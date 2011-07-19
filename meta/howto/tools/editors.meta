@@ -1,0 +1,16 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1224114005;s:8:"modified";i:1229545139;}s:11:"last_change";a:7:{s:4:"date";i:1229545139;s:2:"ip";s:11:"77.99.99.10";s:4:"type";s:1:"E";s:2:"id";s:19:"howto:tools:editors";s:4:"user";N;s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:4:{s:11:"nickhammond";s:12:"Nick Hammond";s:9:"nanodeath";s:9:"Max Aller";s:9:"carpeliam";s:11:"Liam Morley";s:8:"mattetti";s:14:"Matt Aimonetti";}s:5:"title";s:12:"Text editors";s:11:"description";a:2:{s:15:"tableofcontents";a:8:{i:0;a:4:{s:3:"hid";s:12:"text_editors";s:5:"title";s:12:"Text editors";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:3:"vim";s:5:"title";s:3:"Vim";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:8:"textmate";s:5:"title";s:8:"TextMate";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:3;a:4:{s:3:"hid";s:26:"linux_textmate_look_a_like";s:5:"title";s:29:"Linux TextMate ( look_a_like)";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:4;a:4:{s:3:"hid";s:4:"ides";s:5:"title";s:4:"IDEs";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:5;a:4:{s:3:"hid";s:8:"netbeans";s:5:"title";s:8:"Netbeans";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:6;a:4:{s:3:"hid";s:8:"intellij";s:5:"title";s:8:"IntelliJ";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:7;a:4:{s:3:"hid";s:7:"eclipse";s:5:"title";s:7:"Eclipse";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:324:"Vim
+
+
+vim-rails now has basic support for merb. 
+
+Mini HOWTO:
+
+$ cd /tmp
+$ git clone git://github.com/tpope/vim-rails.git
+$ cd vim-rails; rake install
+
+Now the plugin is installed, but it needs a small workaround to detect your merb app:
+
+$ cd $MERB_ROOT
+$ touch config/environment.rb
+There are some useful scripts for Vim :";}s:8:"relation";a:1:{s:10:"references";a:1:{s:27:"howto:tools:editors:eclipse";b:1;}}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:3:{s:4:"date";a:2:{s:7:"created";i:1224114005;s:8:"modified";i:1229545139;}s:11:"last_change";a:7:{s:4:"date";i:1229545139;s:2:"ip";s:11:"77.99.99.10";s:4:"type";s:1:"E";s:2:"id";s:19:"howto:tools:editors";s:4:"user";N;s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:4:{s:11:"nickhammond";s:12:"Nick Hammond";s:9:"nanodeath";s:9:"Max Aller";s:9:"carpeliam";s:11:"Liam Morley";s:8:"mattetti";s:14:"Matt Aimonetti";}}}

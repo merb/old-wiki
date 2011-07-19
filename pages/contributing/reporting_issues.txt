@@ -1,0 +1,9 @@
+====== Reporting Website Problems ======
+
+Merb-related issues are managed at http://merb.lighthouseapp.com.  You'll need to choose a product category from the several that are available on right-hand side of that page. Website-related problems are reported in the [[http://merb.lighthouseapp.com/projects/16598-merb-website|Merb website category]].  This category should not be used for bugs in merb itself, or the related gems.  "Merb website" is for issues like:
+  * Broken links in merbivore.com
+  * Problems with page layout and CSS
+  * Problems with wiki.merbivore.com account creation or management
+  * Incorrect/out-of-date documentation ... but only if you can't fix the problem yourself.  This is a wiki, after all.  Do you really need to file a ticket?  Ideally, you'll be able to help us maintain these docs. (hint: irc://irc.freenode.net/merb is a good place to ask questions)
+
+It is probably '''not''' worth filing bugs about incomplete documentation at this point, since there are a lot of APIs that need documentation.  Rather than filing a ticket, if you can take the time to help flesh out the documentation anywhere you're able to, it would be appreciated by everyone.  Ditto for requests for tutorials and how-to documents.

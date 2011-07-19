@@ -1,0 +1,50 @@
+====== Rails-style "Flash" messages ======
+Merb lets you do Rails-style "flash" messages that you can use to inform the user about the results of certain actions.  Merb's messages are slightly different because they are encoded and serialized into the request, and do not require the session ala Rails.  Because of this optimization, you'll end up with an extra _message request parameter, but you gain not having to use a session :)
+===== If you want to use session =====
+  * $ gem sources -a http://gems.github.com
+  * $ sudo gem install teamon-merb-flash (see https://github.com/teamon/merb-flash/tree)
+===== Setting the message =====
+In your controller code, you usually have two use cases for when you want to set the message
+
+  * Before a redirect
+  * Before rendering an action
+
+When you are redirecting, the message is used as an option in the second argument to redirect(), e.g.
+
+<code ruby>redirect url(:foo), :message => "The widget was saved successfully."</code>
+
+Before rendering an action, you can simply set ''@_message'' (or use ''message=()'' with a [[http://merb.lighthouseapp.com/projects/7433/tickets/956-patch-add-message-support|pending patch]]):
+
+<code ruby>
+message[:error] = "The widget failed validation"
+render :new
+</code>
+
+Note that this may change in future versions of Merb, since there is no official public API for setting the message in this way.
+
+Since the message is just an object that is marshalled, you can put almost any object into it.  You can use this to organize your message like Rails does, like a hash:
+
+<code ruby>redirect url(:foo), :message => {:notice => "The widget was saved"}</code>
+
+===== Displaying the message =====
+To display your message, simply use something like:
+
+**ERB:**
+<code erb><%= h(message) %></code>
+
+**HAML:**
+<code haml>&= message</code>
+or
+<code haml>= h(message)</code>
+
+If you organize your message as described above, simply use message[:notice] or whatever key you use.
+
+==== Security Warning! ====
+Be aware that ''params[:_message]'' can be set by the user, and is therefore trivial for anybody to inject their own message or Ruby object.
+
+**REMEMBER TO ESCAPE ANY MESSAGES YOU DISPLAY!**
+
+This means that you should use ''h(message)'' or equivalent to keep malicious users from injecting code into your pages.
+
+===== References =====
+  * Original Commit: http://github.com/wycats/merb-core/commit/5ae0124fd58464e668896335c5015b786fbb591c

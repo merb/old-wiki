@@ -1,0 +1,3 @@
+====== Where can I get Merb from? ======
+
+See [[http://wiki.merbivore.com/howto/installation|how to install merb]].

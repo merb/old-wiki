@@ -1,0 +1,65 @@
+====== What is Thor, and how do I use it? ======
+
+It provides a clear structure for processing command line arguments, 
+
+Thor is like ''[[http://rake.rubyforge.com|rake]]'' on steroids, with support for command line arguments, lack of a DSL in favor of plain old classes (''class Spoons < Thor''), system wide tasks (like ''[[http://errtheblog.com/posts/60-sake-bomb|sake]]''), and support for remote tasks.
+
+Yehuda Katz, Thor's author, has a [[http://yehudakatz.com/2008/05/12/by-thors-hammer/|great writeup]] on the hows and why of Thor.
+===== Building your own thor tasks =====
+
+<code ruby>
+# module: random
+
+class Amazing < Thor
+  desc "describe NAME", "say that someone is amazing"
+  method_options :forcefully => :boolean
+  def describe(name)
+    ret = "#{name} is amazing"
+    puts options["forcefully"] ? ret.upcase : ret
+  end
+
+  desc "hello", "say hello"
+  def hello
+    puts "Hello"
+  end
+end
+</code>
+
+===== Running your tasks =====
+
+<code>
+$ thor amazing:hello
+</code>
+
+===== Managing thor tasks =====
+
+==== Installing ====
+<code>
+$ thor install task.thor
+</code>
+will install ''task.thor'' Thor file. You can also install thor tasks from a url: 
+<code>
+$ thor install http://merbivore.com/merb.thor
+</code>
+
+In both cases, Thor will prompt you before installing the tasks.
+
+You can also have thor alias the task:
+<code>
+$ thor install task.thor --as my_awesome_task
+</code>
+
+==== Updating ====
+
+You can update installed tasks really easily: 
+<code>
+$ thor update my_awesome_task
+</code>
+and Thor will remember where you got the task from, and redownload it. 
+
+==== Listing  =====
+
+You can get a list of all installed thor tasks on your system with: 
+<code>
+$ thor installed
+</code>

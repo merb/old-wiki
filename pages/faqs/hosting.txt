@@ -1,0 +1,17 @@
+Several hosting companies now officially support Merb:
+
+  * [[http://www.engineyard.com|Engine Yard]]
+  * [[http://www.hostingrails.com/|Hosting Rails]]
+  * [[http://dreamhost.com|Dreamhost]]
+
+If you are looking for a VPS, your best bet is to go with [[http://slicehost.com|Slicehost]] or [[http://linode.com|Linode]] where you have complete control. The most common configurations are Apache with [[http://www.modrails.com/|Phusion Passenger]] or [[http://code.macournoyer.com/thin/|Thin]] on Nginx.
+
+===== Shared hosts (with Passenger) =====
+
+  * [[http://dreamhost.com|Dreamhost]] ([[http://wiki.dreamhost.com/Merb|Installing Merb 1.0 at DreamHost]])
+
+===== Merb on Slicehost tutorial =====
+
+  * [[http://uipoet.com/read/3|Part 1: Users and Permissions]]
+  * [[http://uipoet.com/read/4|Part 2: Install Software]]
+  * [[http://uipoet.com/read/5|Part 3: Version and Deploy]]

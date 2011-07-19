@@ -1,0 +1,16 @@
+====== Installation HOWTOs ======
+
+  * [[howto/installation/gems|Installing Merb from gems]] (recommended)
+  * [[howto/installation/edge|Installing Merb from edge]]
+
+===== Do I want gems or edge? =====
+
+"edge" is what most people refer to as "trunk" in the svn world.  It represents the cutting edge of the source.  As such, most people don't actually need it.
+
+Get edge only if one of the following is true:
+  * You want to help develop merb
+  * You like having the latest and greatest, even if it means the possibility of having more bugs or undocumented changes
+  * There's a bug in the current gem that's fixed in edge and you absolutely must have the fix right now (p.s. no you don't)
+  * You don't mind the hassle of installing/using git instead of rubygems to stay up to date
+
+If none of those sound like you, please install from gems.

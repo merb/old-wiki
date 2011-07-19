@@ -1,0 +1,25 @@
+====== Style guidelines when writing pages ======
+
+  * Always make sure there's a **heading** at the top of the page (type some text and use H1 button)
+  * **Link appropriately** to other pages and other projects. There's no such thing as too many links.
+  * Use ''<code>'' tags whenever **embedding code** examples. You can also specify ''<code ruby>'' for magic syntax highlighting.
+  * When including commands running in a shell, **prefix the command** with a ''$'' to indicate that the command should be run as a normal user, or ''#'' for ''root'' (but you shouldn't be using ''root'' anyway, right? That's what ''[[http://www.sudo.ws/|sudo]]'' is for!)
+    * e.g. <file>
+$ ls /tmp
+</file> for a user, and <file>
+# ls /tmp
+</file> for ''root''.
+
+===== Wiki Information =====
+
+This wiki runs on [[http://www.dokuwiki.org|DokuWiki]];
+see the [[http://www.dokuwiki.org/manual|manual]] for details.
+
+==== Syntax quirks ====
+
+  * If you need to have code nested within an ordered list, you can do it by starting the ''<code>'' tag on the same line as the point you want it to be under, ie: <file>
+  - this is my ordered item <code ruby>
+puts 'foo'
+</code>
+  - another ordered item
+</file> (yes; this is dumb)

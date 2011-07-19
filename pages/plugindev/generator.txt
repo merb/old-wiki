@@ -1,0 +1,65 @@
+====== Adding Generators to your Plugin ======
+
+===== Rationale =====
+
+Generators not only remove some error prone tedium, they also make your plugins more approachable to developers trying them out.
+
+===== Details =====
+
+Adding a generator to your own plugin is fairly straightforward.
+
+By convention you should put your generators in ''lib/generators'' and associated templates in ''lib/generators/templates''. You should not require these files from your plugin. The simplest way to add the generators to your plugin is by simply adding a line like this:
+
+<code ruby>
+Merb.add_generators File.join(File.dirname(__FILE__), 'generators', 'model') 
+</code>
+
+This will tell merb-gen to load that file, as soon as your plugin is required in the app. In this example we're only adding a single generator, but ''add_generators'' does accept a list of file names.
+
+The generator file itself is where the magic happens - this is where we hook into an existing merb-gen generator. In our example ''merb_my_plugin/lib/generators/model.rb'' we hook into the ''ModelGenerator''.
+<code ruby>
+Merb::Generators::ModelGenerator.template :model_relaxdb, :orm => :relaxdb do |template|
+  template.source = File.dirname(__FILE__) / "templates/model/app/models/%file_name%.rb"
+  template.destination = "app/models" / base_path / "#{file_name}.rb"
+end
+</code>
+
+The ModelGenerator (''merb-gen/lib/generators/model.rb'') is one of many contained in merb-gen and used by merb to generate components. merb-gen itself makes use of the templater gem to parameterize and create the templates.
+
+The template parameterized by our generator is located at ''merb_my_plugin/lib/generators/templates/model/app/models/%file_name%.rb''. Note the ''%'' characters in the filename.
+<code ruby>
+<% with_modules(modules) do -%>
+class <%= class_name %> < RelaxDB::Document
+end
+<% end -%>
+</code>
+
+The variables available for substitution will obviously depend on the current generator.
+
+Finally, you'll need to add the ''Generators'' file to your gem spec file list. In ''merb_my_plugin/Rakefile''
+<code ruby>
+spec = Gem::Specification.new do |s|
+  s.name = GEM_NAME
+  ...
+  s.files = %w(LICENSE README.textile Rakefile Generators) + Dir.glob("{lib,spec}/**/*")
+end
+</code>
+
+Install your gem and you should be good to go.
+
+===== App level generators =====
+
+Sometimes you might want to generate things outside a merb application. An example of this are the slice generators. In that case you need a different way of hooking into merb-gen. Add a file called Generators at the top level of your plugin, and make sure it is part of your gems manifold. Make it look like this:
+
+<code ruby>
+scope 'merb-gen' do
+  Merb.add_generators File.join(File.dirname(__FILE__), 'lib', 'generators', 'model')
+end  
+</code>
+
+Merb-gen will discover this file and add your generators just by virtue of the gem being installed. Since this a) depends on the gem being installed (it might not be in a frozen app) b) completely ignores Gem's versioning and c) adds an overhead to the startup of merb-gen, it should *only* be used when it is necessary. For 99% of plugins, it is not.
+
+===== Examples =====
+
+For a fairly simple example of using generators take a look at [[http://github.com/paulcarey/merb_relaxdb/tree/master|merb_relaxdb]]. For a more complex example, check out [[http://github.com/wycats/merb/tree/master/merb_datamapper/|merb_datamapper]].
+

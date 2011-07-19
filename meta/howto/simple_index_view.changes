@@ -1,0 +1,4 @@
+1223956353	72.130.144.12	C	howto:simple_index_view	mattetti	created	
+1224087179	74.0.4.26	E	howto:simple_index_view		missing <% end %>	
+1224087487	74.0.4.26	E	howto:simple_index_view		@article should be artical inside loop, err block	
+1224474606	75.182.71.171	E	howto:simple_index_view		This stub would have resulted in informed XHTML. Now it is at least a little better.	

@@ -1,0 +1,14 @@
+===== Show action view example =====
+
+<code RUBY>
+<h1>Article controller, show action</h1>
+
+<h3><%=h @article.title %></h3>
+<b>by: <%=h @article.author %></b>
+
+<p>
+  <%=h @article.body %>
+</p>
+
+<%= link_to 'Back', resource(:articles) %>
+</code>

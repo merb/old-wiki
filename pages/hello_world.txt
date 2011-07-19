@@ -1,0 +1,13 @@
+====== Hello World ======
+
+  - Either [[installing_merb_from_edge|install edge Merb]] or [[howto/installation/gems|from gems]]. 
+  - Generate a new app with<code>
+merb-gen app helloworld
+</code> and change into the newly created directory<code>
+cd helloworld
+</code>
+  - Generate a new resource by running:<code>
+merb-gen resource person
+</code> now it's time to fill in the blanks!
+
+[[howto/gettingstarted/firstapp|Check this page for more detailed information]]

@@ -1,0 +1,15 @@
+Simple application utilizing the following technologies:
+
+  * haml
+  * rss
+  * hpricot
+  * google search
+  * Merb 1.0.1
+    * partials
+    * form helper
+
+Browse the source at: http://github.com/nanodeath/merb_example_google_rss/tree/master
+
+Also note...there are no specs.  I didn't feel like they were within the scope of this app.
+
+If there's anything readers would like me to add that's relevant, please let me (nanodeath) or someone know in #merb.

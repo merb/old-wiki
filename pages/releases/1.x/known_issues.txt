@@ -1,0 +1,41 @@
+====== Known issues and fixes - Merb 1.x - ======
+
+==== Merb 1.0.4 ====
+
+The [[http://github.com/wycats/merb/tree/master/merb-slices/lib/generators/templates/full/lib/%25base_name%25.rb#L5|merb-slices generator]] is relying on a merb's private API method: load_dependency.
+The method was modified in 1.0.4. 
+Users should replace this line in their generated code with the public API version, which is:
+
+<code RUBY>
+dependency 'merb-slices', :immediate => true
+</code>
+
+
+==== Merb 1.0.3 ====
+
+merb -i still requires webrat
+
+==== Merb 1.0.2 ====
+
+merb -i requires webrat
+
+==== Merb 1.0.1 ====
+
+  * Merb was truncating the log file with each start
+  * merb -i was silently failing for users who did not have webrat installed
+  * issue with numeric routes ([[http://merb.lighthouseapp.com/projects/7433/tickets/1036-cannot-generate-route-with-an-integer-attribute-if-it-is-validated-in-the-router-file|ticket 1036]]) is now resolved.
+  * issue with cookies ([[http://merb.lighthouseapp.com/projects/7433/tickets/1022-merbtestcookiejar-not-joining-properly|ticket 1022]]) is now resolved.
+
+
+
+==== Merb 1.0.0 ====
+
+  * Minor bug with partials. No fixes, update to 1.0.1
+  * Addressable 2.0 release broke DataMapper 0.9.6 because of an API change and a weak dependency definition
+
+Fix: 
+<code> gem uninstall addressable </code> remove the 2.x gem.
+    * or declare a dependency on addressable 1.0.4 in your merb app
+    * or update to DataMapper 0.9.7 and update your dependency settings (dependencies.rb)
+
+

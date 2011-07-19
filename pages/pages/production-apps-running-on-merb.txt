@@ -1,0 +1,3 @@
+[[http://shellshadow.com|ShellShadow]] (in process of rewrite for merb 1.0)
+
+[[http://www.rudolf.pl|Rudolf]] - Polish online auction site, merb 1.x

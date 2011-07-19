@@ -1,0 +1,43 @@
+===== Merb Books =====
+
+Several Merb books were in progress when the Rails/Merb "merbger" was announced.
+Although most of these are being re-purposed to cover Rails 3,
+their current content is still Merb-specific:
+
+==== Beginning Merb ====
+
+[[http://www.apress.com/book/view/9781430218234|Beginning Merb]]
+
+Matthew Ford (Apress)
+
+{{:beg_merb.gif|Beginning Merb}}
+
+==== Merb: What You Need to Know ====
+
+[[http://apress.com/book/view/9781430218654|Merb: What You Need to Know]]
+
+Aaron Farnham, Ben Burket, and Brian Smith (Apress)
+
+{{:merb_you_need_to_know.gif|}}
+
+==== Merb in Action ====
+
+[[http://manning.com/ivey/| Merb in Action]]
+
+Yehuda Katz (Manning; Beta PDF)
+
+{{:merb_in_action.jpg|Merb in Action}}
+
+==== The Merb Way ====
+
+[[http://safari.oreilly.com/9780321601636 | The Merb Way]]
+
+Foy Savas (Addison Wesley Professional; Beta PDF)
+
+{{:merb_way.jpg|The Merb Way}}
+
+==== The Merb Book ====
+
+There is also a community driven, open source book available on Github:
+
+[[http://github.com/mattetti/merb-book/]]

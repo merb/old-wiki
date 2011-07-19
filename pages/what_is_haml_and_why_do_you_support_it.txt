@@ -1,0 +1,26 @@
+====== What is Haml and Why Do You Support It? ======
+
+[[http://haml.hamptoncatlin.com/http://haml.hamptoncatlin.com/|Haml]] is a markup language designed to make the process of creating HTML easier and more efficient.  Haml markup uses indentation to provide structure.
+
+A code example from the Haml web site:
+
+{{ http://haml.hamptoncatlin.com/images/lukas/main_showdownill.gif }}
+
+Full [[http://haml.hamptoncatlin.com/docs/|documentation]] is available.
+
+Haml was originally developed for use in Rails applications, and works as a drop-in replacement for ERB.  It is distributed as part of [[http://github.com/wycats/merb-more/tree/master/merb-haml|merb-more]].
+
+===== Using Haml in Merb =====
+
+  - Add the following line to your dependencies.rb: <code ruby>dependency "merb-haml", merb_gems_version</code>
+  - Edit your init.rb and update the template engine: <code ruby>use_template_engine :haml</code>
+  - Create your templates with the ".html.haml" extension.
+  - Write some Haml!
+
+===== Why is it included with the merb stack =====
+
+merb-haml is included with merb because it is a significant performance improvement over Builder for building XML files. We recommend the use of Haml for XML, even if you use ERB for regular HTML templating.
+
+===== Editor Support =====
+
+TextMate users can use the official [[http://macromates.com/svn/Bundles/trunk/Bundles/Ruby%20Haml.tmbundle/|Ruby Haml.tmbundle]].  A [[http://github.com/douglasjarquin/ruby-haml-tmbundle/tree/master|fork]] is available on Github.

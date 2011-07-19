@@ -1,0 +1,20 @@
+a:2:{s:7:"current";a:6:{s:4:"date";a:2:{s:7:"created";i:1225835135;s:8:"modified";i:1239147607;}s:11:"last_change";a:7:{s:4:"date";i:1284100977;s:2:"ip";s:13:"71.141.96.194";s:4:"type";s:1:"e";s:2:"id";s:24:"howto:simple_delete_view";s:4:"user";s:7:"newacct";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:10:"scottmotte";s:11:"Scott Motte";}s:5:"title";s:51:"Delete action view example with jquery confirmation";s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"description";a:1:{s:8:"abstract";s:503:"Delete action view example with jquery confirmation
+
+This should really be the destroy action. Delete action is more like new and edit action. So should be more like the following down below:
+
+
+
+  def delete(id)
+    only_provides :html
+    @article = Article.get(id)
+    raise NotFound unless @article
+    display @article
+  end
+  
+  def destroy(id)
+    @article = Article.get(id)
+    raise NotFound unless @article
+    if @article.destroy
+      redirect resource(:articles)
+    else
+      raise Inte…";}}s:10:"persistent";a:3:{s:4:"date";a:2:{s:7:"created";i:1225835135;s:8:"modified";i:1239147607;}s:11:"last_change";a:7:{s:4:"date";i:1284100977;s:2:"ip";s:13:"71.141.96.194";s:4:"type";s:1:"e";s:2:"id";s:24:"howto:simple_delete_view";s:4:"user";s:7:"newacct";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:10:"scottmotte";s:11:"Scott Motte";}}}

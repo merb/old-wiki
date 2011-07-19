@@ -1,0 +1,49 @@
+====== What's the difference between render and display? ======
+
+===== Render =====
+
+In Merb, the render method renders a template. For instance, consider the following controller:
+
+<code RUBY>
+class Post < Application
+  provides :json
+
+  def index
+    render
+  end
+end
+</code>
+
+If the index action is hit with the HTML mime-type, Merb will look for ''index.html.*''. If it's hit with the JSON mime-type, Merb will look for ''index.json.*''. There are also some other variants:
+
+  * ''render :new'' looks for ''new.html.*''
+  * ''render "new"'' renders the string "new" inside the current layout
+===== Display =====
+
+On the other hand, the ''display'' method tries to convert an object into the current mime-type. It uses the following strategy.
+
+  * First, it tries to render the template using ''render''.
+  * If that fails, it converts the object using the registered conversion method.
+
+For instance,
+
+<code RUBY>
+class Post < Application
+  provides :json
+
+  def index
+    @posts = Post.all
+    display @posts
+  end
+end
+</code>
+
+If ''index'' is triggered with the HTML mime type, Merb will first look for ''index.html.*''. If that fails, it will try to call ''@posts.to_html''. If that fails, it will raise a ''NotAcceptable'' error.
+
+If it's triggered with the JSON mime type, Merb will first look for ''index.json.*''. If that fails, it will try to call ''@posts.to_json''. If that fails, it will raise a ''NotAcceptable'' error.
+
+Additionally, ''display'''s second parameter will be passed into ''render''. For instance, ''display @posts, :new'' will first look for ''new.json.*'' and then try to call ''@posts.to_json''.
+
+===== Recommended Route =====
+
+Because every URL in HTTP represents a "resource", your actions should reflect this as well. As a result, you should always use ''display''. Even if you just want to do a ''render'', using ''display'' makes the object backing your template explicit. And if you decide to add web-service support to your action later, you simply need to add ''provides :json'' or ''provides :xml'' to your model, and you're ready to go.

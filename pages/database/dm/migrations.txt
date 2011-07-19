@@ -1,0 +1,11 @@
+====== DataMapper Migrations ======
+
+Some additional rake tasks are available [[http://aviewfromafar.net/2008/10/26/adventures-in-merbddland-3-reduce-migration-pain-with-db-migrate-all-rake-tasks|here]]
+
+These are:
+  * ''rake db:migrate:all''
+  * ''rake db:migrate:all:up[version]''
+  * ''rake db:migrate:all:down[version]''
+
+If you find them useful, please feedback to the Merb team and they might be included in the standard tasks.
+

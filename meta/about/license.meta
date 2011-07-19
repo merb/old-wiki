@@ -1,0 +1,12 @@
+a:2:{s:7:"current";a:6:{s:4:"date";a:2:{s:7:"created";i:1224293500;s:8:"modified";i:1224683395;}s:7:"creator";s:14:"Matt Aimonetti";s:11:"last_change";a:7:{s:4:"date";i:1224683395;s:2:"ip";s:12:"82.147.135.2";s:4:"type";s:1:"E";s:2:"id";s:13:"about:license";s:4:"user";N;s:3:"sum";s:40:"Added a copy of the licence to the page.";s:5:"extra";s:0:"";}s:5:"title";s:12:"Merb license";s:11:"description";a:2:{s:15:"tableofcontents";a:1:{i:0;a:4:{s:3:"hid";s:12:"merb_license";s:5:"title";s:12:"Merb license";s:4:"type";s:2:"ul";s:5:"level";i:1;}}s:8:"abstract";s:503:"Merb is released under the MIT license
+
+
+Copyright (c) 2008 Engine Yard Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following c…";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:3:{s:4:"date";a:2:{s:7:"created";i:1224293500;s:8:"modified";i:1224683395;}s:7:"creator";s:14:"Matt Aimonetti";s:11:"last_change";a:7:{s:4:"date";i:1224683395;s:2:"ip";s:12:"82.147.135.2";s:4:"type";s:1:"E";s:2:"id";s:13:"about:license";s:4:"user";N;s:3:"sum";s:40:"Added a copy of the licence to the page.";s:5:"extra";s:0:"";}}}

@@ -1,0 +1,16 @@
+1224017451	84.196.0.143	C	deployment:bundling	fabien	created	
+1226952732	71.194.165.6	E	deployment:bundling			
+1226952791	71.194.165.6	E	deployment:bundling			
+1226953411	71.194.165.6	E	deployment:bundling			
+1227074846	192.73.22.46	E	deployment:bundling		Added gotcha: GEM_HOME	
+1227288624	66.189.28.105	E	deployment:bundling	carpeliam	added noted about cached gems, link to using thor	
+1227288687	66.189.28.105	e	deployment:bundling	carpeliam		
+1227549610	63.243.127.46	E	deployment:bundling		merb:dependencies:redeploy is deprecated	
+1227549721	63.243.127.46	E	deployment:bundling		should be 'gem' and not 'gems'. whoops	
+1230833424	72.130.144.12	E	deployment:bundling			
+1230833768	72.130.144.12	E	deployment:bundling			
+1231319071	72.130.144.12	E	deployment:bundling			
+1232398801	66.242.46.110	E	deployment:bundling			
+1232777656	76.124.186.238	E	deployment:bundling		typo	
+1280162985	119.111.124.194	E	deployment:bundling	alkirk		
+1281725124	119.155.14.126	E	deployment:bundling	saralee		

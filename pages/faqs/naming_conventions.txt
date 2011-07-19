@@ -1,0 +1,5 @@
+====== Does Merb follow any sort of naming conventions? ======
+
+In general ''merb-foo'' (with a dash) means that a gem is officially maintained, while ''merb_foo'' (with an underscore) means it's a community plugin.
+
+A naming convention for Merb slices is being hashed out on the mailing lists at the moment, but there's a vague consensus on ''merb_slice_foo''. 

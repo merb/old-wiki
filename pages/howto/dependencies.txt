@@ -1,0 +1,27 @@
+====== Dependencies - Require but Awesome ======
+
+If you are requiring a gem that is named differently than the name of the library (like from a Github account) then you need to pass the correct name into require_as:
+
+<code ruby>
+dependency("notch8-webrat", :require_as => 'webrat')
+dependency 'rest-client', :require_as => 'rest_client'
+</code>
+
+You may also use the **:immediate** option, which loads the gem immediately, like this:
+
+<code ruby>
+dependency("notch8-webrat", :require_as => 'webrat')
+dependency 'rest-client', :require_as => 'rest_client', :immediate => true
+dependency 'configatron', :immediate => true
+</code>
+
+Dependencies also take a block which is called after the library is required:
+
+<code ruby>
+dependency("notch8-webrat", :require_as => 'webrat') { puts "webrat is cool" }
+</code>
+
+Also of note, all the win32 utils gems need 
+<code ruby>
+dependency('win32-process', :require_as => 'win32/process')
+</code>

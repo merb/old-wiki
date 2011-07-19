@@ -1,0 +1,9 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1223846763;s:8:"modified";i:1224704412;}s:7:"creator";s:16:"Lindsay Holmwood";s:11:"last_change";a:7:{s:4:"date";i:1224704412;s:2:"ip";s:13:"72.130.144.12";s:4:"type";s:1:"E";s:2:"id";s:28:"building_your_own_merb_stack";s:4:"user";s:8:"mattetti";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:7:"auxesis";s:16:"Lindsay Holmwood";s:8:"mattetti";s:14:"Matt Aimonetti";}s:5:"title";s:28:"Building your own Merb stack";s:11:"description";a:2:{s:15:"tableofcontents";a:3:{i:0;a:4:{s:3:"hid";s:28:"building_your_own_merb_stack";s:5:"title";s:28:"Building your own Merb stack";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:14:"building_a_gem";s:5:"title";s:14:"Building a gem";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:20:"building_a_thor_task";s:5:"title";s:20:"Building a thor task";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:267:"The most common and recommend way of installing Merb is by running
+
+
+
+$ sudo gem install merb
+
+
+
+which will pull in a collection of dependencies (merb-core, merb-more, dm-core, dm-more) from RubyGems ready for you to build a Merb app. This is known as a Merb 'stack'.";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1223846763;s:8:"modified";i:1224704412;}s:7:"creator";s:16:"Lindsay Holmwood";s:11:"last_change";a:7:{s:4:"date";i:1224704412;s:2:"ip";s:13:"72.130.144.12";s:4:"type";s:1:"E";s:2:"id";s:28:"building_your_own_merb_stack";s:4:"user";s:8:"mattetti";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:7:"auxesis";s:16:"Lindsay Holmwood";s:8:"mattetti";s:14:"Matt Aimonetti";}}}

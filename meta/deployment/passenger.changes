@@ -1,0 +1,8 @@
+1224094503	68.101.190.117	C	deployment:passenger	auxesis	created page with proper namespacing	
+1225401489	97.94.119.16	E	deployment:passenger			
+1226265337	76.166.141.3	E	deployment:passenger	scottmotte		
+1227078404	75.36.193.158	E	deployment:passenger		Updated config.ru example to include clarified notes	
+1227758409	76.26.224.187	E	deployment:passenger	mattetti		
+1235017843	76.166.141.3	E	deployment:passenger	scottmotte	added better config.ru for bundled gems	
+1235017861	76.166.141.3	E	deployment:passenger	scottmotte		
+1237570823	24.183.46.198	E	deployment:passenger	winescout		

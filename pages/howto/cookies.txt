@@ -1,0 +1,46 @@
+====== Cookies! ======
+
+There may come a point in your life when you want to start putting aside a few cookies now and then for times of need.  Unless you interpret "cookies" as a metaphor for money, Merb can help you!
+
+Handling cookies in Merb is super easy; however, there's a simple method and a more comprehensive method for doing so.  Fear not, they're explained in their entirety here.
+
+===== Setting cookies =====
+
+==== Simple method ====
+
+
+In your controller, say
+
+<code>cookies[:my_cookie] = my_value</code>
+
+and you're done!  This will set a cookie that persists until the current session expires.  The domain is set to the default_cookie_domain var and the path to '/'.
+
+If this isn't exactly what you want, then there's the Comprehensive Method
+
+==== Comprehensive method ====
+
+The method signature looks like this: set_cookie(name, value, options = {}).  Keys in option are path, expires, domain, and secure.  An example would be:
+
+<code>cookies.set_cookie('is_logged_in', 'true', :secure => true, :expires => 3.days.from_now)</code>
+
+===== Reading cookies =====
+
+This is as simple as 
+
+<code>my_var = cookies[:om_nom_nom]</code>
+
+===== Deleting cookies =====
+
+I think the only way to actually delete a cookie is with delete:
+
+<code>cookies.delete(:transient_cookie)</code>
+
+The cookies.delete method sets the value of the cookie to nil, and sets it to expire at Time.now.
+
+===== Final note =====
+
+The underlying data structure for cookies is a "Mash" -- a hash-like structure that treats :this and 'this' as the same key.  So don't worry about mixing and matching symbol-as-key or string-as-key as you please in your own code (though you should probably stick to just symbols or strings for consistency's sake).
+
+===== Digging deeper =====
+
+Check out the source: http://github.com/wycats/merb/tree/master/merb-core/lib/merb-core/dispatch/cookies.rb

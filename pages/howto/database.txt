@@ -1,0 +1,42 @@
+====== Database Support HOWTOs ======
+
+  * [[database/use_orm|Selecting an ORM]]
+
+===== DataMapper Howtos =====
+
+Howtos specific to DataMapper.
+
+  * [[database/dm/migrations|Migrations]]
+
+===== CouchDB =====
+
+CouchDB is a [[http://en.wikipedia.org/wiki/Document-oriented_database|document oriented database]] that doesn’t impose the constraints of schemas and fixed size fields on your data. It's a natural fit for [[http://en.wikipedia.org/wiki/Semi-structured_model|semi-structured data]], and hence, many web apps.
+
+=== Integrating via RelaxDB ==
+
+[[http://github.com/paulcarey/relaxdb/tree/master|RelaxDB]] provides a Ruby interface to CouchDB. It offers a familiar idiom for specifying object relationships, and an elegant wrapper for CouchDB queries. The [[http://github.com/paulcarey/merb_relaxdb/tree/master|merb_relaxdb]] plugin offers an easy way to hook Merb and RelaxDB together.
+
+Grab merb_relaxdb from github and install
+<code>
+$ git clone git://github.com/paulcarey/merb_relaxdb.git
+$ cd merb_relaxdb
+$ rake install
+</code>
+
+In ''your_merb_app/config/dependencies.rb'' add
+<code>
+dependency "merb_relaxdb"
+</code>
+and in ''your_merb_app/config/init.rb'' add
+<code>
+use_orm :relaxdb
+</code>
+
+=== CouchRest ===
+
+[[http://github.com/jchris/couchrest/tree/master|CouchRest]] is another popular Ruby library for CouchDB.
+
+=== DataMapper CouchDB Adapter ===
+
+This [[http://github.com/sam/dm-more/tree/master/adapters/dm-couchdb-adapter|adapter]] is successfully used by many.
+

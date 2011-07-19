@@ -1,0 +1,9 @@
+==== Merb Authentication ====
+
+
+=== MerbAuth examples: ===
+
+
+  * [[cookbook/authenticated_hello_world|Authenticated Hello World]]
+  * [[example_apps/simple_app|Example app showing how to test an authenticated route]]
+  * [[example_apps/couchrest|Example of how to set up authentication with couchdb and couchrest]]

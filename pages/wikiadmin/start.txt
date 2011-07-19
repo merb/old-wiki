@@ -1,0 +1,26 @@
+====== Wiki Administration ======
+
+**WARNING: Please update this page if you change __anything__!!!**
+
+===== How dokuwiki is deployed =====
+
+The wiki exists on an EngineYard slice, run as a fastcgi application through nginx.
+
+Filesystem permissions may need to be explicitly set up. 
+
+<code bash>
+chown merbivore:merbivore /data/dokuwiki/config/   # needed for changes to local.php
+chown merbivore:merbivore /data/dokuwiki/config/acl.auth.php
+chown merbivore:merbivore /data/dokuwiki/config/local.php
+chown merbivore:merbivore /data/dokuwiki/config/users.auth.php
+</code>
+
+''merbivore:merbivore'' should be set to the user fastcgi runs as. 
+
+===== Customisations =====
+
+In ''/data/dokuwiki/current/public/inc/lang/en/lang.php'' set
+<code php>
+$lang['regpwmail']  = 'Your Merb wiki password';
+</code>
+to customise the subject of the registration email.

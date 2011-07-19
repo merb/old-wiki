@@ -1,0 +1,363 @@
+====== Mailers ======
+A plugin for the Merb framework that allows you to send email from Merb application. It separates email composition and sending into micro MVC: you may have mail controllers that compose complex emails, emails have their own views and models (models use MailFactory library and are non-persistable).
+
+===== Installation =====
+The gem **merb-mailer is already installed as part of the standard merb installation** via sudo gem install merb. See http://github.com/wycats/merb/tree/master
+
+But if you are missing it, do:
+<code>
+sudo gem install merb-mailer
+</code>
+
+It will install "mailfactory":http://mailfactory.rubyforge.org/ gem and "mime-types":http://mime-types.rubyforge.org/ that mailfactory depends on. 
+
+
+===== Configuration =====
+Assuming you created an app using 'merb-gen app', merb-mailer will already be listed in config/dependencies.rb. If you started your app using 'merb-gen core' then you will need to include merb-mailer as a dependency like the following:
+
+In init.rb, put this at the top
+<code ruby>
+require 'config/dependencies.rb'
+</code>
+
+In config/dependencies.rb
+<code ruby>
+# dependencies are generated using a strict version, don't forget to edit the dependency versions when upgrading.
+merb_gems_version = "1.0"
+dm_gems_version   = "0.9.6"
+
+# For more information about each component, please read http://wiki.merbivore.com/faqs/merb_components
+dependency "merb-slices", merb_gems_version 
+</code>
+
+In init.rb configure for sendmail (see below for other config options like smtp). Alternatively, you can put this in development.rb if your production.rb email setup might use smtp instead or vice versa. Development.rb and production.rb will override the init.rb file.
+<code ruby>
+Merb::BootLoader.after_app_loads do
+  # This will get executed after your app's classes have been loaded.
+  Merb::Mailer.config = {:sendmail_path => '/usr/sbin/sendmail'}
+  Merb::Mailer.delivery_method = :sendmail
+end
+</code>
+(Type "which sendmail" to verify where sendmail is located on your machine.)
+
+
+See http://merbivore.com/documentation/current/doc/rdoc/merb-mailer-1.0/index.html for documented config options.
+
+===== Using Merb mailers =====
+Merb separates out its mailers into its only little MVC so things work a little differently than you might be used to with Rails. But it's for the better. 
+
+==== First, setup the mailer. ====
+<code ruby>
+merb-gen mailer contact
+</code>
+This will generate a mailer controller and a mailer view under app/mailers
+
+Open up app/mailers/contact_mailer.rb and make it look like the following:
+<code ruby>
+class ContactMailer < Merb::MailController
+
+  def notify
+    @user = params[:user]
+    render_mail
+  end
+  
+end
+
+</code>
+
+Edit app/mailers/views/contact_mailer/notify.text.erb
+<code ruby>
+Tall tube socks with red stripes. The right sock has a large whole near the big toe.
+</code> 
+
+==== Now put the mailer to use inside a controller ====
+**Generate a static controller**
+<code>
+merb-gen controller static
+</code>
+
+**Create an index action and contact action for the static controller**
+<code ruby>
+class Static < Application
+
+  # ...and remember, everything returned from an action
+  # goes to the client...
+  def index
+    render
+  end
+  
+  def contact
+    send_mail(ContactMailer, :notify, {
+      :from => 'yourself@email.com',
+      :to => "someoneelse@gmail.com",
+      :subject => "Free gym socks. Used!"
+    })
+    
+    render
+  end
+end
+
+</code>
+
+**Make sure your routes are setup properly in router.rb**
+<code ruby>
+Merb::Router.prepare do
+  match('/index').to(:controller => "static", :action => "index").name(:index)
+  match('/contact').to(:controller => 'static', :action =>'contact').name(:contact)
+  match('/').to(:controller => 'static', :action =>'index')
+end
+</code>
+
+**Make sure your views (static/index.html.erb and static/contact.html.erb) are setup to some degree**
+<code html>
+# index.html
+<h2>Home page</h2>
+
+# contact.html
+<h2>Contacto!</h2>
+</code>
+
+**Navigate to http://localhost:4000/contact and it should work!**
+
+See http://github.com/wycats/merb/tree/master/merb-mailer for additional details.
+
+It you have problems make sure postfix is running with sudo postfix stop and then sudo postfix start). You should also see the email get sent in your merb development server output. It should look something like the following:
+<code>
+merb : worker (port 4000) ~ notify sent to someoneelse@gmail.com about =?utf-8?Q?Free_gym_socks._Used!?=
+</code>
+===== Creating a contact form =====
+This assumes you've followed the above instructions so far. This also assumes usage with datamapper.
+
+Create a contact model
+<code>
+merb-gen model contact
+</code>
+
+Edit models/contact.rb to look like the following:
+<code ruby>
+class Contact
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :name, String, :nullable => false
+  property :email, String, :nullable => false
+  property :message, String, :nullable => false
+  
+  validates_format :email, :as => :email_address
+
+end
+</code>
+
+Edit the static controller's contact action. This renders the contact page unless the form is submitted using request.post? Then the contact information is saved with datamapper (but not to the database) and our ContactMailer notify action is used to send the mailer.
+<code ruby>
+# static.rb controller
+  def contact
+    if request.post?
+      @contact = Contact.new(params[:contact])
+      if @contact.valid?
+        send_mail(ContactMailer, :notify, {
+          :from => @contact.email,
+          :to => 'scott@scottmotte.com',
+          :subject => "New message from contact form"
+        }, { :contact => @contact})
+        render "Thank you. Your message has been sent."
+      else
+        render :contact
+      end
+    else
+      @contact = Contact.new
+      render
+    end
+  end
+</code>
+
+Edit the contact action's view at views/static/contact.html.erb
+<code html>
+<h2>Contact</h2>
+<%= error_messages_for @contact %>
+<%= form_for @contact, :action => url('contact') do %>
+     <p><%= text_field :name, :label => 'Name' %></p>
+     <p><%= text_field :email,  :label => 'Email' %></p>
+     <p><%= text_area :message, :label => 'Message' %></p>
+     <%= submit 'Send' %>
+<% end =%>
+</code>
+
+Your contact form should now send emails and do validations if items aren't filled in. We still have to pass the values to the emailed message though so let's take a look at our mailers/contact_mailer.rb and its prospective view to do this.
+
+Edit contact_mailer.rb
+<code ruby>
+class ContactMailer < Merb::MailController
+
+  def notify
+    # use params[] passed to this controller to get data
+    @contact = params[:contact]
+    render_mail
+  end
+  
+end
+</code>
+
+Edit notify.text.erb
+<code html>
+Name: <%= @contact.name %>
+
+Email: <%= @contact.email %>
+
+Message:
+
+<%= @contact.message %>
+</code>
+
+**That's it. You're done.** You could also customize things a bit here, by creating a global from email in devlopment.rb and production.rb by putting something like 'SITE_EMAIL = "scott@scottmotte.com"' at the end of those files.
+
+**You may want a layout for your mail views.  This is a great way to create common footers.  To add a global layout add a file such as app/mailers/views/layout/application.text.erb
+
+===== Send methods =====
+
+Merb mailer can use SMTP, Sendmail and imitate sendout in test environment. By default Sendmail is used so to use SMTP you have to use config in your application init file. From Merb-mailer documentation:
+
+==== SMTP ====
+<code ruby>
+  Merb::Mailer.config = {
+    :host   => 'smtp.yourserver.com',
+    :port   => '25',              
+    :user   => 'user',
+    :pass   => 'pass',
+    :auth   => :plain # :plain, :login, :cram_md5, the default is no auth
+    :domain => "localhost.localdomain" # the HELO domain provided by the client to the server 
+ }
+</code>
+
+=== Gmail SMTP ===
+
+Install tls mail to enable SSL support (required by Gmail).
+
+<code>
+$ gem install tlsmail
+</code>
+
+Then configure Merb Mailer to work with Gmail
+
+in config/init.rb:
+
+<code ruby>
+Merb::BootLoader.after_app_loads do
+  dependency 'tlsmail'
+
+  # Activate SSL Support
+  Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+
+  # Configure Merb Mailer
+  Merb::Mailer.config = {
+    :host   => 'smtp.gmail.com',
+    :port   => '587',
+    :user   => 'user@gmail.com',
+    :pass   => 'pass',
+    :auth   => :plain
+  }
+end
+</code>
+
+Then to send mail:
+
+<code ruby>
+m = Merb::Mailer.new :to => 'foo@bar.com',
+                     :from => 'bar@foo.com',
+                     :subject => 'Welcome to whatever!',
+                     :text => partial(:sometemplate)
+m.deliver!
+</code>
+
+==== Sendmail ====
+
+Configuration for Sendmail send method takes path to Sendmail:
+
+<code ruby>
+Merb::Mailer.config = {:sendmail_path => '/path/to/sendmail'}
+</code>
+
+===== Plain text mail, HTML mail and MailFactory wrapping. =====
+
+[[http://www.merbivore.com/documentation/current/doc/rdoc/merb-mailer/index.html?a=C00000044&name=Mailer|Merb::Mailer]] is a “smart wrapper” around [[http://www.merbivore.com/documentation/current/doc/rdoc/merb-mailer/index.html?a=C00000037&name=MailFactory|MailFactory]]. This means you should think 2 or 3 times before operating on @mail.body attribute of mailer instances in your code. To set plain text body use text attribute like this:
+
+<code ruby>
+Merb::Mailer.new(:to => '...', :from => '...', :subject => '...', :text => "Users with NO HTML rendering mail clients will see this").deliver!
+</code>
+
+and html attribute to set html content:
+
+<code ruby>
+Merb::Mailer.new(:to => '...', :from => '...', :subject => '...', :html => "Users having HTML rendering mail clients will see this").deliver!
+</code>
+
+body, to, from and subject fields are proxied to [[http://www.merbivore.com/documentation/current/doc/rdoc/merb-mailer/index.html?a=C00000037&name=MailFactory|MailFactory]] when you receive them. Keep this in mind if you wonder why those fields return arrays instead of strings.
+
+===== Testing mailers. =====
+
+First off, make sure you use test sending method so emails won’t be sent on each tests run:
+
+<code ruby>
+Merb::Mailer.delivery_method = :test_send
+</code>
+
+
+Useful helper for mailers testing in your controller specs:
+
+<code ruby>
+send_mail UserMailer, :hello, { :from => "greeter@example.com",
+                                :to => @person.email,
+                                :subject => "Greetings" }, 
+                              { :name => @person.name }
+</code>
+
+Another useful helper to test mailers themselves:
+
+<code ruby>
+def describe_mail(mailer, template, &block)
+  describe "/#{mailer.to_s.downcase}/#{template}" do
+    before :each do
+      @mailer_class, @template = mailer, template
+      @assigns = {}
+    end
+
+    def deliver(send_params={}, mail_params={})
+      mail_params = {:from => "from@example.com", :to => "to@example.com", :subject => "Subject Line"}.merge(mail_params)
+      @mailer_class.new(send_params).dispatch_and_deliver @template.to_sym, mail_params
+      @mail = Merb::Mailer.deliveries.last
+    end
+
+    instance_eval &block
+  end
+end
+</code>
+
+Mailer controller specs may look like this then:
+
+<code ruby>
+require File.join(File.dirname(__FILE__),'..','spec_helper')
+
+describe_mail UserMailer, :hello do
+  it "should say hello" do
+    deliver :name => "Jamie" 
+    @mail.text.should == "Hello Jamie" 
+  end
+end
+</code>
+
+===== Massive mail sendouts, mail queueing. =====
+
+If you need to send out more than one email, it may become a bottleneck of your action. Classic example is forum notifications on new replies: sending out 100 email in action may take fair number of seconds. In Merb with Mongrel you can use [[http://www.merbivore.com/documentation/current/doc/rdoc/merb-core/index.html?a=M000252&name=render_then_call|render_then_call]] method to “release” Mongrel and then do actual send out:
+
+<code ruby>
+def create
+  # ...
+  rendered_template = render :template => :posted
+  render_then_call(rendered_template) do
+    # do emails sending
+  end
+end
+</code>
+
+But because this example above does not work with Thin and Ebb (at least, 0.8.1 and 0.2 versions, respectively) you may consider using mail queue plugin that stores email jobs in the database and provides simple processor to do cron scheduled sendouts.
+([[http://vip-essays.com/paper-writing-service|research paper]])

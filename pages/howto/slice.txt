@@ -1,0 +1,351 @@
+====== How to Quickstart Merb Slice Development ======
+
+
+===== What are Merb Slices? =====
+
+
+Merb Slices are a kind of mini Merb Application that can be packaged up as gems and used as is (or with customizations) within actual Merb Applications. They are full Model-View-Controller stacks to support a large feature within a larger application. Examples could be a full blogging system, user management system or a file upload system.
+
+Where else can I find good overview information about Merb Slices?
+
+There are a few places, but you should start with the [[http://merbcamp.com/video/neighman1.mp4|MerbCamp 2008 MerbSlices talk]] by Daniel Neighman aka [[http://github.com/hassox|hassox]]. His slides are found [[http://github.com/hassox/merb-camp-talks/tree/master|here]] and [[http://www.slideshare.net/hassox/merb-slices-presentation|here]]. Watch the other [[http://merbcamp.com/video|MerbCamp videos]] for more Merb info.
+
+===== Generate slice structure =====
+
+Let's start by creating our slice.
+
+<code>
+  $ merb-gen slice myslice
+  Generating with slice generator:
+       [ADDED]  app/controllers/application.rb
+       [ADDED]  app/controllers/main.rb
+       [ADDED]  app/helpers/application_helper.rb
+       [ADDED]  app/views/layout/myslice.html.erb
+       [ADDED]  app/views/main/index.html.erb
+       [ADDED]  config/init.rb
+       [ADDED]  config/router.rb
+       [ADDED]  lib/myslice.rb
+       [ADDED]  Rakefile
+       [ADDED]  README
+       [ADDED]  spec/myslice_spec.rb
+       [ADDED]  spec/controllers/main_spec.rb
+       [ADDED]  spec/spec_helper.rb
+       [ADDED]  stubs/app/controllers/application.rb
+       [ADDED]  stubs/app/controllers/main.rb
+       [ADDED]  TODO
+       [ADDED]  public/javascripts/master.js
+       [ADDED]  public/stylesheets/master.css
+       [ADDED]  LICENSE
+       [ADDED]  lib/myslice/merbtasks.rb
+       [ADDED]  lib/myslice/slicetasks.rb
+       [ADDED]  lib/myslice/spectasks.rb
+  $ cd myslice
+</code>
+Our goal here is to set up our slice so we can actually do development without needing to install it within a Merb application, and to give an example run through of creating a resource.
+
+===== Configure slice =====
+
+Let's start by editing the slice's init.rb file. This file is solely used in your slice development cycle; it is omitted from the final packaged gem; it is NOT used in production. If you look at the slice's Rakefile, you will see that NO file in the config/ directory is included in the gem.
+<code>
+  $ vi config/init.rb
+</code>
+<code ruby>
+  # Add the following to the top of the slice's config/init.rb file.
+  # USE THE CORRECT GEM VERSIONS.
+  merb_gems_version = "0.9.12"
+  dm_gems_version   = "0.9.6"
+  
+  # Uncomment the following two lines to develop with haml instead of erb.
+  # dependency "merb-haml", merb_gems_version
+  # use_template_engine :haml
+  
+  dependency "dm-core", dm_gems_version
+  dependency "dm-aggregates", dm_gems_version
+  dependency "dm-migrations", dm_gems_version
+  dependency "dm-timestamps", dm_gems_version
+  dependency "dm-types", dm_gems_version
+  dependency "dm-validations", dm_gems_version
+  
+  use_orm :datamapper
+</code>
+
+What we did above is to declare a dependency on the DataMapper ORM. You can use whatever ORM you wish, but I'll be using DataMapper as the example in this article.
+
+Also, I have included commented lines to show how one would use Haml instead of Erb as the templating engine. I highly suggest that developers write views for BOTH Erb and Haml when developing slices. This gives the users of such slices a choice.
+
+Since we're editing files in the config/ directory, we'll go ahead and create the database.yml file we'll need.
+
+<code>
+  $ vi config/database.yml
+</code>
+<code yaml>
+  # This is a sample database file for the DataMapper ORM
+  development: &defaults
+    # These are the settings for repository :default
+    adapter:  sqlite3
+    database: sample_development.db
+</code>
+
+===== Generate resource for slice =====
+
+Next, we go ahead and try creating a resource as most developers will be doing. It's just the same merb-gen command as one would do for any regular Merb application.
+<code>
+  $ merb-gen resource article
+       [ADDED]  spec/models/article_spec.rb
+       [ADDED]  app/models/article.rb
+       [ADDED]  spec/requests/articles_spec.rb
+       [ADDED]  app/controllers/articles.rb
+       [ADDED]  app/views/articles/index.html.erb
+       [ADDED]  app/views/articles/show.html.erb
+       [ADDED]  app/views/articles/edit.html.erb
+       [ADDED]  app/views/articles/new.html.erb
+       [ADDED]  app/helpers/articles_helper.rb
+</code>
+
+After running the above command go to router.rb and remove or comment out the line "resources :articles". This will screw up slice -i functionality otherwise.
+
+===== Namespace the controller =====
+
+When we edit the articles controller, we'll see that it looks exactly like a generated resource that one would get in a Merb application. In fact that's probably the whole point since we want our slices to be full MVC stacks to implement our subsystem features. But if we tried to use this resource right now, we'll find that our slice just won't work. The main reason is how we define a slice's controller versus a controller in a full Merb application. The whole issue is about namespacing.
+<code>
+  $ vi app/controllers/articles.rb
+</code>
+We need to change the following class declaration:
+<code ruby>
+  class Articles < Application
+</code>
+to
+<code ruby>
+  class Myslice::Articles < Myslice::Application
+</code>
+This article class needs to inherit from the slice's application class instead of whatever Merb app it is installed in. And the Articles class needs to be in the Myslice namespace so the slice router rules will actually be able to find the class.
+
+The rest of the controller looks good. It's got all the default DataMapper access code for its methods. **NOTE**: If one did not call "use_orm :datamapper" in the slice's init.rb file, then all this ORM access code will be omitted; one would have a plain class whose methods just called `render`.
+
+===== Configure slice routes (NOT router.rb) =====
+
+As a next step, one would generally verify that merb-gen would have updated the config/router.rb file with this new resource. **WARNING!** The config/router.rb file is NOT where routes are configured for slices. Everything is done in lib/myslice.rb, or whatever it is named in your real slice. In fact, this is also where we'll find other configuration options.
+<code>
+  $ vi lib/myslice.rb
+</code>
+Let's go ahead and update our slice meta data. Replace the following code with your own stuff.
+<code ruby>
+  # All Slice code is expected to be namespaced inside a module
+  module Myslice
+  
+    # Slice metadata
+    self.description = "Myslice is a chunky Merb slice!"
+    self.version = "0.0.1"
+    self.author = "your Name"
+</code>
+I won't cover the other slice hooks in this file except for the "def self.setup_router(scope)" method. This is where you SHOULD add your resource. Although the scope.default_routes line will correctly route to your resource, I find it cleaner to explicitly declare the slice's routes. Watch the video mentioned above to understand why we setup routes in this hook instead of a slice's router.rb file.
+<code ruby>
+    def self.setup_router(scope)
+      # Add the following resource line
+      scope.resources :articles
+      # The lines that follow are the pre-generated ones.
+
+      scope.match('/index(.:format)').to(:controller => 'main', :action => 'index').name(:index)
+      scope.match('/').to(:controller => 'main', :action => 'index').name(:home)
+      # enable slice-level default routes by default
+      scope.default_routes
+    end
+</code>
+
+
+I personally would delete the "scope.default_routes" line because I'm all about explicitly specifying routes.
+By default Merb mounts slices at the root of the router, so if you don't specify a path, you might have a route conflict and the first route defined will be used.
+
+For this example, let's change our routes:
+
+<code ruby>
+    def self.setup_router(scope)
+      # Add the following resource line
+      scope.resources :articles do |article|
+        article.resource :comments
+      end
+      scope.match('/custom_index(.:format)').to(:controller => 'main', :action => 'index').name(:index)
+      scope.match('/').to(:controller => 'main', :action => 'index').name(:home)
+    end
+</code>
+
+At this point, we've got routes and a fixed up controller.
+
+**NOTE** Nested resources need to have a block parameter.  
+
+==== Accessing slice routes ====
+Quick note about accessing slice urls: use the method slice_url, not url!
+
+===== Create table from model =====
+
+Now we look at the Article model. This model contains the code required to define it as a DataMapper resource.
+<code>
+  $ cat app/models/article.rb
+</code>
+<code ruby>
+  class Article
+    include DataMapper::Resource
+    property :id, Serial
+  end
+</code>
+Again, as with controllers, the DataMapper code would have been omitted without the "use_orm :datamapper" in the slice's config/init.rb file. We would have had an empty class.
+
+I will skip over how we develop Models for Datamapper in Merb. One should watch the other [[http://merbcamp.com/video|MerbCamp videos]] for that or view the [[http://datamapper.org/doku.php?id=docs|Datamapper docs]]. Let's just assume that you've added a few other properties to the Article model class.
+
+Let's create the model's sqlite3 tables.
+<code>
+  $ rake db:automigrate
+  Don't know how to build task 'db:automigrate'
+</code>
+Oops. We don't have that kind of default support in our slice's rake tasks. But no fear, we'll just invoke the auto_migrate! directly:
+<code>
+  $ echo 'DataMapper.auto_migrate!' | slice -i
+  Loading init file from /Users/notroot/projects/myslice/config/init.rb
+   ~ Connecting to database...
+   ~ Loaded slice 'Myslice' ...
+   ~ Parent pid: 9145
+   ~ Activating slice 'Myslice' ...
+  DataMapper.auto_migrate!
+  [Merb::DataMapperSessionStore, Article]
+</code>
+
+If you have this problem "//ArgumentError: Adapter not set: default. Did you forget to setup?//" with the last command, try to setupd datamapper with the following command:
+<code>
+  $ echo 'DataMapper.setup(:default, "sqlite3:sample_development.db") && DataMapper.auto_migrate!' | slice -i
+  Loading init file from /Users/alx/dev/webbastic/config/init.rb
+   ~ Loaded slice 'Webbastic' ...
+   ~ Parent pid: 37620
+   ~ Activating slice 'Webbastic' ...
+  irb: warn: can't alias context from irb_context.
+  DataMapper.setup(:default, "sqlite3:sample_development.db") && DataMapper.auto_migrate!
+  [Webbastic::Page, Webbastic::Site]
+</code>
+
+Be sure to use single quotes since the `!' character is special in bash. But if you want to do it interactively, just start up the slice irb console.
+<code>
+  $ slice -i
+</code>
+The only other thing to note is how slice sql tables are named. Our "articles" table in the slice's development database becomes "myslice_articles" in a Merb application's database.
+
+===== Serve up the slice =====
+
+And to finally get it all together, we need to start mogrel to serve up the slice... but NOT using the `merb` command. We use the `slice` binary.
+<code>
+  $ slice
+  Loading init file from /Users/notroot/projects/myslice/config/init.rb
+   ~ Connecting to database...
+   ~ Loaded slice 'Myslice' ...
+   ~ Parent pid: 9147
+   ~ Activating slice 'Myslice' ...
+  merb : worker (port 4000) ~ Starting Mongrel at port 4000
+  merb : worker (port 4000) ~ Successfully bound to port 4000
+</code>
+And off to the browser you go; and off to developing your slice.
+Example) http://localhost:4000/articles
+
+So what's next once I finish developing my slice?
+
+===== Install your slice as a gem =====
+
+Install your slice directly into your gem repository.
+<code>
+  $ sudo rake install
+</code>
+
+Add your slice to the application's list of dependencies.
+<code>
+  $ cd ~/projects/myapp
+  $ vi config/dependencies.rb
+</code>
+<code ruby>
+  # Add your slice dependency to the bottom of the file.
+  dependency "myslice", "0.0.1"
+</code>
+Install the Slice into your Merb Application.
+<code>
+  $ rake -T slices
+  $ rake slices:myslice:install
+</code>
+And go ahead and add your slice to your application's router.rb file.
+<code>
+  $ vi config/router.rb
+</code>
+<code ruby>
+  # Find the following method call and add your slice.
+  Merb::Router.prepare do
+    slice(:myslice)
+  
+    # other stuff omitted.
+  end
+</code>
+
+This will mount the slice to the root of the router and all the routes defined in the slice are now available.
+
+Now, you can run `merb` to start up mongrel for your application and
+hit away.
+
+Example: 
+http://localhost:4000/
+http://localhost:4000/custom_index
+http://localhost:4000/articles
+http://localhost:4000/articles/new
+etc..
+
+You can also specify where to mount the slice in your app:
+
+<code ruby>
+  # Find the following method call and add your slice.
+  Merb::Router.prepare do
+    slice(:myslice, :path => "test")
+  
+    # other stuff omitted.
+  end
+</code>
+
+You can now access your slice via: http://localhost:4000/test or http://localhost:4000/test/custom_index http://localhost:4000/test/articles  etc...
+
+Note that when mounting a slice that uses a dash in its name, you would need to replace the dashes by underscores or use "classify" the slice name. If we had a slice called "my-slice"
+
+ <code>slice :my_slice</code>
+or
+ <code>slice MySlice</code>
+or 
+ <code>slice :Myslice</code>
+
+
+
+
+----
+
+Based on an blog post from [[http://badpopcorn.com/blog/2008/11/02/how-to-quickstart-merb-slice-development/|badpopcorn]]
+
+
+===== Example of slice new.html.erb =====
+Note the use of **slice_url**.
+
+<code RUBY>
+<h1>New Article</h1>
+ 
+<%= form_for(@article, :action => slice_url(:articles) ) do %>
+ 
+  <p>
+    <%= text_field :title, :label => "Title" %>
+  </p>
+ 
+  <p>
+    <%= text_area :body, :label => "Body"  %>
+  </p>
+ 
+  <p>
+    <%= submit "Create" %>
+  </p>
+<% end =%>
+ 
+<%= link_to 'Back', slice_url(:articles) %>
+
+</code>
+
+
+=== Example slices ===
+
+* [[http://github.com/mattetti/merb-static-pages-slice/tree/master|Mattetti's merb static pages slice]]

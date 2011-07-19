@@ -1,0 +1,145 @@
+====== Models in Merb ======
+
+===== Datamapper =====
+
+You can find a quick overview of DataMapper features below, but you should check out the [[http://datamapper.org/doku.php?id=docs|DataMapper documentation]] for more in-depth information. 
+
+==== Properties ====
+
+When defining a model in Datamapper you specify the properties in the model file.  This is handy when you want to see what the column was that has all of your headline content in it.  The basic syntax is this...
+<code>
+property :field_name, String # String is the class of the variable type you would like to use
+</code>
+Class names that you can use for variable types are...
+  * TrueClass, Boolean
+  * String
+  * Text
+  * Float
+  * Fixnum, Integer
+  * BigDecimal
+  * DateTime, Date, Time
+Datamapper also provides more complex data-types if you include [[http://datamapper.org/doku.php?id=dm-more:dm-types|DM-Types]] ...
+  * Csv
+  * Enum
+  * EpochTime
+  * FilePath
+  * Flag
+  * IPAddress
+  * URI
+  * Yaml
+  * Json
+  * BCryptHash
+  * Regexp (incorrectly called Regex in the DataMapper docs)
+
+
+
+==== Options ====
+
+You can assign various options to your properties, most of them should look pretty familiar.  
+<code>
+:public, :protected, :private, :accessor, :reader, :writer,
+:lazy, :default, :nullable, :key, :serial, :field, :size, :length,
+:format, :index, :check, :ordinal, :auto_validation, :validates, :unique,
+:lock, :track, :scale, :precision
+
+:key          - Set as primary key. Can't use :key as a field name.
+:serial       - auto-incrementing key
+:lazy         - Lazy load the specified property (:lazy => true).
+:default      - Specifies the default value
+:field        - Specifies the table column
+:nullable     - Can the value be null?
+:index        - Creates a database index for the column
+:accessor     - Set method visibility for the property accessors. Affects both
+                reader and writer. Allowable values are :public, :protected, :private.
+:reader       - Like the accessor option but affects only the property reader.
+:writer       - Like the accessor option but affects only the property writer.
+:protected    - Alias for :reader => :public, :writer => :protected
+:private      - Alias for :reader => :public, :writer => :private
+</code>
+
+==== Associations ====
+
+There are only a few subtle differences in datamapper models compared to active record models. has_many in Merb uses 'has' and then the association you would like, see below. 
+<code RUBY>
+has n, :pugs # has many
+has 1, :pug # has exactly 1
+has n..n # has from n to n. e.g. - 1..3, 0..2, etc.
+belongs_to :owner
+</code>
+Possible options are :through, :child_key, :class
+
+==== Validation ====
+
+Here are a few examples of the model property validation methods provided by DataMapper. Add your own examples below.
+
+<code ruby>
+
+# ensure #name is always set
+validates_present :name
+validates_present :name, :with => [:create, :update]
+
+# ensure #spam is never set
+validates_absent :spam
+
+# check the length of #zip_code is exactly 5 characters
+validates_length :zip_code, :is => 5 
+
+# check the length of #age is between 1 and 3 characters
+validates_length :age, :in => 1..3 
+
+# check that #email and #email_confirmation have the same value
+validates_is_confirmed :email
+
+# check that #email and #email_repeat have the same value
+validates_is_confirmed :email, :confirm => :email_repeat
+
+# check that #registration matches the given regex
+validates_format :registration, :with => /[A-Z]{3}-[0-9]{3}/
+
+# check that #email is a valid email address
+validates_format :email, :as => :email_address
+
+# check that #homepage is a valid URL
+validates_format :homepage, :as => :url
+
+# check that #age is an integer
+validates_is_number :age, :integer_only => true
+
+# check that #percentage is a fixnum
+validates_is_number :percentage
+
+# ensure #email is unique
+validates_is_unique :email
+
+# execute an arbitrary check against #age
+validates_with_method :age, :less_than_130?
+
+# execute an arbitrary check against #age
+validates_with_block :age do
+  return [false, "I doubt you're over 130."] if @age >= 130
+  true
+end
+</code>
+
+**TODO** Restructure this section to provide more explanation and better examples for each validation method.
+ 
+
+==== Migrations ====
+
+Once you are happy with your models or anytime you need to update them you need to migrate/upgrade your database.  With Merb and Datamapper there are 2 ways to do this.  One is destructive(automigrate) and the other is not(autoupgrade).  To see more information about these just run 'rake -T' in one of your apps and look for the rake tasks that start with 'db'
+<code>
+# Destructive migrations
+# Recreates your db, erasing all data
+
+rake db:automigrate
+</code>
+
+<code>
+# Friendly migrations
+# upgrades your table without destroying any data.
+rake db:autoupgrade
+</code>
+
+
+
+

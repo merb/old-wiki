@@ -1,0 +1,39 @@
+====== Debugging HowTos ======
+
+===== Getting Started =====
+
+Merb uses ruby-debug ("rdebug").  Odds are good you have it installed already, but if not...
+
+  > gem install ruby-debug
+
+To launch merb with ruby-debug enabled add the "-D" flag:
+
+  > merb -D
+
+
+Hint: If you spend more than a couple minutes using rdebug, you'll want to set up a ~/.rdebugrc file that looks something like this ((merb support for loading ~/.rdebugrc and ./.rdebugrc is broken in 0.9.9, but should be landing in 1.0.  Until then, you can do:
+<code>rdebug /usr/bin/merb -- (your merb flags and arguments)</code>)):
+
+  set autolist
+  set autoeval
+  set autoreload
+  set forcestep
+
+... and anything else you may find useful
+
+===== Activating the debugger =====
+  
+The debugger is activated automatically anytime a ''debugger'' statement is encountered in your code.  For example:
+
+<code RUBY>
+  def show
+    debugger
+    # ... the rest of your code ...
+  end
+</code>
+
+Another way to activate the debugger is to launch merb with the "-C" option, which instructs merb to open the debugger any time you hit Ctrl-C. Note: [[http://merb.lighthouseapp.com/projects/7433/tickets/597-merb-c-option-is-broken|This feature may be broken]]
+===== Using the Debugger =====
+rdebug is a full-featured debugger but, unfortunately, good references are a bit hard to come by.  This [[http://bashdb.sourceforge.net/ruby-debug.html | guide for v0.10.1 ]], is the best I've found so far.
+
+Feel free to add any merb-specific tips and tricks here.

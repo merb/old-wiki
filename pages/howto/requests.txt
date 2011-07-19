@@ -1,0 +1,14 @@
+====== Intro ======
+
+
+Have a request for a HowTo that's not up yet?  Create a link to the non-existent HowTo on the main wiki page and add your request below.  If the HowTo you want is //already// on this page, feel free to add a * after it to "+1" it.
+
+  * Example HowTo Request *
+
+  (HowTo request with two people interested)
+
+====== Requests ======
+
+  * Authentication Example with both OpenID and BasicAuth * *
+  * Jquery & Json Example(s) using a Database Object **
+  * Exhaustive (or as much as possible) suite of test examples including examples for: file uploads, webrat, mailers, CRUD crap, testing MVC best practices etc.

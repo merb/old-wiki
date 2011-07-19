@@ -1,0 +1,95 @@
+====== File Uploads ======
+
+===== The View =====
+
+
+To handle a file upload, first you must add a file upload control to your view. The following is HAML for adding a file upload control.
+
+<code ruby>
+  = form_for(@make, :action => url(:make, @make)) do
+    %p
+      = text_area :description, :label => "Description"
+      = file_field :attachment, :label => "File"
+      = submit "Update"
+</code>
+
+The line we are interested in is:
+
+<code ruby>
+      = file_field :attachment, :label => "File"
+</code>
+
+It is important to note, just by adding a file_field to the form, Merb automatically adds the multipart attributes to the form.
+
+===== The Controller =====
+
+Now we have to handle the uploaded file in the controller. When the file is uploaded, your controller gets a hash with the following properties
+  - filename, String
+  - content_type, String
+  - size, Integer
+  - tempfile, File
+
+
+===== Example =====
+==== The Model ====
+<code ruby>
+class Attachment
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :filename, String
+  property :content_type, String
+  property :size, Integer
+  property :attachable_id, Integer
+  property :attachable_type, String
+  
+  def url
+    "/uploads/#{self.id}/#{self.filename}"
+  end
+end
+</code>
+
+==== The Module ====
+<code ruby>
+require 'ftools'
+
+module Attachable
+  include FileUtils
+
+  def attachments
+    @attachments = Attachment.all(:attachable_type => self.class, :attachable_id => self.id)
+  end
+  def attachment
+    @attachment
+  end
+  def attachment=(value)
+    @attachment = value
+    unless value.empty?
+      attachment = Attachment.create( :attachable_type => self.class,
+                                      :attachable_id => self.id,
+                                      :filename => @attachment[:filename],
+                                      :content_type => @attachment[:content_type],
+                                      :size => @attachment[:size]
+      )
+    
+      File.makedirs("public/uploads/#{attachment.id}")
+      mv(@attachment[:tempfile].path, "public/uploads/#{attachment.id}/#{attachment.filename}")
+
+      # or partition the path if you are expecting a LOT of attachments
+      # path = File.join('public', 'uploads', partitioned_path(attachment.id))
+      # File.makedirs(path)
+      # mv(@attachment[:tempfile].path, File.join(path, attachment.filename))
+    end
+  end
+
+  protected
+
+  # Partition the path according to the id
+  def partitioned_path(id)
+    *("%06d" % id).scan(/.../)
+  end
+end
+</code>
+
+==== Usage ====
+You can now attach files to any model by including the Attachable module in your model, and adding the file_field to your edit view.

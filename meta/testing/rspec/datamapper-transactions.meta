@@ -1,0 +1,15 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1223963090;s:8:"modified";i:1282022886;}s:7:"creator";s:14:"Matt Aimonetti";s:11:"last_change";a:7:{s:4:"date";i:1282022886;s:2:"ip";s:13:"208.99.158.47";s:4:"type";s:1:"E";s:2:"id";s:37:"testing:rspec:datamapper-transactions";s:4:"user";s:5:"dkubb";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:8:"mattetti";s:14:"Matt Aimonetti";s:5:"dkubb";s:8:"Dan Kubb";}s:5:"title";s:51:"Using transactional tests with RSpec and DataMapper";s:11:"description";a:2:{s:15:"tableofcontents";a:1:{i:0;a:4:{s:3:"hid";s:51:"using_transactional_tests_with_rspec_and_datamapper";s:5:"title";s:51:"Using transactional tests with RSpec and DataMapper";s:4:"type";s:2:"ul";s:5:"level";i:1;}}s:8:"abstract";s:503:"spec_helper.rb
+
+
+require "rubygems"
+
+# Add the local gems dir if found within the app root; any dependencies loaded
+# hereafter will try to load from the local gems before loading system gems.
+if (local_gem_dir = File.join(File.dirname(__FILE__), '..', 'gems')) && $BUNDLE.nil?
+  $BUNDLE = true; Gem.clear_paths; Gem.path.unshift(local_gem_dir)
+end
+
+require "merb-core"
+require "spec" # Satisfies Autotest and anyone else not using the Rake tasks
+
+# this loads all plugins required in your init file …";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1223963090;s:8:"modified";i:1282022886;}s:7:"creator";s:14:"Matt Aimonetti";s:11:"last_change";a:7:{s:4:"date";i:1282022886;s:2:"ip";s:13:"208.99.158.47";s:4:"type";s:1:"E";s:2:"id";s:37:"testing:rspec:datamapper-transactions";s:4:"user";s:5:"dkubb";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:8:"mattetti";s:14:"Matt Aimonetti";s:5:"dkubb";s:8:"Dan Kubb";}}}

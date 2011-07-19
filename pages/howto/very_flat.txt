@@ -1,0 +1,7 @@
+====== Notes on Very Flat Apps: ======
+
+  * to have the app reload itself while in development mode, add this to your file: 
+      <code>Merb.push_path(:application,  __FILE__)</code>
+
+  * to have the app reload itself only when the file is modified, try this:
+      <code>Merb.push_path(:lib,  File.dirname(__FILE__), File.basename(__FILE__))</code>

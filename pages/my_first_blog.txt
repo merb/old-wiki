@@ -1,0 +1,198 @@
+====== My First Blog ======
+Learn how to create a very simple blog using Merb, DataMapper, haml.
+
+===== Generating the app =====
+From the console, type:
+
+<code>$ merb-gen app my_first_merblog --template-engine=haml</code>
+
+and then:
+
+<code>$ cd my_first_merblog</code>
+
+NOTE: Would you prefer to use erb then just omitt the ''--template-engine=haml'' flag.
+
+===== Time to REST =====
+What's a blog without posts and comments, right, so let's create those the RESTful way.
+
+From the console, type:
+
+<code>$ merb-gen resource post title:string,body:string</code>
+
+<code>$ merb-gen resource comment post_id:integer,name:string,body:string</code>
+
+Now open the project in your texteditor of choice and edit the file, ''config/router.rb''
+
+Change it from this:
+
+<code ruby>
+... snipp ...
+Merb::Router.prepare do
+  resources :comments
+  resources :posts
+  
+  ... snipp ...
+end
+</code>
+
+To this:
+
+<code ruby>
+... snipp ...
+Merb::Router.prepare do
+  resources :posts do |post|
+    post.resources :comments
+  end
+  
+  ... snipp ...
+end
+</code>
+
+===== Setting up the relationships =====
+In ''app/models/post.rb'' add the folowing:
+
+<code ruby>
+class Post
+  ... snipp ...
+  has n, :comments
+end
+</code>
+
+and in ''app/models/comment.rb'' add:
+
+<code ruby>
+class Comment
+  ... snipp ...
+  
+  belongs_to :post
+end
+</code>
+
+===== Make it pretty =====
+
+==== ''app/views/posts'' ====
+
+Edit ''new.html.haml'' to look like this:
+
+
+<code ruby>
+= error_messages_for :post
+
+= form_for(@post, :action => url(:posts) ) do
+  = partial :form
+  %p= submit "Create"
+
+= link_to 'Back', url(:posts)
+</code>
+
+
+Edit ''edit.html.haml'' to look like this:
+
+<code ruby>
+= error_messages_for :post
+
+= form_for(@post, :action => url(:post, @post)) do
+  = partial :form
+  %p= submit "Update"
+
+= link_to 'Show', url(:post, @post)
+|
+= link_to 'Back', url(:post)
+</code>
+
+Since our new and edit templates contains similar logic we've extracted it to a partial called ''form'' in order to keep things nice and DRY,
+in order for this to work we need to create a file called ''_form.html.haml'' to hold the repeated code and edit it to look like this:
+
+<code ruby>
+%p= text_field :title
+%p= text_area  :body
+</code>
+
+Now edit ''index.html.haml'' to look like this:
+
+<code ruby>
+%table
+  %tr
+  - for post in @posts
+    %td= post.title
+    %tr
+      %td= link_to 'Show', url(:post, post)
+      %td= link_to 'Edit', url(:edit_post,  post)
+
+= link_to 'New', url(:new_post)
+</code>
+
+Finally let's edit the ''show'' page, ''show.html.haml'' to look like the following:
+
+<code ruby>
+%p= @post.title
+%p= @post.body
+
+%br/
+%hr/
+%h1 Comments
+%p= partial "comments/show", :with => @post.comments.reverse, :as => :comment
+
+%hr/
+%p= partial("comments/comment")
+
+= link_to 'Edit', url(:edit_post,  @post)
+|
+= link_to 'Back', url(:posts)
+</code> 
+==== ''app/views/comments'' ====
+
+Our posts show page is dependent upon two partials in order to create and display comments so let's create those now.
+First create a file called ''_show.html.haml'' and edit it to look like this:
+
+<code ruby>
+%p
+  %i= comment.name
+%p= comment.body
+</code>
+
+NOTE: We don't have to do any kind of looping or anything here since we call the partial with a collection of posts from the posts/show template ('':with => @post.comments.reverse, :as => :comment'')
+
+Next let's create the partial for creating the comment, so create a file called ''_comment.html.haml'' and edit it to look like this:
+
+<code ruby>
+%p= error_messages_for :comment
+
+= form_for(:comment, :action => "/posts/#{@post.id}/comments", :method => :post) do
+  %p= text_field :name, :name => "comment[name]"
+  %p= text_area  :body, :name => "comment[body]"
+  %p= submit "Comment"
+</code>
+
+NOTE: For some reason, when using nested routes, we need to include the '':name => model[field_name]'' option on ''text_field'' helpers or it won't get passed along to the controller, but ''text_area'' helpers works fine without it.
+
+UPDATE: As of 1.0.15 it appears the :name option is required on text_area as well, otherwise the parameter is named ''nil_class[body]'' and is ignored.  Also note that in this example, '':name, :name'' is confusing.  The generic form is ''form_widget :key, :name => model[key]''. The '':name => '' parameter overrides the name of the POST variable.
+
+===== One last thing =====
+
+We need to make some minor modifications to our comments controller's ''create'' action in order for this to work, so lets edit it to look like this:
+
+<code ruby>
+  def create(comment)
+    @post = Post.get(params[:post_id])
+    @comment = Comment.new(comment.merge(:post => @post))
+    if @comment.save
+      redirect resource(@post), :message => {:notice => "Comment was successfully created"}
+    else
+      message[:error] = "Comment failed to be created"
+      render :new
+    end
+  end
+</code>
+
+===== Let's blog about it =====
+
+From inside the directory where you app lives, type the following in the console:
+
+''$ rake db:automigrate''
+
+and then, start up the merb server:
+
+''$ merb''
+
+Now open up your web browser of choice and point it to ''http://localhost:4000/posts'' and start blogging...

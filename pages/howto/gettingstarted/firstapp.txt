@@ -1,0 +1,177 @@
+====== Generate your first app ======
+
+This tutorial assumes you install Merb from gems and therefore have what we call the merb-stack. ( a collection of gems)
+
+Once you have Merb installed you can start using the generator.
+
+<code>
+ $ merb-gen app my-first-app
+Generating with app generator:
+     [ADDED]  gems
+     [ADDED]  tasks/merb.thor
+     [ADDED]  .gitignore
+     [ADDED]  public/.htaccess
+     [ADDED]  tasks/doc.thor
+     [ADDED]  public/javascripts/jquery.js
+     [ADDED]  doc/rdoc/generators/merb_generator.rb
+     [ADDED]  doc/rdoc/generators/template/merb/api_grease.js
+     [ADDED]  doc/rdoc/generators/template/merb/index.html.erb
+     [ADDED]  doc/rdoc/generators/template/merb/merb.css
+     [ADDED]  doc/rdoc/generators/template/merb/merb.rb
+     [ADDED]  doc/rdoc/generators/template/merb/merb_doc_styles.css
+     [ADDED]  doc/rdoc/generators/template/merb/prototype.js
+     [ADDED]  public/favicon.ico
+     [ADDED]  public/images/merb.jpg
+     [ADDED]  public/merb.fcgi
+     [ADDED]  public/robots.txt
+     [ADDED]  Rakefile
+     [ADDED]  app/controllers/application.rb
+     [ADDED]  app/controllers/exceptions.rb
+     [ADDED]  app/helpers/global_helpers.rb
+     [ADDED]  app/models/user.rb
+     [ADDED]  app/views/exceptions/internal_server_error.html.erb
+     [ADDED]  app/views/exceptions/not_acceptable.html.erb
+     [ADDED]  app/views/exceptions/not_found.html.erb
+     [ADDED]  autotest/discover.rb
+     [ADDED]  autotest/merb.rb
+     [ADDED]  autotest/merb_rspec.rb
+     [ADDED]  config/database.yml
+     [ADDED]  config/dependencies.rb
+     [ADDED]  config/environments/development.rb
+     [ADDED]  config/environments/production.rb
+     [ADDED]  config/environments/rake.rb
+     [ADDED]  config/environments/staging.rb
+     [ADDED]  config/environments/test.rb
+     [ADDED]  config/init.rb
+     [ADDED]  config/rack.rb
+     [ADDED]  config/router.rb
+     [ADDED]  public/javascripts/application.js
+     [ADDED]  public/stylesheets/master.css
+     [ADDED]  merb/merb-auth/setup.rb
+     [ADDED]  merb/merb-auth/strategies.rb
+     [ADDED]  merb/session/session.rb
+     [ADDED]  spec
+     [ADDED]  app/views/layout/application.html.erb
+
+</code>
+
+Get into your app folder:
+
+<code>
+$ cd my-first-app/
+</code>
+
+Generate your first resource:
+
+<code>
+$ merb-gen resource article title:string,content:text # separate each field with comma, no space(s) allowed
+Loading init file from /Users/mattetti/my-first-app/config/init.rb
+Loading /Users/mattetti/my-first-app/config/environments/development.rb
+Generating with resource generator:
+     [ADDED]  spec/models/article_spec.rb
+     [ADDED]  app/models/article.rb
+     [ADDED]  spec/requests/articles_spec.rb
+     [ADDED]  app/controllers/articles.rb
+     [ADDED]  app/views/articles/index.html.erb
+     [ADDED]  app/views/articles/show.html.erb
+     [ADDED]  app/views/articles/edit.html.erb
+     [ADDED]  app/views/articles/new.html.erb
+     [ADDED]  app/helpers/articles_helper.rb
+resources :articles route added to config/router.rb
+
+</code>
+
+The resource route is automatically added to your router. (config/router.rb)
+
+<code RUBY>
+
+Merb.logger.info("Compiling routes...")
+Merb::Router.prepare do
+  resources :articles  #  <-- new route to deal with our new resource
+</code>
+
+DataMapper, the default ORM in Merb-stack, converts data back and forth between your database(s) and your application code.
+Because DataMapper models define the schema mapping, DataMapper can figure out what your database should look like.  However you need to create the database and update the schema.   By default Merb stack uses sqlite3 which stores data in flat files.  If you want a mysql example of database.yml file:
+
+<code>
+# This is a sample database file for the DataMapper ORM
+:development: &defaults
+  :adapter: mysql
+  :database: db_development
+  :username: username
+  :password: secret
+  :host: host
+
+:test:
+  <<: *defaults
+  :database: db_test
+
+:production:
+  <<: *defaults
+  :database: db_production
+
+
+#now it's time to create db_development database in your mysql admin tool.
+
+
+Simply use:
+</code>
+<code>$ rake db:automigrate
+(in /Users/mattetti/my-first-app)
+Loading init file from /Users/mattetti/my-first-app/config/init.rb
+Loading /Users/mattetti/my-first-app/config/environments/development.rb
+ ~ Connecting to database...
+ ~ Loaded slice 'MerbAuthSlicePassword' ...
+ ~ Parent pid: 68165
+ ~ Compiling routes...
+ ~ Activating slice 'MerbAuthSlicePassword' ...
+ ~ DROP TABLE IF EXISTS "articles"
+ ~ DROP TABLE IF EXISTS "users"
+ ~ PRAGMA table_info('users')
+ ~ SELECT sqlite_version(*)
+ ~ CREATE TABLE "users" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "login" VARCHAR(50), "crypted_password" VARCHAR(50), "salt" VARCHAR(50))
+ ~ PRAGMA table_info('articles')
+ ~ CREATE TABLE "articles" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "title" VARCHAR(50))
+</code>
+
+Congratulations, you just created a database and created the tables, fields you needed. Note that this is a destructive command, so only use it when you get started with an application. 
+
+If you already have a database with the required tables and fields, you don't need to run this command. [todo: link to DataMapper migration options]
+
+You can now start your server.
+
+<code>$ merb
+Loading init file from /Users/mattetti/my-first-app/config/init.rb
+Loading /Users/mattetti/my-first-app/config/environments/development.rb
+ ~ Connecting to database...
+ ~ Loaded slice 'MerbAuthSlicePassword' ...
+ ~ Parent pid: 68184
+ ~ Compiling routes...
+ ~ Activating slice 'MerbAuthSlicePassword' ...
+merb : worker (port 4000) ~ Starting Mongrel at port 4000
+merb : worker (port 4000) ~ Successfully bound to port 4000 
+</code>
+
+You can now access [[http://localhost:4000/articles]]
+
+**Note:** accessing [[http://localhost:4000]] will raise an error: No routes match the request: /
+
+That's because we did not define an index route. Let's do that right away. Open config/router.rb in your editor and edit the line just before the last one:
+
+<code RUBY>
+match('/').to(:controller => 'articles', :action =>'index')
+</code>
+
+Save your file and go check on [[http://localhost:4000]]  it works :)
+
+**Note:** You don't need to restart your application when changing routes, the router will reload automatically in development mode.
+
+**Note:** If you run into any problems, you may need to remove all your old Merb gems and start fresh. Here's a shell command for that:
+
+<code>
+sudo gem search merb | ruby -n -e 'puts $1 if ($_ =~ /(merb\S+)/)' | xargs sudo gem uninstall -a -x
+</code>
+or:
+<code>
+gem list merb --no-versions | xargs sudo gem uninstall -a -x
+</code>

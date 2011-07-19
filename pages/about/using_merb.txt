@@ -1,0 +1,71 @@
+====== Applications using Merb ======
+
+{{:about:powered_by_merb.png|}}
+
+| ^ URL ^ Description ^
+| | [[http://www.sproutcore.com/|sproutcore.com]] | SproutCore is a framework for building applications in JavaScript. |
+| | [[http://www.apple.com/mobileme/ | Apple MobileMe]] | MobileMe is built on [[http://www.sproutcore.com/|sproutcore]], which uses Merb. |
+| [[http://lessoctane.com/|{{:about:lessoctane.com-_small.jpg|}}]] | [[http://lessoctane.com/| lessoctane.com]] | makes the last decade of EPA fuel economy data accessible (merb + datamapper + haml) |
+| [[http://jeanelietrujillo.com|{{:about:jeanelietrujillo.com_small.jpg|jeanelietrujillo.com}}]] | [[http://jeanelietrujillo.com| jeanelietrujillo.com, Designer portfolio]] | |
+| |[[http://yellowpages.com/|YellowPages.com]] | No need for description ;)|
+| | [[https://adspot.rippletv.com|Ripple AdSpot]] | |
+| | [[http://www.dropboks.com/| dropboks.com]] | Online file management |
+| | [[http://ajaxwhois.com/|ajaxwhois.com Ajax Whois]] | |
+| | [[http://www.facebook.com/apps/application.php?id=2431403991| PackRat (Facebook app)]] | |
+| | [[http://apps.facebook.com/cflpool|Canadian Football Poo (Facebook app)]] | |
+| | [[http://apps.facebook.com/eurostack|Euro 2008 Goal Stack (facebook app)]] | |
+| | [[http://merbunity.com/|merbunity.com]] | Merb's community app |
+| [[http://powerset.com|{{:about:powerset.com_small.jpg|}}]] | [[http://powerset.com|Powerset/Microsoft]] | Search |
+| | [[http://freegovernment.org | FreeGovernment.org]] | |
+| | [[http://traineo.com | Traineo.com]] | |
+| | [[http://atgyc.com | Atgyc.com]] | a social network for a bar in Brooklyn with SMS presence notification |
+| | [[http://defensio.com | Defensio]] | Spam Filtering |
+| | [[http://sensei.zenunit.com |Zenunit Sensei]] | Has how-to videos, but will eventually grow to become a learning resource on anything. |
+| | [[http://ylastic.com | Ylastic.com]] | World's first unified management application for AWS - EC2, S3, SQS and SimpleDB. |
+| | [[http://www.fstat.no | FStat.no]] | Financial derivatives & monte-carlo simulation |
+| | [[http://botablog.cz | BotaBlog.cz]] and [[http://rubypowered.cz|RubyPowered.cz]] | Czech and English Blogs about Merb, Ruby, and related stuff |
+| | [[http://101ideas.cz | 101Ideas.cz]] | web presentation of 101Ideas Company |
+| | [[http://forums.gogreensolar.com | GoGreenSolar.com forums]] | |
+| | [[http://pandastream.com/ | pandastream.com]] | Panda open source video platform |
+| | [[http://www.legal500.com/ | legal500.com Legal website]] | |
+| | [[http://www.viewbook.com/ | viewbook.com]] | Online image manager |
+| | [[http://www.gethundos.com/ | www.gethundos.com]] | a social networking site for college students (25% merb / 75% rails) |
+| | [[http://www.hitgeist.com/ | higeist.com]] | site ranking |
+| | [[http://www.recollectr.com/ | recollectr.com]] | Recollectr is a fast, straightforward link-storing app with advanced features. |
+| | [[http://japanified.com/lists/ | japanified.com]] | Japanified is a place where you can study for the Japanese Language Proficiency Test with ease! |
+| | [[http://myttc.ca/| myttc.ca]] | MyTTC is a trip planer for transit in Toronto. |
+| | [[http://byclosure.com]] | Agile semantic applications |
+| | [[http://slurpit.co.uk]] | a blogging tool built in Merb with MySQL |
+| | [[http://www.milliondollarcalendar.com]] | a new spin on the Million Dollar Homepage on a calendar |
+| [[http://www.chronicular.com/|{{http://thumboo.com/thumbnails/2008-12-19-022049_1024x768_www.chronicular.com-_small.jpg}}]]| [[http://www.chronicular.com]] | an in-browser front-end for Chronic (a natural language date/time parser) |
+| | [[http://buzzworthy.me/1/2| http://buzzworthy.me]] | addictive promotional tool / game |
+| | [[http://daytomeet.com | http://daytomeet.com]] | DayToMeet makes it easy to share your availability and find the best day to meet among a large group of people. |
+| | [[http://greenwala.com/ | http://greenwala.com/]] | Green life |
+| | [[http://widgets.boo-box.com/ | http://widgets.boo-box.com/]] | boo-box widgets webservice |
+| | [[http://entitea.com/|http://entitea.com/]] | Community of tea drinkers |
+| | [[http://www.facestat.com/]] | Rate people/faces |
+| | [[http://www.waferbaby.com/]] | Lil' community |
+| {{http://rubytime.org/images/shot.jpg}} | [[http://rubytime.org/|http://rubytime.org/]]| Open Source time tracking and invoicing system from [[http://www.lunarlogicpolska.com|Lunar Logic Polska]] |
+| [[http://twitpay.me|{{http://thumboo.com/thumbnails/2008-12-19-024623_1024x768_twitpay.me-_small.jpg}}]] | http://twitpay.me | Twitpay: Payments in 140 characters or less |
+| | [[http://shellshadow.com/|ShellShadow]] | collaborative server support. |
+| [[http://mywishwand.co.uk|{{http://thumboo.com/thumbnails/2008-12-19-021806_1024x768_mywishwand.co.uk-_small.jpg}}]] | [[http://mywishwand.co.uk]] | A wishlist service with gift search and matching, geared for the entire family. |
+| | [[http://www.sagenorthamerica.com/]] |accounting, operations, customer management, human resources, time tracking, merchant services and the specialized needs of the construction, distribution, healthcare, manufacturing, nonprofit and real estate industries|
+| | [[http://www.zuiden.com/|http://www.zuiden.com/]] | |
+| | [[http://gom-jabbar.org/|http://gom-jabbar.org/]] | A blog written in merb where I write about merb/ruby/whatever (I will release the source code of the blog once I clean it up a bit) |
+| | [[http://fotonauts.com|fotonauts.com]] | |
+| [[http://gotgastro.com|{{http://www.thumboo.com/thumbnails/2008-12-19-021120_1024x768_gotgastro.com-_small.jpg}}]] | [[http://gotgastro.com/|Gastro]] | Gastro aggregates health code breaches from the NSW Food Authority, displaying them on Google maps, and republishing the data for developers to mash up. |
+| | [[http://tweetlinkmonster.com/|http://tweetlinkmonster.com/]] | Gives an Atom feed of all of the links your Twitter friends tweet |
+| | [[http://www.newsoundreview.com/|http://www.newsoundreview.com/]] | Gullbuy's new sound review (music review site) |
+| | [[http://www.jeremydurham.com/|http://www.jeremydurham.com/]] | Simple blog written in Merb |
+| {{http://sites.google.com/site/merbsprout/_/rsrc/1232758151544/Home/thumb_100_75.png}} | [[http://merb.kicks-ass.org/|Twitter-on-Merb]] | posts edge merb github feeds on twitter |
+| | [[http://merbi.st/plugins|Merbist Plugins]] | 3rd Party Plugins |
+| [[http://profile.myspace.com/Modules/Applications/Pages/Canvas.aspx?appId=121990|{{http://img.skitch.com/20090128-jt6q9qxttktmhu4pb27u2nukeb.jpg}}]] | [[http://profile.myspace.com/Modules/Applications/Pages/Canvas.aspx?appId=121990|War of the Roses]] | A fun, little MySpace app written in Merb. |
+| [[http://flossedtoday.com|{{http://flossedtoday.com/images/no-tooth.png}}]] | [[http://flossedtoday.com|Flossed Today]] | A reminder application to help you floss. |
+| [[http://missmint.com|{{http://missmint.com/images/missmint-twitter.gif?73}}]] | [[http://missmint.com|Miss Mint]] | A reminder application for ladies. |
+| [[http://jawaker.com/?lang=en&|{{http://jawaker.com/images/home-screen.jpg}}]] | [[http://jawaker.com/?lang=en&|Jawaker]] | Jawaker is a multi-player card gaming website for the Arab world. |
+| [[http://investapp.com|{{https://s3.amazonaws.com/twitter_production/profile_images/206529538/twitter-logo.png?73}}]] | [[http://investapp.com|Investapp]] | Organize your investment group. |
+| | [[http://www.guestlistapp.com|Guestlist]] | Guestlist is an event registration app that helps you sell tickets online |
+
+
+Feel free to add your site to the **END** of this list.
+You can create a screenshot for your site using [[http://www.thumboo.com/]]

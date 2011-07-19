@@ -1,0 +1,53 @@
+====== Cache validators ======
+
+[[http://github.com/wycats/merb/tree/ad378ce413769bc1c3d03aefac02e8e32a5432e4/merb-core/lib/merb-core/controller/mixins/conditional_get.rb|Check]] how this feature is implemented in merb-core ([[http://github.com/wycats/merb/tree/ad378ce413769bc1c3d03aefac02e8e32a5432e4/merb-core/lib/merb-core/controller/mixins/conditional_get.rb|lib/merb-core/controller/mixins/conditional_get.rb]])
+
+Caching is tricky but [[http://tomayko.com/writings/things-caches-do|here]] is a great read about HTTP caching, more precisely "reverse proxy caches".
+
+Basically the concept is to let the HTTP gateway cache know when a piece of content was modified so it can serve it without going through the entire stack. At least that's the theory.
+
+The problem is that the cache needs to validate that the cached request is still fresh.
+
+You have to do that in your controller. Here is an example how how you could use cache validators.
+
+<code RUBY>
+# model
+class Article
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :body, String
+  property :author, String
+  property :updated_at, Time
+
+end
+</code>
+
+<code RUBY>
+# controller
+class Articles < Application
+
+  def show(id)
+    @article = Article.get(id)
+    set_validators(@article)
+    if request_fresh?
+      self.status = 304
+      # we have to return/render an empty body so the cache gateway
+      # can process the request as a 304 Not Modified.
+      return ""
+    else
+      render
+    end
+  end
+  
+  private
+    def set_validators(resource_item)
+      # Use whatever resource value you want to set the etag
+      self.etag = Digest::SHA1.hexdigest(resource_item.to_s)
+      # As of 1.0.3 you have to pass a Time instance, if you have a DateTime instance, please use #to_time
+      # before setting up the last_modified value.
+      self.last_modified = resource_item.updated_at
+    end
+  
+end
+</code>

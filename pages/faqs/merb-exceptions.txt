@@ -1,0 +1,4 @@
+====== merb-exceptions ======
+
+Check out the [[http://github.com/wycats/merb/tree/master/merb-exceptions/README.markdown|readme]] on GitHub for the most up to date information!
+

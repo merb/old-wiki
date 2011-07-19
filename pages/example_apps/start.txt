@@ -1,0 +1,26 @@
+====== Merb Application Examples ======
+
+External sites may be in various stages of development, and may not use the latest Merb code -- remember to check anything you find on an external site with the Merb API.
+
+===== Skeleton Applications =====
+
+Basic skeleton applications to help you get off the ground.
+
+  * [[http://github.com/dkubb/merb-skeleton|dkubb's merb-skeleton]]
+
+===== Basic Applications =====
+
+Intended to be used as teaching examples.
+
+  * [[/example_apps/simple_app|Simple application source code (with specs)]] (uses [[http://github.com/mattetti/simple_merb_example_app|mattetti's simple_merb_example_app]])
+  * [[/example_apps/google_to_rss_app|merb_example_google_rss: Extremely simple app that takes a query, runs it by Google, and returns an RSS 2.0 feed]]
+  * [[http://github.com/jackdempsey/merb-service-example|jackdempsey's merb-service-example]]
+  * [[http://github.com/mattetti/merb-static-pages-slice/tree/master|Mattetti's static pages slice]]
+
+===== "Real World" Applications =====
+
+These apps may involve solving more realistic problems, but also may involve gem dependencies and a larger codebase to sort through.
+
+  * [[http://github.com/mleung/feather|feather]] - lightweight blogger
+  * [[http://github.com/meekish/collective|collective]] - no-frills wiki
+  * [[http://github.com/carpeliam/groupthink|groupthink]] - group-oriented document/file sharing

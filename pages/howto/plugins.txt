@@ -1,0 +1,66 @@
+===== About Merb Plugins =====
+
+Merb plugins are distributed as [[http://www.rubygems.org/|gems]], which makes for easy versioning and management. Your merb plugin gems can be installed either on a per-application basis, or for an entire system. The following sections will outline how to get started with plugins.
+
+Please note that this section assumes some knowledge of rubygems and the __gem__ command-line tool.
+
+==== Installing Merb Plugins for a Single Application ====
+
+Merb automatically attempts to use the "gems" directory of your application as a repository for application-specific gems. The command for installing gems accepts an optional argument which allows you to specify the installation directory for a given gem. To install plugins for a specific merb application, you can run the following command:
+
+<code bash>
+gem install -i path/to/my/app/gems merb-fixtures-0.9.5.gem
+</code>
+
+Once the gem is installed, you can follow the README file to determine what configuration changes are necessary. For example, if you've just installed the merb-fixtures plugin you might need to add the following to your config/init.rb:
+
+<code ruby>
+dependency "merb-fixtures"
+</code>
+
+Note that if you intend to distribute a merb application that makes use of several plugins, it may be easier for other developers who wish to work on your code if you install the gems using this method. If you don't, they may have to go hunting for the dependencies themselves.
+
+==== Installing Merb Plugins for Multiple Applications ====
+
+If you have several applications that you know will be making use of the same plugin, you might want to install it to your system's gem repository. Once installed to the system gem repository, this plugin will then be available to any merb application you install on the system.
+
+<code bash>
+gem install merb-fixtures-0.9.5.gem
+</code>
+
+Again, once the gem is installed you may need to make plugin-specific configuration changes to your merb application(s). Check the README file for your plugins.
+==== Developing Your Own Plugins ====
+
+Writing plugins for merb is dead simple
+
+<code>
+$ merb-gen plugin myplugin
+</code>
+
+Then there are two ways for build a merb plugin:
+
+  - Build the plugin outside your merb app
+  - Build the plugin inside your merb app
+
+The second way, need some simple step.
+
+do this:
+
+<code>
+$ mkdir /path/to/myapp/gems/development
+$ mv myplugin /path/to/myapp/gems/development
+</code>
+
+Then in edit **before_app_loads** in your init.rb (/path/to/myapp/config/init.rb) like this:
+
+<code ruby>
+Merb::BootLoader.before_app_loads do
+  dev_gems = Dir.glob("#{Merb.root}/gems/development/**/lib/*.rb")
+  dev_gems.each { |dev_gem| require dev_gem }
+end
+</code>
+
+That's all!
+
+Now you can live edit your all your plugins (which are really gems, remember) and test them inside your app.
+ 

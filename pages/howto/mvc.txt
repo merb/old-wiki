@@ -1,0 +1,14 @@
+====== What is the Model-View-Controller architectural pattern? ======
+
+The MVC architectural pattern is the notion of abstracting your application into three layers:
+  * The View layer presents the data to the user.  This is the only layer that actually generates markup that is outputted to the user's browser.  In Merb, you have two options for templating engines: [[http://en.wikipedia.org/wiki/Eruby|eRuby]] and [[http://en.wikipedia.org/wiki/Haml|Haml]].  Which you choose depends on personal preference and application.
+  * The Model layer embodies objects that the user is interacting with.  Posts, Articles, even Users (in authentication) would be models.  Models are often represented in a database.
+  * The Controller layer ties the View and Model layer together, allowing users to interact with models by handling certain behavior (or "business logic") and outputting the relevant views.  Methods in controllers used to render a view are called "actions" in Merb.
+
+For more information about the theory behind MVC, see [[http://en.wikipedia.org/wiki/Model-view-controller|Wikipedia]] or (perhaps even better) [[http://c2.com/cgi/wiki?ModelViewController|C2]].
+
+====== More information about the parts ======
+
+  * [[howto/mvc/model| Model]]
+  * [[howto/mvc/view| View]]
+  * [[howto/mvc/controller| Controller]]

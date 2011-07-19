@@ -1,0 +1,2 @@
+====== Frequently Asked Questions That Need Answers ======
+  * I just installed 1.0RC2 and want to update my app to use it, I'm a few versions behind (.9.0ish?) is there a rake task to run to update the old app, rake -T is failing on me.

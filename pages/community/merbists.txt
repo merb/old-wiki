@@ -1,0 +1,78 @@
+====== Merbists ======
+
+This page allows Merbists to provide location and contact information about themselves.
+The table below uses JSON syntax, allowing it to be harvested for planning conferences,
+setting up local developer groups, etc.
+
+Latitude and Longitude information are obtainable in a number of places,
+including  [[http://www.backups.nl/geocoding/]].
+For reasons of brevity and privacy,
+these values should be rounded to the nearest tenth of a degree (eg, 12.3).
+Also, please keep the list sorted by Longitude,
+to increase the odds of spotting "neighbors".
+===== Data =====
+
+<code>
+[
+  { "lon":  -123.1,  "lat":  44.0, "loc":    "Eugene, OR, USA",
+    "name": "Ham, Zack",         "email":    "zackham@gmail.com",
+    "url":  "http://zackham.com" },
+   
+  { "lon":  -122.4,  "lat":  37.6, "loc":    "San Bruno, CA, USA",
+    "name": "Morin, Rich",       "email":    "rdm@cfcl.com",
+    "url":  "http://www.cfcl.com/rdm" },
+
+  { "lon":   -121.9, "lat":  39.7, "loc":    "Chico, California, USA",
+    "name":  "Rocha, Justin", "email":       "xenith@xenith.org",
+    "url":   "http://xenith.org/" },
+
+  { "lon":   -88.1,  "lat":  42.2, "loc":    "Lake Zurich, IL, USA",
+    "name": "Thomson, Mark",     "email":    "markmthomson@comcast.net" },
+
+  { "lon":   -85.8,  "lat":  38.3, "loc":    "Clarksville, IN, USA",
+    "name": "Cox, Cameron",      "email":    "cameroncox@gmail.com",
+    "url":  "http://cameroncox.com" },
+
+  { "lon":   -75.1,  "lat":  40.0, "loc":    "Jenkintown, PA, USA",
+    "name": "Eichert, Steve",    "email":    "steve.eichert@gmail.com",
+    "url":  "http://www.steveeichert.com" },
+
+  { "lon":   -71.8,  "lat":  42.3, "loc":    "Worcester, MA, USA",
+    "name": "Morley, Liam",      "email":    "liam@carpeliam.com",
+    "url":  "http://www.carpeliam.com" },
+
+  { "lon":   -71.1,  "lat":  42.4, "loc":    "Arlington, MA, USA",
+    "name": "Durham, Jeremy",    "email":    "jeremydurham@gmail.com",
+    "url":  "http://www.jeremydurham.com" },
+
+  { "lon":     2.8,  "lat":  50.4, "loc":    "Avion, France",
+    "name": "Cavigneaux, Nicolas", "email":  "nico@bounga.org",
+    "url":  "http://www.bounga.org/" },
+
+  { "lon":    36.3,  "lat":  33.5, "loc":    "Damascus, Syria",
+    "name": "alHabache, khaled", "email":    "khellls@gmail.com",
+    "url":  "http://www.khelll.com/blog" },
+
+  { "lon":   121.5,  "lat":  31.1, "loc":    "Shanghai, Shanghai, China",
+    "name": "Hancock, Jon",      "email":    "jhancock@shellshadow.com",
+    "url":  "http://shellshadow.com" },
+
+  { "lon":   121.5,  "lat":  31.1, "loc":    "Shanghai, Shanghai, China",
+    "name": "GUILBOT, Maxime",   "email":    "maxime@ekohe.com",
+    "url":  "http://ekohe.com" },
+
+  { "lon":   121.5,  "lat":  31.1, "loc":    "Shanghai, Shanghai, China",
+    "name": "Ballantyne, Scott", "email":    "scott@ekohe.com",
+    "url":  "http://ekohe.com" },
+
+  { "lon":   121.5,  "lat":  31.1, "loc":    "Shanghai, Shanghai, China",
+    "name": "Qian, Aaron",       "email":    "aaron@ekohe.com",
+    "url":  "http://ekohe.com" },
+
+  { "lon":   151.1,  "lat": -33.7, "loc":    "Sydney, Australia",
+    "name": "Holmwood, Lindsay", "email":    "lindsay@holmwood.id.au",
+    "url":  "http://holmwood.id.au/~lindsay/" },
+
+  {}  
+]
+</code>

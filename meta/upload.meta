@@ -1,0 +1,10 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1224481319;s:8:"modified";i:1233646533;}s:7:"creator";s:20:"Christopher Petersen";s:11:"last_change";a:7:{s:4:"date";i:1233646533;s:2:"ip";s:15:"165.228.180.193";s:4:"type";s:1:"E";s:2:"id";s:6:"upload";s:4:"user";s:7:"auxesis";s:3:"sum";s:21:"old revision restored";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:5:"xilef";s:5:"felix";s:7:"auxesis";s:16:"Lindsay Holmwood";}s:5:"title";s:12:"File Uploads";s:11:"description";a:2:{s:15:"tableofcontents";a:7:{i:0;a:4:{s:3:"hid";s:12:"file_uploads";s:5:"title";s:12:"File Uploads";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:8:"the_view";s:5:"title";s:8:"The View";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:14:"the_controller";s:5:"title";s:14:"The Controller";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:3;a:4:{s:3:"hid";s:7:"example";s:5:"title";s:7:"Example";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:4;a:4:{s:3:"hid";s:9:"the_model";s:5:"title";s:9:"The Model";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:5;a:4:{s:3:"hid";s:10:"the_module";s:5:"title";s:10:"The Module";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:6;a:4:{s:3:"hid";s:5:"usage";s:5:"title";s:5:"Usage";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:336:"The View
+
+To handle a file upload, first you must add a file upload control to your view. The following is HAML for adding a file upload control.
+
+
+  = form_for(@make, :action => url(:make, @make)) do
+    %p
+      = text_area :description, :label => "Description"
+      = file_field :attachment, :label => "File"
+      = submit "Update"";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1224481319;s:8:"modified";i:1233646533;}s:7:"creator";s:20:"Christopher Petersen";s:11:"last_change";a:7:{s:4:"date";i:1233646533;s:2:"ip";s:15:"165.228.180.193";s:4:"type";s:1:"E";s:2:"id";s:6:"upload";s:4:"user";s:7:"auxesis";s:3:"sum";s:21:"old revision restored";s:5:"extra";s:0:"";}s:11:"contributor";a:2:{s:5:"xilef";s:5:"felix";s:7:"auxesis";s:16:"Lindsay Holmwood";}}}

@@ -1,0 +1,6 @@
+1224450272	72.130.144.12	C	development:resource_urls	mattetti	created	
+1224450598	72.130.144.12	E	development:resource_urls	mattetti		
+1225269868	68.98.38.120	E	development:resource_urls	nickhammond		
+1225877326	202.171.13.52	e	development:resource_urls	abdshomad	note the difference between @article (single form, as instance variable) and :articles (plural form, as symbol)	
+1226933396	66.189.28.105	E	development:resource_urls	carpeliam	added some nested routes, cleaned up router slightly	
+1230124119	74.66.246.62	E	development:resource_urls			

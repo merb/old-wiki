@@ -1,0 +1,58 @@
+====== Merb Edge ======
+
+[[http://github.com/merb/merb|Edge Merb]] is only meant for people who know what they are doing. For the majority of users, we **strongly** recommend [[howto/installation/gems|installing using stable gems]]. 
+
+===== Nightly gems: the easy way =====
+
+<code>$ sudo gem install merb --source http://edge.merbivore.com</code>
+
+The edge gems are released nightly and are not recommended in production.
+
+WARNING: This is currently failing as of November 14th unless you first have datamapper installed. To install datamapper do
+
+<code shell>
+$ sudo gem install dm-core dm-more
+</code>
+
+See DataMapper's [[http://datamapper.org/getting-started.html|getting started]] guide for more details.
+===== Using Git: the hard and not so recommended way =====
+
+
+Merb ''core'' and ''more'' gems are available from our main git repository: [[http://github.com/merb/merb]]
+
+On top of the release branches, you will find 2 other branches:
+
+  * ''master'' (aka edge managed by the gatekeeper, usually wycats)
+  * ''active'' (working branch the core developers commit to)
+
+==== Prerequisites ====
+
+Set up edge Merb gem dependencies with the following command:
+
+<code>
+$ sudo gem install rake rack rspec mongrel hoe templater bundler
+</code>
+
+==== Installing by hand ====
+
+To install from edge, start by cloning the repo:
+
+<code>
+$ git clone git://github.com/merb/merb.git
+</code>
+
+Then ''cd'' into the repo and install what you need using the available rake tasks. You can either use the rake task at the root of the git branch: 
+
+<code>
+$ cd merb
+$ sudo rake install 
+</code>
+
+or go into each component's directory and install it separately: 
+
+<code>
+$ cd merb/merb-core
+$ sudo rake install 
+$ cd ../merb-auth
+$ sudo rake install 
+</code>

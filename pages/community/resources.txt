@@ -1,0 +1,170 @@
+====== Resources ======
+
+This page lists community resources for Merbists.
+
+
+===== Articles, Interviews, etc. =====
+
+   * [[http://railspikes.com/2008/6/6/merb-and-rails-interview-with-ezra|
+       Where Merb is]], Ezra Zygmuntowicz, interviewed by Jon Dahl
+
+
+===== Books =====
+
+==== Beginning Merb ====
+
+Matthew Ford;
+[[http://www.apress.com/book/view/9781430218234|Apress]]
+
+==== Merb: What You Need to Know ====
+
+Aaron Farnham, Ben Burket, Brian Smith;
+[[http://www.apress.com/book/view/9781430218234|Apress]]
+
+==== Merb in Action ====
+
+Michael D. Ivey, Yehuda Katz, Ezra Zygmuntowicz;
+[[http://manning.com/ivey|Manning]]
+
+
+==== The Merb Way ====
+
+Foy Savas;
+Addison Wesley,
+[[http://my.safaribooksonline.com/9780321601636?portal=awprofessional|Safari]]
+
+
+===== Forums =====
+
+   * Email
+      * [[http://groups.google.com/group/datamapper?hl=en  |datamapper]]
+      * [[http://groups.google.com/group/merb?hl=en        |merb]]
+      * [[http://groups.google.com/group/merb-book?hl=en   |merb-book]]
+      * [[http://rubyforge.org/mailman/listinfo/merb-devel |merb-devel]]
+
+   * IRC
+      * merb         on irc.freenode.net
+      * merb-book    on irc.freenode.net
+      * merb-hacking on irc.freenode.net
+      
+   * Web
+      * [[http://www.merbherd.com?h1=en|Merbherd Forums]]
+
+===== Videos =====
+
+   * [[http://research.google.com/video.html|Google Tech Talks]]
+      * [[http://youtube.com/watch?v=TcMklv40YMY|
+          Merb, Rubinius, and the Engine Yard Stack]], Ezra Zygmuntowicz
+
+   * [[http://goruco2008.confreaks.com|GORUCO 2008]]
+      * [[http://goruco2008.confreaks.com/videos/06_zygmuntowicz.html|
+          Merb: All you need, nil you don't]], Ezra Zygmuntowicz
+
+   * [[http://lsrc2008.confreaks.com|Lone Star Ruby Conference 2008]]
+      * [[http://lsrc2008.confreaks.com/videos/13-yehuda-katz-merb-the-pocket-rocket-framework.html|
+          Merb: The Pocket Rocket Framework]], Yehuda Katz
+
+   * [[http://www.merbcamp.com|MerbCamp 2008]]
+      * [[http://www.merbcamp.com/video/zygmuntowicz.mp4|
+          Keynote]],                            Ezra Zygmuntowicz
+      * [[http://www.merbcamp.com/video/lerche.mp4      |
+          Merb plumbing: The router]],                  Carl Lerche
+      * [[http://www.merbcamp.com/video/neighman1.mp4   |
+          MerbSlices: Total Killer]],                   Daniel Neighman
+      * [[http://www.merbcamp.com/video/katz1.mp4       |
+          Testing Merb applications]],                  Yehuda Katz
+      * [[http://www.merbcamp.com/video/neighman2.mp4   |
+          MerbAuth: Darwinian authentication]],         Daniel Neighman
+      * [[http://www.merbcamp.com/video/whitten.mp4     |
+          Damage control: A primer on Merb]],           Brock Whitten
+      * [[http://www.merbcamp.com/video/burkert.mp4     |
+          Keep a hot cache with merb-cache]],           Ben Burkert
+      * [[http://www.merbcamp.com/video/beary.mp4       |
+          Using multiple databases in Merb: with special guest CouchDB]], Wesley Beary
+      * [[http://www.merbcamp.com/video/aimonetti1.mp4  |
+          DataMapper: the Ruby ORM that kicks butt and takes names]], Matt Aimonetti
+      * [[http://www.merbcamp.com/video/holden.mp4      |
+          Merb and Sequel]],                            Lori Holden
+      * [[http://www.merbcamp.com/video/katz2.mp4       |
+          jQuery on Merb]],                             Yehuda Katz
+      * [[http://www.merbcamp.com/video/holmwood.mp4    |
+          Deploying a Merb app]],                       Lindsay Holmwood
+      * [[http://www.merbcamp.com/video/miller.mp4      |
+          Real time web apps with Orbited and Merb]],   Collin T. Miller
+      * [[http://www.merbcamp.com/video/aimonetti2.mp4  |
+          Writing a Merb plugin 101]],                  Matt Aimonetti
+      * [[http://www.merbcamp.com/video/oconnor.mp4     |
+          Learning from Django]],                       Edward O'Connor
+      * [[http://www.merbcamp.com/video/kaufman.mp4     |
+          Driven Merb: A user story]],                  Rob Kaufman
+      * [[http://www.merbcamp.com/video/from_rails_to_merb_panel.mp4|
+          From Rails to Merb (Merb team panel)]],       Merb Team
+      * [[http://www.merbcamp.com/video/todd.mp4        |
+          Expanding our idea of the background web with Merb]], Matt Todd
+      * [[http://www.merbcamp.com/video/katz3.mp4       |
+          Keynote]],                                    Yehuda Katz
+
+   * [[http://mtnwestrubyconf2008.confreaks.com|MountainWest Ruby Conference 2008]]
+      * [[http://mtnwestrubyconf2008.confreaks.com/videos/04katz.html|
+          Faster, Better ORM with DataMapper]], Yehuda Katz
+      * [[http://mtnwestrubyconf2008.confreaks.com/videos/02zygmuntowicz.html|
+          Strengthening the Ruby Ecosystem Part II: Merb]], Ezra Zygmuntowicz
+
+   * [[http://peepcode.com|PeepCode]]
+      * [[http://peepcode.com/products/meet-merb-pdf-draft|
+          Meet Merb]], Geoffrey Grosenbach
+
+   * [[http://rubyhoedown2007.confreaks.com|Ruby Hoedown 2007]]
+      * [[http://rubyhoedown2007.confreaks.com/videos/session02.html|
+          Exploring Merb]], Ezra Zygmuntowicz
+
+===== Web Sites =====
+
+   * [[http://datamapper.org]]
+      * [[http://datamapper.org/doku.php?id=docs|Documentation]]
+      * [[http://datamapper.org/doku.php?id=why_datamapper|Why DataMapper?]]
+
+   * [[http://en.wikipedia.org/wiki/Merb]]
+
+   * [[http://github.com]]
+      * [[http://github.com/hornbeck/blerb-core/tree/master]] (blerb-core)
+      * [[http://github.com/wycats/merb/tree/master/merb-core]] (merb-core)
+      * [[http://github.com/wycats/merb-more/tree/master/]] (merb-more)
+      * [[http://github.com/wycats/merb-plugins/tree/master/]] (merb plugins)
+      * [[http://github.com/wycats/thor/tree/master]] (thor)
+
+   * [[http://gweezlebur.com]] (Michael Ivey)
+      * [[http://gweezlebur.com/2007/11/9/why-i-am-a-datamapper-convert-it-makes-bdd-happy]]
+
+   * [[http://merb.rubyforge.org]]
+
+   * [[http://merbcamp.com]]
+
+   * [[http://merbist.com]] (Matt Aimonetti)
+
+   * [[http://merbivore.com]]
+      * [[http://merbivore.com/documentation.html]]
+      * [[http://merbivore.com/documentation/current/doc/rdoc/stack/]]
+      * [[http://merbivore.com/why_merb.html]]
+      * [[http://blog.merbivore.com]]
+      * [[http://planet.merbivore.com]]
+      * [[http://wiki.merbivore.com]]
+         * [[http://wiki.merbivore.com/testing/view_matchers]]
+
+   * [[http://merboverheard.com]]
+
+   * [[http://merbunity.com]]
+
+   * [[http://new-bamboo.co.uk]] (New Bamboo)
+      * [[http://blog.new-bamboo.co.uk/2008/1/16/activerecord-datamapper|
+          ActiveRecord != DataMapper]]
+      * [[http://blog.new-bamboo.co.uk/2008/1/14/rails-merb|
+          Rails || Merb]]
+
+   * [[http://pastie.caboo.se/14416]] (original Merb pastie)
+
+   * [[https://rubyforge.org]]
+      * [[https://rubyforge.org/projects/dorb|DataObjects.rb (DO.rb)]]
+
+   * [[http://www.rubyinside.com]]
+      * [[http://www.rubyinside.com/merb-tutorials-and-resources-716.html]]

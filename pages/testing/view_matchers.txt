@@ -1,0 +1,13 @@
+====== View Matchers ======
+
+By default, Merb generate a request spec per generated controller. You might have noticed the have_xpath matcher.
+You have more matchers available:
+
+<code ruby>
+  have_content  # checks that the document contains some specfic text
+  have_selector # checks that a css selector is available (css3 supported)
+  have_tag      # checks that a tag is available
+  have_xpath    # checks that a xpath element is available
+</code>
+
+[[http://github.com/brynary/webrat/tree/master/lib/webrat/core/matchers|Webrat source code]]

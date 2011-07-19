@@ -1,0 +1,16 @@
+===== So you want to contribute? =====
+
+If you're new to Merb and want to contribute, there's a few things you can do.
+
+  - Try to install Merb and create an app using publicly available instructions.
+    * To the extent that you are unsuccessful, report the difficulty you have on the [[http://groups.google.com/group/merb|Merb mailing list]]. Reference this page.
+    * This is your one opportunity to test the "n00b" user experience before you get more familiar with it, so please take the opportunity to take notes about what wasn't as easy as you'd hoped.
+  - Head over to [[http://merb.lighthouseapp.com/dashboard|Lighthouse]] and find some unconfirmed bugs that you're able to confirm. Basically, these are bug reports that have not yet been reproduced by anyone but the original reporter.
+    * If you are able to confirm the bug, fill in any gaps in the steps to reproduce, platform, gem versions or other details in a comment.
+    * If you are unable to confirm, provide details about your test in a comment.
+    * Once a bug is confirmed, it will be assigned to someone to resolve.
+  - If you're feeling adventurous, write a failing spec for a bug you were able to confirm and attach it as a patch to the ticket.
+  - If you're feeling more adventurous, try to write a patch for the bug.
+    * Note that we prefer failing specs with no patch to a patch with no specs, so please write a failing spec first and attach it to the ticket.
+
+

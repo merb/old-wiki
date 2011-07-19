@@ -1,0 +1,14 @@
+a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1223694648;s:8:"modified";i:1224349639;}s:7:"creator";s:9:"Matt Todd";s:11:"last_change";a:7:{s:4:"date";i:1224349639;s:2:"ip";s:13:"78.146.19.140";s:4:"type";s:1:"E";s:2:"id";s:14:"howto:database";s:4:"user";s:9:"paulcarey";s:3:"sum";s:16:"Added dm-adapter";s:5:"extra";s:0:"";}s:11:"contributor";a:3:{s:5:"mtodd";s:9:"Matt Todd";s:7:"auxesis";s:16:"Lindsay Holmwood";s:9:"paulcarey";s:10:"Paul Carey";}s:5:"title";s:23:"Database Support HOWTOs";s:11:"description";a:2:{s:15:"tableofcontents";a:3:{i:0;a:4:{s:3:"hid";s:23:"database_support_howtos";s:5:"title";s:23:"Database Support HOWTOs";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:17:"datamapper_howtos";s:5:"title";s:17:"DataMapper Howtos";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:2;a:4:{s:3:"hid";s:7:"couchdb";s:5:"title";s:7:"CouchDB";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:295:"*  Selecting an ORM
+
+DataMapper Howtos
+
+
+Howtos specific to DataMapper.
+
+
+	*  Migrations
+
+CouchDB
+
+
+CouchDB is a document oriented database that doesn’t impose the constraints of schemas and fixed size fields on your data. It's a natural fit for semi-structured data, and hence, many web apps.";}s:8:"relation";a:1:{s:10:"references";a:2:{s:16:"database:use_orm";b:0;s:22:"database:dm:migrations";b:1;}}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1223694648;s:8:"modified";i:1224349639;}s:7:"creator";s:9:"Matt Todd";s:11:"last_change";a:7:{s:4:"date";i:1224349639;s:2:"ip";s:13:"78.146.19.140";s:4:"type";s:1:"E";s:2:"id";s:14:"howto:database";s:4:"user";s:9:"paulcarey";s:3:"sum";s:16:"Added dm-adapter";s:5:"extra";s:0:"";}s:11:"contributor";a:3:{s:5:"mtodd";s:9:"Matt Todd";s:7:"auxesis";s:16:"Lindsay Holmwood";s:9:"paulcarey";s:10:"Paul Carey";}}}

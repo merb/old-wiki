@@ -1,0 +1,1 @@
+moved to cookbook/authenticated_hello_world

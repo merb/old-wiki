@@ -1,0 +1,109 @@
+====== Authenticated Hello World ======
+
+When you generate an application with the default merb stack, merb-auth is already setup for normal usage.
+
+If you don't want to use this, simply comment out the dependency on merb-auth in config/dependencies.rb
+
+First step is to generate your application.
+
+<code>
+$ merb-gen app hello_world
+$ cd hello_world
+</code>
+
+This generates an application stub, with authentication already configured.  The basic elements are
+
+<code>
+app/models/user.rb
+
+merb/merb-auth/setup.rb
+merb/merb-auth/strategies.rb
+</code>
+
+The setup for user authentication is taken care of by default using a password and login.  Of course we need to setup the database and add a user first.
+
+<code>
+$ rake db:automigrate
+$ merb -i
+>> u = User.new(:login => "login_name")
+>> u.password = u.password_confirmation = "sekrit"
+>> u.save
+</code>
+
+Now we have an application, and a user, we need something to protect.
+
+<code>
+$ merb-gen controller hello_world
+</code>
+
+Let's put something into the controller.
+
+<code ruby>
+class HelloWorld < Application
+
+  def index
+    "Hello World"
+  end
+
+end
+</code>
+
+If you fire up merb now and head on over to http://localhost:4000/hello_world you'll see the "Hello World" results.  It's not protected yet, so let's fix that.  We can either protect it in the routes in config/router.rb or in the controller action.  Let's do the router option first.
+
+Open up config/router.rb 
+
+<code ruby>
+
+Merb::Router.prepare do
+
+ authenticate do
+   match("/hello_world").to(:controller => "hello_world")
+ end
+
+end
+
+</code>
+
+This will cause the user to login.  This is discovered in the router and when it fails, it stops in the router.  Try to hit http://localhost:4000/hello_world now.  You'll see that you need to login to access it!
+
+Ok.  Logout, http://localhost:4000/logout
+
+Now let's remove the code from the router, and put the protection at the controller level.  This will allow you finer control over resources for example.
+
+<code ruby>
+
+Merb::Router.prepare do
+ match("/hello_world").to(:controller => "hello_world")
+end
+
+</code>
+
+Let's now put it into the controller:
+
+<code ruby>
+class HelloWorld < Application
+
+  before :ensure_authenticated
+
+  def index
+    "Hello World"
+  end
+
+end
+</code>
+
+To get access to the currently logged in user inside your controller use:
+<code ruby>
+session.user
+</code>
+
+Really... For a basic Hello World authentication, that's it.
+
+If you want more customization, you can do:
+<code>
+rake slices:merb-auth-slice-password:freeze:views
+</code>
+
+What that will do is copy the views from the slice to the //slices// folder in your application.
+
+Then you need to move/copy them to your //views//. Editing the copied views in //app/views// should now be taken into account.

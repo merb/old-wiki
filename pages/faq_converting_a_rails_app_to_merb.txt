@@ -1,0 +1,122 @@
+====== FAQ: How can I convert my Rails app to a Merb app? ======
+
+So you're heard that Merb is the hot-diggity and you're ready to convert your latest greatest Rails creation to Merb.  Below are some basics to get you started.
+
+THIS IS VERY MUCH A WORK IN PROGRESS.  Please edit to make it better.
+
+===== First, should you? =====
+
+So you're familiar with Rails.  It's working great for your app.  Things are running well and plenty fast.  Do you have a real reason to convert?  Many Rails apps are just fine (and will live and die quite happily) being Rails apps their entire life-cycle.  It's not an either/or world out there.  You may want to use Rails for one project and Merb for another.  If you're happy with Rails... it may be time to stop reading.
+
+It could be you've hit the spot where Rails isn't shining as much as it used to...
+
+  * perhaps your Rails stack is sweating with millions of hits each hour and you've hear Merb is _fast_
+  * perhaps you're wanting to port your app just to learn your way around Merb
+  * perhaps you're constantly fighting with Rails and the "Rails Way" 
+
+===== ORM Agnostic == Long Live ActiveRecord =====
+
+You've heard Merb is ORM agnostic.  This is good news for the Rails conversion.  Below are steps to convert your models to Merb.
+
+  * copy models/*.rb to your new merb app
+  * edit your config/init.rb and set your ORM to AR <code>
+use_orm :activerecord </code>
+  * edit your config/database.yml to point to your dev, testing, and production databases
+
+
+Yep, that's it... you're done.  You can now fire up merb and hit up your models...
+
+<code>
+# merb -i
+
+>> Forum.find(:first)
+=> #<Forum ...>
+>>
+</code>
+===== Controllers =====
+==== Typical Changes ====
+
+  * there is no default render assumption in Merb... you must always call render or display if you want anything rendered
+  * respond_to is replaced with case content_type and provides functionality
+  * typical params (id, object hash) will be passed to your controller method as parameters (no need to use the params[] hash to retrieve them)
+
+==== Examples ====
+
+Here is a typical update action in Rails.
+
+<code>
+  def update
+    @forum = Forum.find(params[:id])
+
+    respond_to do |format|
+      if @forum.update_attributes(params[:forum])
+        flash[:notice] = 'Forum was successfully updated.'
+        format.html { redirect_to(@forum) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @forum.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+</code>
+
+Here is the same action in Merb (with AR).
+
+<code>
+  def update(id, forum)
+    provides :html, :xml
+    @forum = Forum.find(id)
+    if @forum.update_attributes(forum)
+       return render(:nothing => 200) if content_type==:xml
+       redirect resource(@forum), :message => {:notice => 'Forum was successfully updated.'}
+    else
+      return render(:xml => ?) if content_type==:xml
+      display @forum, :edit
+    end
+  end
+</code>
+
+
+===== Plugins =====
+===== Authentication =====
+
+===== Deployment =====
+
+===== Development =====
+
+someapp/config/environments/development.rb
+
+rails:
+<code>
+config.after_initialize do
+  ActiveMerchant::Billing::Base.mode = :test
+end
+</code>
+
+merb:
+<code>
+Merb::BootLoader::after_app_loads do
+  ActiveMerchant::Billing::Base.mode = :test
+end
+</code>
+
+===== Glossary ====
+
+|Rails 	 |Merb|
+|script/server | merb |
+|script/console  | merb -i |
+|script/generate | merb-gen |
+|redirect_to article_path(@article) | redirect resource(@article) |
+|respond_to | provides :xml, :js, :yaml (respond to is automatic in Merb but a block can be used)|
+|format  | content_type |
+|render :xml => @article  | render @article |
+|render :file => 'public/404.html, :status => 404 | raise NotFound |
+|logger | Merb.logger (e.g. Merb.logger.info("Setting coordinates")) |
+|before_filter | before |
+|render :partial | partial |
+|Rails.env 	| Merb.environment |
+|flash[:notice] | message[:notice] |
+|rake routes| rake audit:routes |
+|rake db:migrate | rake db:automigrate |

@@ -1,0 +1,41 @@
+====== Slices available ======
+
+[[http://github.com/sferik/merb-admin|merb-admin]] | An easy-to-use interface for managing your data
+
+[[http://github.com/matinahat/merb-auth-slice-managed|merb-auth-slice-managed]] | Bundles managed user features like activation and password reset
+
+[[http://github.com/scottmotte/merb_auth_slice_multisite|merb_auth_slice_multisite]] | Adds multisite/subdomain functionality
+
+[[http://github.com/ck/merb-auth-slice-password-reset|merb-auth-slice-password-reset]] | Adds password-reset functionality
+
+[[http://github.com/ck/merb-auth-slice-activation|merb-auth-slice-activation]] | Adds basic activation functionality to merb-auth
+
+[[http://github.com/fightinjoe/merb_blog_slice|merb_blog_slice]] | Provides simple blog functionality
+
+[[http://github.com/adulteratedjedi/merb-slice-contact-form|merb-slice-contact-form]] | Provides generic contact-form functionality
+
+[[http://github.com/foysavas/merb-forums-slice|merb-forums-slice]] | Forums
+
+[[http://github.com/nmerouze/merb_git_wiki|merb_git_wiki]] | Git wiki
+
+[[http://github.com/mattetti/merb_latest_rss_items_slice|merb_latest_rss_items_slice]] | Displays the latest RSS items from a feed
+
+[[http://github.com/alx/media_rocket|media_rocket]] | Slice to upload and manage medias
+
+[[http://github.com/uipoet/merb-photos|merb-photos]] | Flickr photo gallery
+
+[[http://github.com/uipoet/merb-search|merb-search]] | Images, news, and web search
+
+[[http://github.com/genki/merb-slices-search-path-fix|merb-slices-search-path-fix]] | Fixes search path of merb-slices
+
+[[http://github.com/nanodeath/merb_slice_solitary_part|merb_slice_solitary_part]] | Lets you hit a part (or partial) by specifying it in the request
+
+[[http://github.com/rhyhann/merb_stathyc_slice|merb_stathyc_slice]] | Provides static page functionality
+
+[[http://github.com/mattetti/merb-static-pages-slice|merb-static-pages-slice]] | Use markdown files to store and serve static pages
+
+[[http://github.com/uipoet/merb-ui|merb-ui]] | User interface components
+
+[[http://github.com/adulteratedjedi/merb-slice-user-registration|merb-slice-user-registration]] | Provides flexible user registration
+
+[[http://github.com/uipoet/merb-words|merb-words]] | Word management

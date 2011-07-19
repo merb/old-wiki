@@ -1,0 +1,12 @@
+====== Deploying a Merb application ======
+
+Watch Lindsay's [[http://merbcamp.com/video/holmwood.mp4|deployment talk]] from MerbCamp.
+
+
+=== Capistrano Task ===
+
+Matt Aimonetti has a [[http://merbist.com/2008/09/23/deploying-a-bundled-merb-app-merb-097/#more-23
+|good writeup and example cap file]] on his blog. 
+
+
+Zack Chandler has a [[http://depixelate.com/2008/10/31/coming-home-to-merb|another writeup which includes an example cap file]] on his blog. 

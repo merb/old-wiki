@@ -1,0 +1,42 @@
+====== Installing Merb from edge ======
+
+**FIXME: this seems to be a duplicate of [[howto/installation/edge|this page]], merge changes?**
+
+You'll need a bunch of dependencies on your system before you're able to install edge Merb. 
+
+Once you've got your system set up, jump down to the [[installing_merb_from_edge#installing|installing]] section.
+
+===== Prerequisites for Ubuntu Hardy =====
+
+RubyGems pushed a backwards incompatible update that causes the ''gem'' command to explode and chew up all CPU and memory. Because of Ubuntu's policy of updating packages in stable releases, they haven't shipped the new update, so RubyGems **does not work** out of the box. 
+
+[[http://www.brightbox.co.uk/|Brightbox]] sponsor an [[https://launchpad.net/~ubuntu-ruby-backports|Ubuntu Ruby Backports]] repository with the latest security updates, including the updated RubyGems. 
+
+  - Add the following line to ''/etc/apt/sources.list'' to add the repository:<code>
+deb http://ppa.launchpad.net/ubuntu-ruby-backports/ubuntu hardy main
+</code>
+  - Then run the following command to update your <code>
+apt-get update 
+</code>
+  - You'll need the following toolchain for edge Merb to build. <code>
+apt-get install wget build-essential ruby ruby1.8-dev rubygems git git-core libsqlite3-dev libhttp-access2-ruby
+</code>
+
+===== Prerequisites for Mac OS X =====
+
+  - Download the ''rubygems-update'' from the [[http://rubyforge.org/frs/?group_id=126&release_id=26453|RubyForge project page]], and install it with a:<code>
+sudo gem install <rubygems-update-gem>
+</code>
+===== Installing =====
+
+  - Set up edge Merb gem dependencies with the following command:<code>
+sudo gem install rake thor rspec mongrel hoe
+</code>
+  - Get the Merb thor file:<code>
+wget http://merbivore.com/merb.thor -O merb.thor
+</code>or if you're on Mac OS X<code>
+curl http://merbivore.com/merb.thor > merb.thor
+</code>
+  - Install the stack<code>
+sudo thor merb:edge:stack --install
+</code>

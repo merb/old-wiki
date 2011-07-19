@@ -1,0 +1,8 @@
+1224461046	72.130.144.12	C	testing:request_specs	mattetti	created	
+1224461397	72.130.144.12	E	testing:request_specs	mattetti		
+1224928533	62.49.1.168	E	testing:request_specs	namelessjon	Added headings to delimit code examples	
+1224928633	62.49.1.168	E	testing:request_specs	namelessjon	Removed un-needed created at (dm-timestamps is included in stack)	
+1224928739	62.49.1.168	E	testing:request_specs	namelessjon	Added link to the actual sideshow	
+1225812496	72.77.174.69	E	testing:request_specs		s/a article/an article/g	
+1226656193	86.169.77.216	E	testing:request_specs		Removing a couple of useless newlines	
+1229080509	78.146.229.152	e	testing:request_specs	paulcarey	Added link to atmos blog post on controller test	

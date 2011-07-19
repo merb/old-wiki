@@ -1,0 +1,9 @@
+====== Testing HOWTOs ======
+
+  * [[testing/request_specs|Testing the full stack with request specs]]
+  * [[testing/rspec|Testing a Merb app with Rspec]]
+  * [[testing/rspec/datamapper-transactions|Testing transactional specs with DataMapper]]
+  * [[testing/view_matchers|View matchers]]
+  * [[Using Webrat with Merb]]
+  * Tips & Tricks
+    * [[testing/datamapper|DataMapper]]

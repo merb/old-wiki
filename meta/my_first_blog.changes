@@ -1,0 +1,17 @@
+1227360688	213.185.224.67	C	my_first_blog		created	
+1227445881	213.185.224.67	E	my_first_blog			
+1227446972	213.185.224.67	E	my_first_blog			
+1227447492	213.185.224.67	E	my_first_blog			
+1227447571	213.185.224.67	E	my_first_blog			
+1227548637	86.151.98.23	E	my_first_blog		cleaning it up	
+1227548735	86.151.98.23	E	my_first_blog			
+1227548777	86.151.98.23	E	my_first_blog			
+1227550811	86.151.98.23	E	my_first_blog			
+1228007449	98.217.196.42	E	my_first_blog		HAML must be indented 2 spaces, not 4.	
+1228794822	70.171.42.234	E	my_first_blog			
+1229037643	193.171.244.2	E	my_first_blog		Fixed indentation for classComment	
+1243293997	24.82.160.123	E	my_first_blog	ujihisa	Bug fix by http://ujihisa.blogspot.com/2009/05/trying-merb.html	
+1262287562	68.255.107.89	E	my_first_blog	jbarciauskas	Add :name attribute to body, otherwise the parameter is passed as nil_class[body]	
+1262287802	68.255.107.89	E	my_first_blog	jbarciauskas		
+1262287841	68.255.107.89	E	my_first_blog	jbarciauskas		
+1262288061	68.255.107.89	E	my_first_blog	jbarciauskas	Italicize the name to differentiate from body	

@@ -1,0 +1,10 @@
+a:2:{s:7:"current";a:7:{s:4:"date";a:2:{s:7:"created";i:1229734109;s:8:"modified";i:1236381468;}s:7:"creator";s:10:"Rich Morin";s:11:"last_change";a:7:{s:4:"date";i:1236381468;s:2:"ip";s:13:"64.142.15.200";s:4:"type";s:1:"E";s:2:"id";s:18:"community:merbists";s:4:"user";s:10:"rich_morin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:3:{s:10:"rich_morin";s:10:"Rich Morin";s:9:"carpeliam";s:11:"Liam Morley";s:7:"auxesis";s:16:"Lindsay Holmwood";}s:5:"title";s:8:"Merbists";s:11:"description";a:2:{s:15:"tableofcontents";a:2:{i:0;a:4:{s:3:"hid";s:8:"merbists";s:5:"title";s:8:"Merbists";s:4:"type";s:2:"ul";s:5:"level";i:1;}i:1;a:4:{s:3:"hid";s:4:"data";s:5:"title";s:4:"Data";s:4:"type";s:2:"ul";s:5:"level";i:2;}}s:8:"abstract";s:503:"This page allows Merbists to provide location and contact information about themselves.
+The table below uses JSON syntax, allowing it to be harvested for planning conferences,
+setting up local developer groups, etc.
+
+Latitude and Longitude information are obtainable in a number of places,
+including  <http://www.backups.nl/geocoding/>.
+For reasons of brevity and privacy,
+these values should be rounded to the nearest tenth of a degree (eg, 12.3).
+Also, please keep the list sorted by Longitude,
+to …";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1229734109;s:8:"modified";i:1236381468;}s:7:"creator";s:10:"Rich Morin";s:11:"last_change";a:7:{s:4:"date";i:1236381468;s:2:"ip";s:13:"64.142.15.200";s:4:"type";s:1:"E";s:2:"id";s:18:"community:merbists";s:4:"user";s:10:"rich_morin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:3:{s:10:"rich_morin";s:10:"Rich Morin";s:9:"carpeliam";s:11:"Liam Morley";s:7:"auxesis";s:16:"Lindsay Holmwood";}}}

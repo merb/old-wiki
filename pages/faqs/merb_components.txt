@@ -1,0 +1,46 @@
+====== Merb components ======
+
+Merb Stack:
+
+^ merb-core                 | Merb. Pocket rocket web framework.                                                         |
+^ merb-action-args          | Provides support for querystring arguments to be passed in to controller actions           |
+^ merb-assets               | Provides link_to, asset_path, auto_link, image_tag methods (and lots more)                 |
+^ merb-cache                | Provides your application with caching functions                                           |
+^ merb-gen                  | Provides a generator for apps, controllers, models, etc.                                   |
+^ merb-haml                 | Provides support for using [[http://haml.hamptoncatlin.com/|Haml]] in your templates *     |
+^ merb-helpers              | Provides the form, date/time, and other helpers                                            |
+^ merb-mailer               | Integrates mail support via Merb Mailer                                                    |
+^ merb-slices               | Provides a mechanism for letting plugins provide controllers, views, etc. to your app      |
+^ merb-auth-core            | An Authentication framework for Merb                                                       |
+^ merb-auth-more            | Additional resources for use with the merb-auth-core authentication framework              |
+^ merb-auth-slice-password  | Merb Slice that provides UI for password strategy of merb-auth                             |
+^ merb-param-protection     |                                                                                            |
+^ merb-exceptions           | Provides support for sending error messages to email addresses or web hooks                |
+^ merb_datamapper           | DataMapper plugin providing DataMapper support for Merb                                    |
+| -                         |                                                                                            |
+^ dm-core                   | The datamapper ORM                                                                         |
+^ dm-aggregates             | Provides your DM models with count, sum, avg, min, max, etc.                               |
+^ dm-migrations             | Make incremental changes to your database.                                                 |
+^ dm-timestamps             | Automatically populate created_at, created_on, etc. when those properties are present.     |
+^ dm-types                  | Provides additional types, including csv, json, yaml.                                      |
+^ dm-validations            | Validation framework                                                                       |
+^ dm-serializer             | DataMapper plugin for serializing DataMapper objects                                       |
+| -                         |                                                                                            |
+^ data-objects              | The Core DataObjects class                                                                 |
+^ do_sqlite3                | A DataObject.rb driver for Sqlite3                                                         |
+^ do_mysql                  | A DataObject.rb driver for MySQL *                                                         |
+^ do_postgress              | A DataObject.rb driver for PostgreSQL *                                                    |
+
+
+These components (except for those with a '*') are the dependencies for a project generated with ''merb-gen'' (as of version 1.0.8.1).
+
+More components can easily be found using, for example, the following commands:
+
+''gem list -d --remote merb''
+
+''gem list -d --remote dm-''
+
+The file ''config/dependencies.rb'' is where the components get 'included', you can add any ruby gem to the dependencies of your app. Using ''thor'' you can bundle all gems with the app to ease distribution and deployment. Use the following command from the root of your app:
+
+''thor merb:gem:install''
+

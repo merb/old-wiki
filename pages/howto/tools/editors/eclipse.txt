@@ -1,0 +1,32 @@
+====== Developing for Merb in Eclipse/RadRails ======
+RadRails builds on the fantastic Eclipse IDE/platform with built-in support for running Rake tasks, servers, syntax highlighting, error checking, and more. On the flip side, it can be memory hungry, and does not have built-in support for Merb. If you like Eclipse already and want to use it for Merb development or you're just looking for an IDE to experiment with, read on.
+
+===== Installing RadRails =====
+You have two options: either install the Eclipse IDE and then install Aptana RadRails as a plugin, or install Aptana as a program, which embeds the Eclipse environment. The decision boils down to two things: will you use Eclipse as an editor outside of Aptana (for Java, Python, Eclipse plug-in development, or otherwise), and do you have a Linux x64 environment. If either of those two things are true, then you'll want to install the Eclipse platform, and then install Aptana as a plugin. This has always been my preference, regardless of environment.
+
+//If you choose to install Aptana as a standalone product, you can skip this step.// There are several flavors of Eclipse, any of which can be downloaded from [[http://www.eclipse.org/downloads/|here]]. They differ mainly in what you get in the base package. Aptana declares a dependency on an SDK version of the platform, so you'll need something like Eclipse Classic.
+
+After installing Eclipse if necessary, you can then [[http://www.aptana.com/studio/download|download Aptana]]. Regardless of your installation method, the procedure for RadRails is the same: once Aptana has been installed, you can add RadRails to Aptana Studio by following the instructions at Help > My Aptana > Plugins.
+
+===== Starting a New Project =====
+The easiest option here is to create a new blank Rails project in Eclipse, and then (a) import your existing Merb project into that directory or (b) running merb-gen app|core to [[/howto/gettingstarted/firstapp|generate your application]].
+
+It's up to you whether you want to create your project within a Rails environment or a Ruby environment. I've usually used a Rails environment to start with, though it's up to you. (If you are using the Ruby environment, please feel free to weigh in on pros and cons.)
+
+===== Running a Merb Server within Eclipse/RadRails =====
+Along the bottom pane is a view entitled Servers. (If you don't see this view, you can open it from Window > Show View.) Because RadRails doesn't support Merb natively, there isn't a one-click Merb server installation like there is for Ruby on Rails. However, they do have a generic server, which can be used to run Merb.
+  - Click the "Add Server" button to add a new server
+  - Choose "Connect to Generic Web Server"
+  - Choose the following options:
+    * Hostname: localhost
+    * Port: 4000 (or your port of choice)
+    * If you choose to use a log file, specify its location in "Path to log file". This is probably recommended, as the server will be run within Eclipse and not in a console. You'll have to modify your config/environments/development.rb file to use logging, simply by commenting out c[:log_stream] and uncommenting c[:log_file]. Note that the log file has to exist before you can link to it in your new server.
+  - Click "Server is local", and then add the following below:
+    * "Path" is the path to Merb; either use /usr/bin/merb if you're running Merb as a gem, or ~/workspace/<projectname>/bin/merb if you're freezing merb to your project. (This assumes that you're using the default Eclipse workspace location of ~/workspace, please choose the path to your project if otherwise.)
+    * Start Server: -m ~/workspace/<projectname> -d
+    * Stop Server: -m ~/workspace/<projectname> -K 4000
+-m specifies your project location, -d runs the server as a daemon, and -K gracefully kills the merb server running on port 4000. //If you choose to run on a different port, you'll have to specify it above in the "Port" box as well as in the "Start Server" box with -p and in "Stop Server" as the argument to -K.//
+
+Other fields are either non-applicable or can be chosen personally.
+
+**Caveat**: because of the loose integration of this process, there is no heartbeat server that will tell you if your Merb server is actually running or not. If your server should fail unexpectedly, RadRails will not tell you, and if your server becomes irresponsive, you'll have to kill it in the command line. Also, please keep in mind that starting Merb usually takes a second; even though RadRails informs you that the server is running immediately after clicking "Start", you should probably give it half a second to finish starting. RadRails has no idea whether your server is running or not.

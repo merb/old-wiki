@@ -1,0 +1,13 @@
+====== Naming conventions when creating pages ======
+
+We're trying to enforce some structure to the content of the wiki, so we'd really appreciate it if you follow these guidelines: 
+
+  * The naming convention of pages is ''<section>/<abbreviated_page_name>''. 
+  * Please make abbreviations succinct but meaningful. We abbreviate so you don't have to type in long urls.
+    * ''http://wiki.merbivore.com/contributing_to_the_wiki/naming_conventions_when_creating_pages'' makes your eyes bleed.
+    * ''http://wiki.merbivore.com/contributing/naming_conventions'' is roses. 
+  * An underscore (''_'') is used as the delimiter in page names.
+  * Before creating any new pages, **please** check how pages in the same category are namespaced. We've seeded a bunch of content and structure specifically for this reason.
+    * FAQs should be under ''faq/abbreviated_faq_name''
+    * HOWTOs should be under ''howto/abbreviated_howto_name''
+  * Namespacing should never be more than 2 deep, 3 at most. If you creating pages ''/with/more/than/three/levels'', have a think about whether your page needs to be where it is.

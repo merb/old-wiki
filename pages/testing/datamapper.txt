@@ -1,0 +1,21 @@
+====== Autocreating/autoupdating your database on spec run ======
+
+Specs not running because of your non-existent test database?  Tired of setting your environment to test and running rake db:automigrate?  Try adding the following to your spec/spec_helper.rb in Spec::Runner.config block:
+
+<code ruby>
+  config.before(:all) do
+    DataMapper.auto_migrate!
+  end
+</code>
+
+Need transactions in your specs, check [[testing/rspec/datamapper-transactions|this entry]]
+
+===== Note =====
+
+It's worth saying that this is unnecessary if you generated your app with one of the newer version of Merb as the spec/spec_helper.rb already contains the following code.
+
+<code ruby>
+config.before(:all) do
+  DataMapper.auto_migrate! if Merb.orm == :datamapper
+end
+</code>

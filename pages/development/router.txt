@@ -1,0 +1,108 @@
+====== Merb Router ======
+
+The merb router is found in $MERB_ROOT/config/router.rb. It will by default contain a block that looks like:
+
+<code ruby>
+Merb::Router.prepare do
+  # RESTful routes
+  # resources :posts
+  
+  # This is the default route for /:controller/:action/:id
+  # This is fine for most cases.  If you're heavily using resource-based
+  # routes, you may want to comment/remove this line to prevent
+  # clients from calling your create or destroy actions with a GET
+  default_routes
+  
+  # Change this for your home page to be available at /
+  match('/').to(:controller => 'reports', :action =>'index')
+end
+</code>
+
+===== Resources =====
+
+As the comments mention, you can add a resource to the router by adding the following code within the Merb::Router.prepare block
+
+<code ruby>
+  resources :cars
+</code>
+
+===== Friendly URLs =====
+
+Resources use the model's id in the url by default, but this can be overridden using the identify block to make a url more readable. For instance, the following code uses the model's slug. 
+
+<code ruby>
+  identify Car => :slug do
+    resources :cars
+  end
+</code>
+
+It is important to note, your controller must be changed to find the Car by slug, your show action would look something like the following.
+
+<code ruby>
+  def show
+    @car = Car.first(:slug => params[:slug])
+    raise NotFound unless @car
+    display @car
+  end
+</code>
+
+===== Nested Resources =====
+
+The router allows you to nest models. The following code, nests Cars within CarModels, which are in turn nested within Makes.
+
+<code ruby>
+  resources :makes do
+    resources :car_models do
+      resources :cars
+    end
+  end
+</code>
+
+With the above code you would then access cars with the url http://localhost:4000/makes/5/car_models/10/cars/15.
+
+You can now generate urls for your nested resources using the following format:
+
+<code ruby>
+  url(:make_car_model_cars, @car.car_model.make, @car.car_model)
+  url(:make_car_model_car, @car.car_model.make, @car.car_model, @car)
+  url(:edit_make_car_model_car, @car.car_model.make, @car.car_model, @car)
+</code>
+
+===== Bringing It All Together =====
+
+Finally, you can combine the identify block for friendly urls with nest resources. The following code nests Cars within CarModels within Makes, and uses their slugs instead of their ids for access.
+
+<code ruby>
+  identify Make => :make_slug do
+    resources :makes do
+      identify CarModel => :model_slug do
+        resources :car_models do
+          identify Car => :car_slug do
+            resources :cars
+          end
+        end
+      end
+    end
+  end
+</code>
+
+NOTE: currently the identify attributes are passed in with the name you give them here, so when nesting resources, they must have different identifiers.  If you named them all "slug" (like I did in the first iteration), then you will only get one of them passed into your controller. I think this corner case will be accommodated in future builds. 
+
+Unless your slugs are all globally unique, your controller's show action would look something like:
+
+<code ruby>
+  def show
+    @car = Make.first(:make_slug => params[:make_slug]).car_models.first(:model_slug => params[:model_slug]).cars.first(:car_slug => params[:car_slug])
+    raise NotFound unless @car
+    display @car
+  end
+</code>
+
+If you use action-args to make your controllers more readable, your show action might look more like the following:
+<code ruby>
+  def show(make_slug, model_slug, car_slug)
+    @car = Make.first(:make_slug => make_slug).car_models.first(:model_slug => model_slug).cars.first(:car_slug => car_slug)
+    raise NotFound unless @car
+    display @car
+  end
+</code>

@@ -1,0 +1,35 @@
+===== CRUD view examples =====
+
+CRUD stands for Create Read Update Delete. Often, web developers decide to follow this principle and create a few views matching the following actions: 
+
+  * New (to collect the data to create)
+  * Create (to actually create an object, no views required: if the creation worked, the user gets redirected, otherwise the new action gets re-rendered)
+
+  * Edit (to edit an existing object)
+  * Update (to modify an existing object, doesn't require a view)
+
+  * Delete (to delete an existing object, doesn't require a view)
+
+  * Show (display an object)
+  * Index (display a collection of objects)
+
+
+The actions above are available in your controller and, if you use the generator to create a resource, you will see the methods above plus a few others. However, Merb doesn't generate a view scaffold. People coming from Rails might be surprised and might even consider the Merb team a bit lazy. After all, generating a few views isn't that hard.
+
+The truth is that we used to generate a few views, but we realized that more than 80% of our users ended up totally changing the views. So what's the point? Turns out people were using the scaffolding as a way to learn how to use the various view helpers. Instead we decided to focus more on documentation and hopefully save you from having to always delete generated views.
+
+Most of these views require merb-assets or merb-helpers, if you generated your app doing <code RUBY> merb-gen app my-app</code> then the dependencies should be already set. Otherwise, make sure they are defined in your init.rb file or your dependencies.rb file. (both located in your /config folder)
+
+
+== Note: ==
+dependencies are declared as follows:
+
+<code RUBY> dependency "merb-assets", "1.0" </code> where the first param is the name of the gem/library you need and the second is the version. 
+
+==== View Examples: ====
+
+  * [[Simple New view]]
+  * [[Simple Edit form]]
+  * [[Simple Show view]]
+  * [[Simple Index view]]
+  * [[Simple Delete view]]

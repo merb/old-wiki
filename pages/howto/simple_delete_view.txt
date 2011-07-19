@@ -1,0 +1,65 @@
+== Delete action view example with jquery confirmation==
+This should really be the destroy action. Delete action is more like new and edit action. So should be more like the following down below:
+<code RUBY>
+  def delete(id)
+    only_provides :html
+    @article = Article.get(id)
+    raise NotFound unless @article
+    display @article
+  end
+  
+  def destroy(id)
+    @article = Article.get(id)
+    raise NotFound unless @article
+    if @article.destroy
+      redirect resource(:articles)
+    else
+      raise InternalServerError
+    end
+  end
+</code>
+
+
+To begin, let's assume you have a delete method in your controller that looks like so:
+<code RUBY>
+  def delete(id)
+    @article = Article.get(id) 
+    raise NotFound unless @article  
+    if @article.destroy
+      redirect resource(:articles)  
+    else
+      raise InternalServerError
+    end
+  end
+</code>
+
+Include a link to the delete action in your index view:
+
+<code RUBY>
+  <%= link_to 'Delete', resource(article, :delete), :class => 'delete' %>
+</code>
+
+Add the following to application.js
+
+<code RUBY>
+$(function() {
+  $('.delete').click(function() {
+    var answer = confirm('Are you sure?');
+    return answer;
+  }); 
+});
+</code>
+
+And voila, delete confirmations a la jquery!
+
+Don't forget to load jquery.js and application.js in your layout...
+
+<code HTML>
+    <script src="/javascripts/jquery.js" type="text/javascript" ></script>
+    <script src="/javascripts/application.js" type="text/javascript"></script>
+</code>
+
+You will have to restart merb for the javascript to be recongized. 
+
+Better solution is to use REST destroy method and then write delete method like 
+def delete(id); show(id); end (it will render delete template) with confirming form submiting to destroy and using js change link to delete into form to destroy.

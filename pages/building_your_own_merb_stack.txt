@@ -1,0 +1,21 @@
+====== Building your own Merb stack ======
+
+The most common and recommend way of installing Merb is by running
+<code>
+$ sudo gem install merb
+</code>
+which will pull in a collection of dependencies (''merb-core'', ''merb-more'', ''dm-core'', ''dm-more'') from RubyGems ready for you to build a Merb app. This is known as a Merb 'stack'.
+
+You can create your own stack to provide a standard way of creating new apps with dependencies. This can be really handy for creating a standard distribution of Merb for your own use, saving you from repetitively installing dependencies for each new project.
+
+===== Building a gem =====
+
+**FIXME: flesh out the details, with some code examples**
+  - grab a copy of the ''merb'' gemspec (the ''merb'' gem is just a metapackage)
+  - make your changes
+  - build your gem, and publish
+
+===== Building a thor task =====
+
+
+Jack Dempsey wrote a good [[http://jackndempsey.blogspot.com/2008/10/creating-new-merb-stack-with-templater.html|blog post]] about creating a custom stack using templater.

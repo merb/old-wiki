@@ -1,0 +1,12 @@
+a:2:{s:7:"current";a:6:{s:5:"title";s:32:"Can I run Merb on Mac OSX Tiger?";s:11:"description";a:2:{s:15:"tableofcontents";a:1:{i:0;a:4:{s:3:"hid";s:31:"can_i_run_merb_on_mac_osx_tiger";s:5:"title";s:32:"Can I run Merb on Mac OSX Tiger?";s:4:"type";s:2:"ul";s:5:"level";i:1;}}s:8:"abstract";s:503:"Merb Stack uses SQLite3 by default, make sure you have it installed.
+
+
+G5:~/Sites/my-first-app John$ rake db:automigrate
+(in /Users/john/Sites/my-first-app)
+Loading init file from /Users/john/Sites/my-first-app/config/init.rb
+Loading /Users/john/Sites/my-first-app/config/environments/development.rb
+Loading init file from /Users/john/Sites/my-first-app/config/init.rb
+Loading /Users/john/Sites/my-first-app/config/environments/development.rb
+ ~ Connecting to database...
+dyld: NSLinkModule() error
+d…";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:4:"date";a:1:{s:7:"created";i:1224094206;}s:7:"creator";s:16:"Lindsay Holmwood";s:11:"last_change";a:7:{s:4:"date";i:1224094206;s:2:"ip";s:14:"68.101.190.117";s:4:"type";s:1:"C";s:2:"id";s:16:"faq:macosx-tiger";s:4:"user";s:7:"auxesis";s:3:"sum";s:31:"created with proper namespacing";s:5:"extra";s:0:"";}}s:10:"persistent";a:3:{s:4:"date";a:1:{s:7:"created";i:1224094206;}s:7:"creator";s:16:"Lindsay Holmwood";s:11:"last_change";a:7:{s:4:"date";i:1224094206;s:2:"ip";s:14:"68.101.190.117";s:4:"type";s:1:"C";s:2:"id";s:16:"faq:macosx-tiger";s:4:"user";s:7:"auxesis";s:3:"sum";s:31:"created with proper namespacing";s:5:"extra";s:0:"";}}}

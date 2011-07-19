@@ -1,0 +1,34 @@
+====== Merb Slice Rake tasks ======
+
+A slice has a Rakefile file specifying some settings for your slice and generic tasks.
+Other tasks are available in /lib/merb_your_slice_name_slice/*
+
+You can clean up/edit any of the tasks pre-defined for you.
+
+Further more, if you need to load rake tasks from other dependencies such as your ORM (i.e: rake db:automigrate) you will need to load the dependencies for your environment and then load all the plugins so they can load their tasks.
+
+Consider adding the following in your Rakefile. (after requiring merb-core and declaring your other dependencies)
+
+Example of dependencies:
+<code RUBY>
+require 'rubygems'
+require 'rake/gempackagetask'
+
+require 'merb-core'
+require 'merb-core/tasks/merb'
+
+dependency 'dm-core'
+dependency 'merb_datamapper'
+</code>
+
+
+Code you need to load the merb_datamapper rake tasks such as rake db:automigrate
+<code RUBY>
+# Load the basic runtime dependencies; this will include 
+# any plugins and therefore plugin rake tasks.
+init_env = ENV['MERB_ENV'] || 'development'
+Merb.load_dependencies(:environment => init_env)
+
+# Get Merb plugins and dependencies
+Merb::Plugins.rakefiles.each { |r| require r }
+</code>

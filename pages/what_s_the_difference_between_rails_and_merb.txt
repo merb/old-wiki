@@ -1,0 +1,26 @@
+====== What's the difference between Rails and Merb ======
+Merb and Rails have quite a few similarities but also their differences.  For instance, they are both a MVC based framework, they both have a router, and they both use Ruby. 
+
+==== Merb ====
+  * Javascript library agnostic
+  * ORM-agnostic
+  * Template language agnostic
+  * Merb is modular
+  * Merb has a public and private [[http://merbivore.com/documentation.html|API]]
+
+==== Rails ====
+  * Opinionated in Javascript library, ORM, and template language
+  * A longer following and bigger user base
+==== Merb & Rails Syntax Conventions ====
+^ Rails ^ Merb ^
+| script/server                                    | merb |
+| script/console                                   | merb -i |
+| script/generate                                  | merb-gen |
+| redirect_to article_path(@article)               | redirect url(:article, @article) |
+| respond_to                                       | provides :xml, :js, :yaml |
+| format                                           | content_type |
+| render :xml => @article                          | render @article  |
+| render :file => 'public/404.html, :status => 404 | raise NotFound |
+| before_filter                                    | before |
+| render :partial                                  | partial |
+| flash[:notice]                                   | message[:notice] |

@@ -1,0 +1,163 @@
+====== Documentation Wish List ======
+
+===== General =====
+
+==== Architectural Documentation ====
+
+The [[http://ghettochip.com/merb_internals|Merb Internals Handbook]] covers how different bits of Merb's architecture hang together. 
+
+FIXME: add some diagrams. 
+
+===== RDoc, etc. =====
+
+See [[documentation/rdoc]] for links about RDoc, per se.
+
+
+==== General ====
+
+=== Data harvesting ===
+
+RDoc does not harvest all of the data it could
+from either the code or comments.
+A full parse of the code would, for example,
+yield information on:
+
+  * locations where methods are called
+
+  * locations where non-local variables are used
+
+  * method visibility (eg, ''private'', ''protected'', ''public'')
+
+Other metadata could be extracted from comments
+(eg, Merb's ''@plugin'', ''@private'', and ''@public'' tags).
+
+
+=== Interface information ===
+
+It would be useful for API documentation to include information
+on interfaces, as discussed in Ken Pugh's book,
+"Interface-Oriented Design".
+For example:
+
+  * exceptions (handled, raised, etc)
+
+  * pre- and post-conditions
+
+  * return values (eg, typical, possible) from methods
+
+=== Namespace integration ===
+
+It would be convenient for the programmer
+to be able to view integrated API documentation.
+That is, documentation for all classess and methods
+that are relevant to a given framework (eg, Merb, Rails) or application.
+
+The specification of an app's namespace would be tedious to specify manually.
+However, it could be harvested from the app
+by means of code running in (say) ''merb -i'' or ''script/console''.
+A short-form URL could then be generated to reference this "view".
+
+
+==== Generated HTML ====
+
+There are a variety of templates for RDoc;
+in fact, each API site seems to use a different one!
+So, some of the comments below are relevant only
+to (the template used on) a particular site.
+
+=== General ===
+
+== Syntax-based code highlighting and navigation ==
+
+RDoc does not offer syntax-based code highlighting or navigation in its HTML output.
+
+
+=== merbivore.com ===
+
+These items relate to http://merbivore.com/documentation.html.
+
+== broken parsing ==
+
+In many cases, comment text is incorrectly interpreted as embedded code.
+For example, see ''creat()'' under methods.
+
+== disclosure control ==
+
+This should include some form of disclosure control
+for the "Source Code" section on the "files" pages
+(eg, something that allows a single method to be viewed).
+
+== ''file:'' heading ==
+
+If the file path exceeds 66 characters,
+the yellow ''file:'' heading spills out of its gray background
+onto the white page below.
+This is ugly and hard to read.
+Also, the same information is given in the ''Path:'' heading below.
+
+== printing vs. style ==
+
+The Source Code is printed as white-on-black (sometimes including green).
+This doesn't print well on many printers;
+it also uses up huge amounts of ink.
+
+There should be a way to eliminate the "chrome"
+(eg, left navigation sidebar) from the page.
+
+Attempting to print the page using Firefox
+yields a long list of links,
+rather than the content of any particular (internal) page.
+
+== redundant header ==
+
+The header "Documentation for RDoc Documentation" is redundanant.
+
+=== ruby-doc.org ===
+
+These items relate to http://www.ruby-doc.org/core/,
+http://www.ruby-doc.org/stdlib/,
+and http://spec.ruby-doc.org/wiki.
+
+== viewing code in File section ==
+
+It would be handy to be able to use the Files section
+on www.ruby-doc.org to view entire files,
+as supported on merbivore.com.
+
+== markup ignored ==
+
+On http://spec.ruby-doc.org/wiki,
+some markup (eg, _, +) is being ignored
+For example, see http://spec.ruby-doc.org/wiki/Array.
+
+== update needed ==
+
+The [[http://www.ruby-doc.org/stdlib/|Ruby Standard Library Documentation]]
+was last updated in 2005.
+
+
+=== rubyonrails.org ===
+
+These items relate primarily to http://api.rubyonrails.org/ and
+http://www.ruby-doc.org/stdlib/,
+with occasional references to http://stdlib.rubyonrails.org/.
+
+== viewing code in File section ==
+
+It would be handy to be able to use the File section
+to view entire files, as supported on merbivore.com.
+
+== printing vs. style ==
+
+The headers is printed as white-on-blue.
+This uses up excessive amounts of ink.
+
+There should be a way to eliminate the "chrome"
+(eg, left navigation sidebar) from the page.
+
+== update needed ==
+
+The Ruby documentation is rather out of date.
+The [[http://corelib.rubyonrails.org/|Core Library]] documentation covers Ruby 1.8.4;
+The [[http://stdlib.rubyonrails.org/|Ruby Standard Library Documentation]]
+was last updated in 2005.

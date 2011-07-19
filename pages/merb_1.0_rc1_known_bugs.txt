@@ -1,0 +1,136 @@
+=== Known Bugs with Merb 1.0 RC1 ===
+
+Bugs related to Merb-Stack (Merb installed using gem install merb)
+
+
+  * The generated resource controller has few typos (redirection route should use : and not @)
+
+Generated:
+
+<code RUBY>
+  def new
+    only_provides :html
+    @article = Article.new
+    display Article
+  end
+</code>
+
+<code RUBY>
+  def create(article)
+    @article = Article.new(params[:article])
+    if @article.save
+      redirect resource(@article), :message => {:notice => "Article was successfully created"}
+    else
+      render :new
+    end
+  end
+</code>
+
+<code RUBY>
+  def update(article)
+    @article = Article.get(article[:id])
+    raise NotFound unless @article
+    if @article.update_attributes(article)
+       redirect resource(@article)
+    else
+      display @article, :edit
+    end
+  end
+</code>
+
+<code RUBY>
+  def destroy(id)
+    @article = Article.get(id)
+    raise NotFound unless @article
+    if @article.destroy
+      redirect resource(@articles)
+    else
+      raise InternalServerError
+    end
+  end
+</code>
+
+Should read:
+
+<code RUBY>
+  def new
+    only_provides :html
+    @article = Article.new
+    display @article
+  end
+</code>
+
+
+<code RUBY>
+  def create(article)
+    @article = Article.new(article)
+    if @article.save
+      redirect resource(@article), :message => {:notice => "Article was successfully created"}
+    else
+      render :new
+    end
+  end
+</code>
+
+<code RUBY>
+  def update(id, article)
+    @article = Article.get(id)
+    raise NotFound unless @article
+    if @article.update_attributes(article)
+       redirect resource(@article)
+    else
+      display @article, :edit
+    end
+  end
+</code>
+
+<code RUBY>
+  def destroy(id)
+    @article = Article.get(id)
+    raise NotFound unless @article
+    if @article.destroy
+      redirect resource(:articles)
+    else
+      raise InternalServerError
+    end
+  end
+</code>
+
+(fixed in the development branch)
+----
+
+
+  * When generating a resource with multiple attributes such as 
+<code>merb-gen resource article title:string,author:string</code> the generated model has a return carriage issue
+
+Generated code:
+
+<code RUBY>
+class Article
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :title, String  property :author, String
+
+end
+</code>
+
+Should read:
+
+<code RUBY>
+class Article
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :title, String  
+  property :author, String
+
+end
+</code>
+
+(fixed in the development branch)
+----
+
+
+  * when upgrading from an old merb app, Merb::Config {|c| c[:log_level] = 'debug'} no longer works.  You need to change it to a symbol: c[:log_level] = :debug
+

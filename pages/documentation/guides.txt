@@ -1,0 +1,86 @@
+===== HOW TO's / Guides =====
+
+Guides for setting up base functionality in Merb.
+Requests for additional guides and/or howtos
+should be made [[howto/requests|here]].
+
+==== Getting Started ====
+
+  * [[howto/installation|Installation]]
+    * [[howto/installation/edge|Install from Edge]]
+    * [[howto/installation/gems|Install from Gems]]
+    * [[deployment/bundling|Bundling Dependencies]]
+    * [[howto/installation/thor|More info on merb.thor]]
+
+  * [[howto/gettingstarted/firstapp|Generate your first app]]
+
+==== Development ====
+
+=== Theory ===
+
+== Data Storage ==
+
+  * [[/howto/cookies|Cookies]]
+
+  * [[/database/dm/migrations|Database migrations]]
+
+  * [[/howto/database|Database Support]]
+
+  * [[/howto/models| Datamapper Models]]
+
+  * [[/howto/mvc| MVC]] - The architectural pattern Merb follows
+    * [[/howto/mvc/model| Model]]
+    * [[/howto/mvc/view| View]]
+    * [[/howto/mvc/controller| Controller]]
+
+== Modularity ==
+
+  * [[/howto/dependencies|Dependencies]]
+
+  * [[/howto/parts|Parts]]
+
+  * [[/howto/plugins|Plugins]]
+
+  * [[/howto/slice|Slices]]
+    * [[/howto/slice/rake_tasks|Rake tasks]]
+
+  * [[/howto/very_flat|Very Flat Apps]]
+
+
+=== Routing, etc. ===
+
+  * [[/howto/crud_view_example_with_merb_using_erb| CRUD view examples]]
+
+  * [[/development/resource_urls| resource url helpers]]
+
+  * [[/howto/router|Router]]
+
+
+=== Tools and Techniques ===
+
+  * [[/howto/testing|Testing]]
+
+  * [[/howto/debugging|Debugging]]
+
+  * [[/howto/deployment|Deployment]]
+
+  * [[/howto/troubleshooting|Troubleshooting]]
+
+  * [[/howto/tools|Tools]]
+    * [[/howto/tools/editors|Editors]]
+
+=== Add-ons ===
+
+  * [[/howto/auth|Authentication]]
+
+  * [[/howto/cache|Caching]]
+    * [[/cache|merb-cache plugin]]
+    * [[/howto/cache/etag|Etag & last-modified header fields]]
+
+  * [[/upload| File Uploads]]
+
+  * [[/howto/mailers|Mailers]]
+
+  * [[/development/flash_messages|Rails-style "flash" messages]]
+
+

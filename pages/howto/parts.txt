@@ -1,0 +1,143 @@
+====== Parts ======
+
+Parts in merb are just like small controllers that you can use to perform logic.
+One very good usage for them is when you want add a "widget" to a view, that 
+has its own logic.
+
+We'll look at an example on how to make a part that, displays the news titles.
+
+===== Installing =====
+Merb parts don't come with merb-stack, so you need to get them separately
+<code>
+sudo gem install merb-parts
+</code>
+
+===== Creating a part =====
+Generate a part
+<code>
+$ merb-gen part news
+
+[ADDED]  app/parts/news_part.rb
+[ADDED]  app/parts/views/news_part/index.html.erb
+[ADDED]  app/helpers/news_part_helper.rb
+</code>
+
+> If getting an error 
+> <code>
+FATAL: The gem merb-action-args (= 0.9.10, runtime), [] was not found
+</code> edit your ''dependencies.rb'' file an change the version on the top to the (latest) version of merb you have installed.
+
+You will need to add ''merb_parts'' as a dependency:
+In your ''dependencies.rb'' file add
+<code ruby>
+dependency "merb-parts", merb_gems_version
+</code>
+Note that currently merb-parts is not tracking merb_gems_version, so may need a separate version
+
+===== Implementing a part =====
+
+Lets assume we have some News model (''merb-gen model news'' to get one)
+We want to make our part display the news titles in a pane, that is reusable on other pages.
+
+First, lets get the news form the db in the PartController.
+Edit ''app/parts/news_part.rb'' to look something like this:
+<code ruby>
+class NewsPart < Merb::PartController
+  def index
+    @news = News.all
+    render
+  end
+end
+</code>
+
+Nice, we have the data now.
+
+Lets touch the view to show it. Edit ''app/parts/views/news_part/index.html.erb'' and make it look similar to this (for example):
+<code ruby>
+<h2>News</h2>
+<ul>
+  <% @news.each do |news| %>
+    <li><%= news.title %></li>
+  <% end %>
+</ul>
+</code>
+
+Nice! ((When using [[http://datamapper.org|DataMapper]] as ORM and your news model has a ''propery :content, Text'' datamapper will not even fetch it here. Checkout [[http://datamapper.org/doku.php?id=spotlight:laziness|Datamapper docs for lazy-loading]])) Now we have a view for our part action. Lets use it
+
+===== Using the part =====
+
+Using the part is very simple - in any of your views call
+<code ruby>
+  <%= part NewsPart => :index %>
+</code>
+
+If you have used the part on the controller, responding to '/', go to http://localhost:4000/ and see the titles of the news.
+
+> Remember to actually add some news to your database so there is something you can see. :)
+
+===== Spec the whole thing =====
+
+Now, let's write a spec
+
+> In a BDD/TDD manner - this should have been the first section, but for this tutorial it's fine.
+
+Following the idea from Yehuda to test the whole request instead of various components let's test our '/' route (the one that is displaying the news titles).
+
+Create a file ''index_spec.rb'' under ''spec/request'' and put this code in it.
+
+<code ruby>
+require File.join( File.dirname(__FILE__), '..', "spec_helper" )
+
+describe '/' do
+  before :each do
+    # Generate 3 news to help us test
+    1.upto(3) do |i|
+      News.new(:title => "news#{i}", :content => "this is news #{i}").save
+    end
+    
+  end
+
+  it "should have news titles listed" do
+    @response = request('/') # Make a request to '/'.
+    @response.should be_successful # Request is ok
+    @response.should have_xpath('//ul/li[3]') # We have at least 3 news titles
+  end
+
+end
+</code>
+
+> On a side - to make your test ''auto_migrate!'' our database when our tests are run add the following line to ''spec/spec_helper.rb''
+
+<code ruby>
+Spec::Runner.configure do |config|
+  config.include(Merb::Test::ViewHelper)
+  config.include(Merb::Test::RouteHelper)
+  config.include(Merb::Test::ControllerHelper)
+  DataMapper.auto_migrate! # (Re)Create our database
+end
+</code>
+
+===== Passing additional parameters =====
+
+When calling the part controller form the view you can pass additional parameters, that get mixed in the params hash in the controller.
+
+<code ruby>
+  <%= part NewsPart => :index, :max => 3 %>
+</code>
+
+The '':index'' action of the ''NewsPart'' should be updated like
+<code ruby>
+  def index
+    limit = params[:max] || 2
+    @news = News.all(:limit => limit)
+    display @news
+  end
+</code>
+
+If you are using merb-action-args the former can be rewritten as
+<code ruby>
+  def index(max = 2)
+    @news = News.all(:limit => max)
+    display @news
+  end
+</code>

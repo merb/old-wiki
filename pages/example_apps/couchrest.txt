@@ -1,0 +1,104 @@
+====== Example of how to set up merb-auth with couchdb and couchrest ======
+
+couchdb is different from relational databases. This affects how a user document can be authenticated with merb-auth. Here is an example of a user model to work with merb-auth
+
+===== Sample Config =====
+code for your development config
+
+<code RUBY>
+  COUCHHOST  = "http://127.0.0.1:5984"
+  COUCHDB    = 'couchrest-dev'
+  SERVER     = CouchRest.new
+  SERVER.default_database = COUCHDB
+</code>
+===== Sample User Model =====
+
+<code RUBY>
+class User < CouchRest::ExtendedDocument
+  use_database SERVER.default_database
+  include CouchRest::Validation
+  
+  # Callbacks
+  save_callback :before, :process_password
+  
+  # Schema
+  unique_id :email
+  property  :first_name
+  property  :last_name
+  property  :salt
+  property  :crypted_password
+
+  timestamps!
+  
+  # Views
+  view_by :email
+  
+  # Validations
+  validates_present        :email
+  validates_present        :first_name, :last_name
+  validates_present        :password,   :if => proc {|o| o.password_required? }
+  validates_is_confirmed   :password,   :if => proc {|o| o.password_required? }
+  
+  validates_length         :email,      :within => 3..100
+  validates_length         :password,   :within => 4..72,   :if => proc {|o| o.password_required? }
+  validates_format         :email,    :as => :email_address
+  validates_present        :privacy_policy, :message => ": You must agree to the Private Policy and Terms of Use.",   :if => proc {|o| o.new_document? }
+  
+  
+  def initialize(keys={})
+    super
+    self.password              = self.delete('password')
+    self.password_confirmation = self.delete('password_confirmation')
+    self
+  end
+ 
+  def process_password
+    if (valid? && password_required?)
+      encrypt_password
+      true
+    else
+      false
+    end
+  end
+  
+  def self.authenticate(email, password)
+    @user = User.by_email(:key => email, :limit => 1).first
+    @user && @user.authenticated?(password) ? @user : nil
+  end
+  
+end
+</code>
+
+
+Here's some additional validation you might find useful.
+
+<code RUBY>
+  validates_with_method   :login, :method => :login_is_unique 
+  validates_with_method   :login, :method => :login_is_reserved
+  validates_with_method   :email, :method => :email_is_unique
+  
+  def login_is_unique
+    if User.by_login(:key => self.login, :limit => 1).blank? || User.get("#{self.id}").login == self.login
+      return true
+    else 
+      return [false, "Login has already been taken"] 
+    end
+  end
+  
+  ReservedLogins = %w[dev ftp mail email pop pop3 imap smtp stage stats status www username messages users members settings login logout twinstang admin administrator help support about tour signup new]
+  def login_is_reserved
+    if ReservedLogins.include?(self.login)
+      [false, "Login '#{self.login}' is reserved."]
+    else
+      true
+    end
+  end
+  
+  def email_is_unique
+    if User.by_email(:key => self.email, :limit => 1).blank? || User.get("#{self.id}").email == self.email
+      return true
+    else 
+      return [false, "Email has already been taken"] 
+    end
+  end
+</code>

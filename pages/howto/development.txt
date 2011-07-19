@@ -1,0 +1,11 @@
+====== Application Development HOWTOs ======
+
+  * [[howto/gettingstarted/firstapp|Generating a new Merb app]]
+  * [[CRUD view example with Merb using ERB]]
+  * [[development/router|Merb Router]]
+  * [[development/mailer|Sending emails from a Merb app]]
+  * [[development/exceptions|Handling Exceptions]]
+  * [[development/rails_quickstart|Quickstart for Rails Users]]
+  * [[development/static_content|Serving static content]]
+  * [[development/resource_urls|Use the resource url helpers]]
+  * [[development/flash_messages|Rails-style "flash" messages]]

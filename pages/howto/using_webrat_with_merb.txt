@@ -1,0 +1,8 @@
+====== Using Cucumber/Webrat with Merb ======
+
+Guide on getting up and running with Cucumber + Webrat on Merb: 
+  * http://teamon.eu/2008/12/02/merb-cucumber-webrat-czyli-wszystko-co-chcielibyscie-wiedzie/
+
+''attach_file'' support in Webrat for Merb can be found in the ''auxesis-webrat'' gem: 
+  * http://github.com/auxesis/webrat/tree/master
+

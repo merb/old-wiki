@@ -1,0 +1,57 @@
+====== Text editors ======
+
+===== Vim =====
+
+[[http://rails.vim.tpope.net/|vim-rails]] now has basic support for merb. 
+
+**Mini HOWTO:**
+
+  $ cd /tmp
+  $ git clone git://github.com/tpope/vim-rails.git
+  $ cd vim-rails; rake install
+
+Now the plugin is installed, but it needs a small workaround to detect your merb app:
+
+  $ cd $MERB_ROOT
+  $ touch config/environment.rb
+
+
+There are some useful scripts for Vim :
+
+   * [[http://github.com/nono/merb.vim/tree/master|Merb, Datamapper and jQuery]]
+   * [[http://www.vim.org/scripts/script.php?script_id=1773|Haml]]
+   * [[http://www.vim.org/scripts/script.php?script_id=1979|Sass]]
+
+===== TextMate =====
+
+If you’re using TextMate for development check out the following bundles:
+   * Dr Nic's [[http://github.com/drnic/merb-tmbundle/tree/master|Merb TextMate Bundle]]
+   * [[http://bjhess.com/blog/2007/05/31/installing-haml-bundle-for-textmate/|HAML/SASS bundle]]
+
+
+===== Linux TextMate ( look_a_like) ======
+
+you can configure gedit to function in a very similar manner
+   * gedit [[http://www.thaumatocracy.com/textpad-for-linux | gedit config ]] 
+
+====== IDEs ======
+
+There are a lot of IDEs with ruby support. Explicit Merb support is not available in any of them.
+===== Netbeans =====
+
+  * [[http://www.netbeans.org/|Netbeans]] Merb support coming up!
+
+===== IntelliJ =====
+
+  * [[http://www.jetbrains.com/idea/features/ruby_rails.html|IntelliJ Idea]]
+  * [[http://www.jetbrains.com/ruby/index.html|RubyMine]]
+
+Both products are commercial.
+
+===== Eclipse =====
+
+  * [[http://www.aptana.com/rails|Aptana RadRails]]
+    * [[howto/tools/editors/eclipse]]
+    * Note: I find Aptana's Ruby mode to be more helpful than its Rails mode, personally  --- //[[nanodeath@gmail.com|Max Aller]] 2008/11/16 21:16//
+  * [[http://www.eclipse.org/dltk/|Eclipse DLTK]] project features Ruby support.
+  * [[http://www.codegear.com/products/3rdrail|CodeGear 3rd rail]] - commercial product

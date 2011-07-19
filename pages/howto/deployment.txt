@@ -1,0 +1,12 @@
+====== Deployment HOWTOs======
+
+  * [[deployment/bundling|Bundling a Merb application]]
+  * [[deployment/deploying|Deploying a Merb application]]
+  * [[deployment/jruby|Deploying on JRuby]]
+  * [[deployment/passenger|Deploying with Passenger]]
+  * [[deployment/haproxy|Deploying with HAProxy]]
+  * Merb on Slicehost:
+    * [[http://uipoet.com/read/3|Part 1: Users and Permissions]]
+    * [[http://uipoet.com/read/4|Part 2: Install Software]]
+    * [[http://uipoet.com/read/5|Part 3: Version and Deploy]]
+

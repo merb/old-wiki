@@ -1,0 +1,6 @@
+====== Exceptions at start ======
+
+=====  FATAL: The gem [some gem] (= [some version], runtime), [] was not found =====
+
+Solution: try running merb with the --verbose flag.  You're probably missing a gem other than the one specified.
+

@@ -1,0 +1,27 @@
+===== Index action view example =====
+
+<code RUBY>
+<h1>Article controller, index action</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+
+    <th colspan="3">Actions</th>
+  </tr>
+
+<% @articles.each do |article| %>
+  <tr>
+    <td><%=h article.title %></td>
+    <td><%=h article.author %></td>
+
+    <td><%= link_to 'Show', resource(article) %></td>
+    <td><%= link_to 'Edit', resource(article, :edit) %></td>
+    <td><%= delete_button(article, "Delete #{article.title}") %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New', resource(:articles, :new) %>
+</code>

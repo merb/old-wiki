@@ -1,0 +1,15 @@
+1225467038	82.147.135.2	C	howto:parts		created	
+1225467114	82.147.135.2	E	howto:parts		typo	
+1225467415	82.147.135.2	E	howto:parts	vladev	Added a footnote about lazy loading in dm	
+1225467470	82.147.135.2	E	howto:parts	vladev	Another typo	
+1225467518	82.147.135.2	E	howto:parts	vladev	Style fix	
+1225467660	82.147.135.2	E	howto:parts	vladev	Another typo	
+1225467722	82.147.135.2	E	howto:parts	vladev	Removed steps in titles	
+1226051090	82.147.135.2	E	howto:parts			
+1226051398	82.147.135.2	E	howto:parts	vladev	Only a single h1 now	
+1226051960	82.147.135.2	e	howto:parts	vladev		
+1226656017	86.169.77.216	E	howto:parts			
+1226656065	86.169.77.216	E	howto:parts			
+1228843285	76.222.244.166	E	howto:parts		grammar	
+1233272211	99.139.75.113	E	howto:parts		changed to merb-parts as mrb_parts does not seem to work well	
+1233272307	99.139.75.113	E	howto:parts		noted that merb-parts is not tracking merb_gems_version	

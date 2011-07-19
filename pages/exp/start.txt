@@ -1,0 +1,140 @@
+====== Welcome to the Merb Wiki! =======
+
+Hi, this is an experiment by Ted Han (knowtheory on freenode) to redraft the Merb wiki.  __If you would like to help out **PLEASE FORK THE CONTENTS OF THIS FILE**__.  I will be clobbering the contents of this document fairly frequently, so the best way to keep yer docs safe is to start your own page, to add contents to, with which we can merge back together into a master doc (and if you want to keep it in pieces across separate pages in your own namespace, feel free!).  You can create your own page just by going to http://wiki.merbivore.com/(a url that doesn't exist yet)/ and clicking on the "create page" link in the lower left.
+
+Guidelines for how to write and hookup the wiki are in the [[#helping_out|Helping Out]] section below.
+
+Thanks, and have fun!
+
+If you wanna get a hold of me you can find me on freenode, or on [[http://twitter.com/knowtheory|twitter]], or email me at ted(dot)han(at)skein(dot)us (replace the dots and the at with . and @ respectively).
+
+=====   Homepage and Information Routing =====
+
+Welcome to the Merb Wiki!  This wiki is set up in order to help users of all skill levels.  Herein you should be able to find information about specific subjects, [[merb|learn more about Merb]] and [[development|how to use it]], and find [[further resources]].
+
+  * **__Looking for specific content__**? Or those who like to jump right in, feel free to use the table of contents to the right or [[http://wiki.Merbivore.com/?do=index|the full document index]].
+  * **__New user__**?  We have [[articles]] about [[what Merb is]], and what it's [[history]], [[philosophy]] are, and what [[it's future]] will be (and [[the merge with Rails]]).  If you are [[new to Ruby]] as well, we've got [[links for that]] too!
+  * **__Rails users__** may be interested in the [[differences between Merb and Rails]], and [[tutorials]] on how to get up and running with Merb.
+  * **__Already a Merbist__**?  Looking for more info?  You may be interested in more detailed information about [[development|Merb development]], [[tutorials]] and the [[Merb ecosystem]].
+  * If we haven't covered what you're looking for, you can check the [[http://wiki.Merbivore.com/?do==index|index]] just in case.  If you still can't find what you are looking for feel free to let us know how we can improve the wiki through our [[mailing list]], or in our [[irc channel]].
+
+=====   Merb =====
+==== What's Merb? ====
+
+Merb is a web development framework written in Ruby. Although it no longer only contains the //Mongrel+Erb// stack that earnt Merb its name, Merb maintains a minimalist aesthetic driven by optional inclusion. The framework is broken into small distinct components, giving developers the freedom to include as much or as little of the framework as they require.
+
+====     Who's using Merb? ====
+====     Why Merb? ====
+====     History of Merb ====
+
+Merb began it's life as a pastie.  A tiny proposal on how to handle file uploads better in a Rails application.  But soon it began to rally some developer frustration, and Merb began to bud into a "clean room rewrite" of Ruby on Rails.  Over time Merb blossomed into a substantial web framework in it's own right, boasting a number of features with no analogues in the Rails stack.
+
+====     The Future of Merb ====
+=====   Philosophy =====
+
+The Merb philosophy 
+
+====     Agnosticism and Componentized Architecture ====
+
+
+
+====     Ruby is awesome, use Ruby. ====
+====     Principled Development ====
+=====   Design Principles =====
+====     Public/Private API ====
+
+Moving your applications to newer versions of the frameworks you built them on can be difficult. On one hand you have pressure to upgrade so you can access new features or security fixes, and on the other hand is the maintenance and testing nightmare of updating your incompatible application code to run on the damned thing.
+
+That's why Merb offers the *Merb Public API*. The developers of Merb promise that the API your applications use will remain compatible from version to version - you only have to worry if you are using internal or undocumented functions in your code. Each method in the Merb documentation has a note alongside it to tell you if that method belongs to the public API.
+
+====     MVC ====
+====     Mountable Applications: Slices ====
+
+If you've written application code that you want to reuse from application to application, then Merb-Slices are the way to go. A Slice, in Merb parlance, is a miniature application with its own controllers, models, views, tests and routing, which can be mounted inside other merb applications. The canonical example is the official merb-auth-slice-password gem, which provides a full username/password based login system for any Merb application.
+
+If you want to use a slice but you do not wish to use the included views, you can simply create the view files at the corresponding path in your own Merb app, and Merb will use your files instead of the ones provided by the Slice. Installing a Slice is as easy as installing it as a gem, and adding it to the dependencies.rb file in your Merb app.
+
+====     Rack ====
+=====   Development =====
+====     Setting Up ====
+===       Getting Merb ===
+Herein you will learn how to get Merb.
+==         Would you like that Stacked, or á la carte? ==
+
+Thanks to Merb's decoupled and agnostic design, Merb isn't a single monolith, but a collection of software packages which work together.  Merb's design lets you pick what you want to include in your framework.  There are several pre-packaged Merb Stacks, or you can get Merb's components á la carte, and use them however you wish (but be warrrrrned, tharrr be dragons there!).
+
+If you're new to Merb, or don't know what you want we **STRONGLY** recommend you use the default stack.  If you are interested in contributing or monkeying about, we'll also explain how to install from the source.
+==         Stacks ==
+
+Merb Stacks are pre-collected packages of merb components.  The primary Merb distribution (the merb gem) is one such stack.  Merb as a project is tested at both the component level and together as a stack.  The [[Primary Stack]] includes the following (as of Jan 11, 2009):
+
+  * merb-core (= 1.0.7.1, runtime)
+  * merb-more (= 1.0.7.1, runtime)
+  * merb_datamapper (= 1.0.7.1, runtime)
+  * dm-core (~> 0.9.8, runtime)
+  * do_sqlite3 (~> 0.9.8, runtime)
+  * dm-timestamps (~> 0.9.8, runtime)
+  * dm-types (~> 0.9.8, runtime)
+  * dm-aggregates (~> 0.9.8, runtime)
+  * dm-migrations (~> 0.9.8, runtime)
+  * dm-validations (~> 0.9.8, runtime)
+  * dm-sweatshop (~> 0.9.8, runtime)
+
+For a more detailed look at the gems included in the merb stack you can always use "gem dependency merb" (if you've got multiple versions of merb installed, include the "-v [version number]" flag just to view one version's dependencies).
+
+Installing the primary stack is fairly easy.  Ensure that you have [[http://www.sqlite.org/|SQLite3]] installed on your system (you'll need [[http://www.ruby-lang.org|Ruby]] and [[http://www.rubygems.org/|RubyGems]] too :P ), and "gem install merb" should do you fine (remember to make that "sudo gem install merb" if you're doing a system wide install).
+
+In addition to being pre-packaged into a single meta-gem, the [[Primary Stack]] is given special preference when [[application_layout|generating the layout for your application]].
+
+==         Á la Carte ==
+==         Merb on the Edges ==
+===       Getting Merb to work with other stuff (Gem Dependencies) ===
+==         To Bundle or Not Bundle ==
+====     Building Your App ====
+===       Application Layout ===
+To get started you need to generate the backbone upon which your application will be built.  Most of the generation that you will need to do with your application will be done through the "merb-gen" command (running this command without arguments will give you a list of what it knows how to generate).
+
+The "merb-gen" command gives special preference to the [[Primary Stack]].  By using "merb-gen app [your-app-name]" you can generate the default Merb app layout and default gem set (they can be found in config/dependencies.rb).  This list of gems is configurable, and you can add or remove gems to this list as you wish.
+===       Models ===
+==         Datamapper ==
+==         ActiveRecord ==
+==         Sequel ==
+===       Views ===
+==         View Helpers ==
+===       Controllers ===
+===       Mailers ===
+===       Javascript and AJAX ===
+====     Connecting to Your App ====
+===       Routing ===
+===       Connecting to Slices ===
+====     Testing ====
+===       Debugging and Hand Testing ===
+==         Merb -i ==
+===       Testing Libraries ===
+==         Rspec ==
+==         Test/Unit ==
+===       Testing Style ===
+=====   The Merb Ecosystem =====
+====     Useful Merb Slices ====
+====     Getting Help ====
+====     Helping Out ====
+===	      Helping with the Wiki ===
+
+[[http://twitter.com/knowtheory|Knowtheory]] here!  I would like to try and start a movement to organize the wiki.  Not just this wiki, actually, but a number of related Ruby projects with a certain lack of attention to their crowd-sourced documentation.  **__IF YOU WOULD LIKE TO HELP PLEASE READ THE INSTRUCTIONS AT [[#welcome_to_the_merb_wiki|THE TOP OF THIS PAGE]]__**.
+
+I've got a few goals in mind, and would love to hear input and critiques from people who have an interest in the Ruby ecosystem and the state of our community education.  So let's get to the meat of what's important:
+
+  * **__Help get people to their desired destination__**.  If they don't want our help, get out of the way and give them an index/toc.
+  * **__Provide clear notifications__**.  Users should know the state of the information they are reading.  E.g. Whether a page has problems/omissions/biases, What versions of software code are applicable, timestamps.
+  * **__Provide clear calls to action__**.  If something needs help, or to be improved, point it out.  Keep a list of weaknesses around the site that people can help with.
+  * **__Lower barriers to editing & helping__**.  Just because we don't want people to screw up existing pages, shouldn't mean that we prevent other people from trying to help out.  We should encourage people to FORK pages, or create new docs under their own namespace to contribute (like i have done here) or get people to use gist!
+  * **__Provide narratives__**.  Different people learn differently.  We can accommodate them!  That is what hypertext is about. :)
+
+=====   Deployment =====
+====     Rack, MRI and Mongrel|Thin|Ebb ====
+====     Rack and Passenger ====
+====     Glassfish & JRuby ====
+=====   FAQ =====
+====     The Merb2/Rails3 Section ====
+===       Why did you sell us out? ===
+=====   Tutorials =====

@@ -1,0 +1,6 @@
+1224098265	98.175.212.242	C	what_s_the_difference_between_rails_and_merb	nickhammond	created	
+1224831567	80.13.79.216	E	what_s_the_difference_between_rails_and_merb		added API URL - yet it seems there's no "stable" API URL :(	
+1224911287	121.73.76.52	E	what_s_the_difference_between_rails_and_merb		Rails 2.2 is thread safe now, so removing the note in merbs difference list	
+1225269559	68.98.38.120	E	what_s_the_difference_between_rails_and_merb	nickhammond	added merb & rails conventions	
+1225431214	67.173.242.50	E	what_s_the_difference_between_rails_and_merb		changed syntax comparison to a table	
+1229267270	83.250.124.96	E	what_s_the_difference_between_rails_and_merb		Remove logger and env differences since they're now basically the same.	

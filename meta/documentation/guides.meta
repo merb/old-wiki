@@ -1,0 +1,14 @@
+a:2:{s:7:"current";a:8:{s:4:"date";a:2:{s:7:"created";i:1238454828;s:8:"modified";i:1238473805;}s:7:"creator";s:10:"Rich Morin";s:11:"last_change";a:7:{s:4:"date";i:1238473805;s:2:"ip";s:13:"64.142.15.200";s:4:"type";s:1:"E";s:2:"id";s:20:"documentation:guides";s:4:"user";s:10:"rich_morin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:10:"rich_morin";s:10:"Rich Morin";}s:5:"title";s:17:"HOW TO's / Guides";s:11:"description";a:2:{s:15:"tableofcontents";a:3:{i:0;a:4:{s:3:"hid";s:15:"how_to_s_guides";s:5:"title";s:17:"HOW TO's / Guides";s:4:"type";s:2:"ul";s:5:"level";i:2;}i:1;a:4:{s:3:"hid";s:15:"getting_started";s:5:"title";s:15:"Getting Started";s:4:"type";s:2:"ul";s:5:"level";i:3;}i:2;a:4:{s:3:"hid";s:11:"development";s:5:"title";s:11:"Development";s:4:"type";s:2:"ul";s:5:"level";i:3;}}s:8:"abstract";s:271:"HOW TO's / Guides
+
+
+Guides for setting up base functionality in Merb.
+Requests for additional guides and/or howtos
+should be made here.
+
+Getting Started
+
+	*  Installation
+		*  Install from Edge
+		*  Install from Gems
+		*  Bundling Dependencies
+		*  More info on merb.thor";}s:8:"relation";a:1:{s:10:"references";a:37:{s:14:"howto:requests";b:1;s:18:"howto:installation";b:1;s:23:"howto:installation:edge";b:1;s:23:"howto:installation:gems";b:1;s:19:"deployment:bundling";b:1;s:23:"howto:installation:thor";b:1;s:29:"howto:gettingstarted:firstapp";b:1;s:13:"howto:cookies";b:1;s:22:"database:dm:migrations";b:1;s:14:"howto:database";b:1;s:12:"howto:models";b:1;s:9:"howto:mvc";b:1;s:15:"howto:mvc:model";b:0;s:14:"howto:mvc:view";b:0;s:20:"howto:mvc:controller";b:0;s:18:"howto:dependencies";b:1;s:11:"howto:parts";b:1;s:13:"howto:plugins";b:1;s:11:"howto:slice";b:1;s:22:"howto:slice:rake_tasks";b:1;s:15:"howto:very_flat";b:1;s:43:"howto:crud_view_example_with_merb_using_erb";b:1;s:25:"development:resource_urls";b:1;s:12:"howto:router";b:1;s:13:"howto:testing";b:1;s:15:"howto:debugging";b:1;s:16:"howto:deployment";b:1;s:21:"howto:troubleshooting";b:1;s:11:"howto:tools";b:0;s:19:"howto:tools:editors";b:1;s:10:"howto:auth";b:1;s:11:"howto:cache";b:1;s:5:"cache";b:1;s:16:"howto:cache:etag";b:1;s:6:"upload";b:1;s:13:"howto:mailers";b:1;s:26:"development:flash_messages";b:1;}}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}}s:10:"persistent";a:4:{s:4:"date";a:2:{s:7:"created";i:1238454828;s:8:"modified";i:1238473805;}s:7:"creator";s:10:"Rich Morin";s:11:"last_change";a:7:{s:4:"date";i:1238473805;s:2:"ip";s:13:"64.142.15.200";s:4:"type";s:1:"E";s:2:"id";s:20:"documentation:guides";s:4:"user";s:10:"rich_morin";s:3:"sum";s:0:"";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:10:"rich_morin";s:10:"Rich Morin";}}}

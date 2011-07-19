@@ -1,0 +1,6 @@
+====== Can I use Merb on Windows? ======
+
+Merb 1.0 RC2 supports Windows. DataMapper do_sqlite3 gem has been compiled natively for windows.
+Make sure to copy the [[http://www.sqlite.org/sqlitedll-3_6_4.zip|sqlite3 dll]] in your Ruby bin or system32 folder.
+
+ActiveRecord users can use Merb (core + components) on Windows without any problems.

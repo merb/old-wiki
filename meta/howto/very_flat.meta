@@ -1,0 +1,7 @@
+a:2:{s:7:"current";a:6:{s:4:"date";a:2:{s:7:"created";i:1229376624;s:8:"modified";i:1231924576;}s:11:"last_change";a:7:{s:4:"date";i:1231924576;s:2:"ip";s:13:"122.49.203.34";s:4:"type";s:1:"E";s:2:"id";s:15:"howto:very_flat";s:4:"user";s:8:"dbalmain";s:3:"sum";s:96:"Added a possible improvement for very_flat app reloading. Not sure if this is the best solution.";s:5:"extra";s:0:"";}s:5:"title";s:24:"Notes on Very Flat Apps:";s:11:"description";a:2:{s:15:"tableofcontents";a:1:{i:0;a:4:{s:3:"hid";s:23:"notes_on_very_flat_apps";s:5:"title";s:24:"Notes on Very Flat Apps:";s:4:"type";s:2:"ul";s:5:"level";i:1;}}s:8:"abstract";s:273:"*  to have the app reload itself while in development mode, add this to your file: 
+
+Merb.push_path(:application,  __FILE__)
+
+	*  to have the app reload itself only when the file is modified, try this:
+
+Merb.push_path(:lib,  File.dirname(__FILE__), File.basename(__FILE__))";}s:8:"internal";a:2:{s:5:"cache";b:1;s:3:"toc";b:1;}s:11:"contributor";a:1:{s:8:"dbalmain";s:13:"David Balmain";}}s:10:"persistent";a:3:{s:4:"date";a:2:{s:7:"created";i:1229376624;s:8:"modified";i:1231924576;}s:11:"last_change";a:7:{s:4:"date";i:1231924576;s:2:"ip";s:13:"122.49.203.34";s:4:"type";s:1:"E";s:2:"id";s:15:"howto:very_flat";s:4:"user";s:8:"dbalmain";s:3:"sum";s:96:"Added a possible improvement for very_flat app reloading. Not sure if this is the best solution.";s:5:"extra";s:0:"";}s:11:"contributor";a:1:{s:8:"dbalmain";s:13:"David Balmain";}}}

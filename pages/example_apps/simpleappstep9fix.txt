@@ -1,0 +1,8 @@
+The assertions in this step and steps below it need the Webrat gem (as alluded to at the end.)  It seems that Webrat was bundled with merb at merb version 1.0.0 (indeed the [[http://github.com/brynary/webrat/blob/master/README.rdoc|webrat installation docs]] seemed to think so at the time of this writing:  //"Merb 1.0 has built-in, seamless Webrat support. Just start using methods from Webrat::Session in your specs. //)
+
+However, by merb-1.0.15 (and perhaps before and probably after) webrat no longer comes out of the box with merb.  To get this step and steps below work for me, i had to:
+
+  - ''sudo gem install webrat'' //(at the time this was webrat-0.5.3 which ended up working.  When i installed 0.6.rc1 from github, i ran into issues.)//
+  - ''sudo gem install rack-test'' //(needed by above but not listed in its dependencies)//
+  - at the end of ''config/dependencies.rb'' add ''dependency "webrat", "0.5.3"''
+

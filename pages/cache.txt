@@ -1,0 +1,45 @@
+====== Merb Cache ======
+
+The merb-cache gem provides many options for caching your data including page and action caching, and different caching strategies including flat file and memcache.
+
+  * Merbunity has a [[http://merbunity.com/tutorials/15|good tutorial]] which explains this in more detail.
+  * There is [[http://gom-jabbar.org/articles/2008/12/19/merb-cache-s-methods|detailed explanation of each methods]] (it uses the version of merb-cache from http://github.com/benschwarz/merb-cache/ a more up-to-date version with quite a few bug fixes and small changes of api)
+  * A description of the different cache stores is [[http://gom-jabbar.org/articles/2008/12/09/merb-cache-and-its-stores|available here]]
+  * There is also an [[http://github.com/RichGuk/merb-cache-example/tree/master|example application]] that uses caching hosted at GitHub.
+
+
+===== Cache Configuration =====
+
+First you must setup the Cache stores and strategies. Put the following code into your $MERB_ROOT/config/environments/production.rb. It will setup a page store and an action store. Both of which will be cached to the disk.
+
+<code ruby>
+Merb::BootLoader.after_app_loads do
+  Merb::Cache.setup do
+    register(:page_store, Merb::Cache::PageStore[Merb::Cache::FileStore], :dir => Merb.root / "public")
+    register(:action_store, Merb::Cache::ActionStore[Merb::Cache::FileStore], :dir => Merb.root / "tmp")
+    register(:default, Merb::Cache::AdhocStore[:page_store, :action_store])
+  end
+end
+</code>
+
+You will want to add the following to your development.rb and test.rb, otherwise you will get errors on your cached actions.
+
+<code ruby>
+Merb::BootLoader.after_app_loads do
+  Merb::Cache.setup do
+    register(:default, Merb::Cache::AdhocStore.new)
+  end
+end
+</code>
+
+===== Page Cache Your Actions =====
+
+Now you must specify which actions you want to cache. To do this, add the following line to your controller.
+
+<code ruby>
+cache :index, :show
+</code>
+
+It will now cache your index and show pages to the public directory where they can be served from nginx, apache or your webserver of choice. 
+
+The pages are cached based on route, so if your url is http://server/cars/1, it will be cached to $MERB_ROOT/public/cars/1.html. If you nest routes, so your url is http://server/makes/1/car_models/2, then it will be cached to $MERB_ROOT/public/cars/1/car_models/2.html. Finally, if you use friendly urls, so your url looks like http://server/makes/ford/car_models/focus, then it will be cached to $MERB_ROOT/public/makes/ford/car_models/focus.html

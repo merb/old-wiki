@@ -1,0 +1,299 @@
+====== The Router ======
+All routes are defined in the "router.rb" file which is in your config directory.  The router uses restful routing which makes several helper urls for common operations.  
+===== General Matcher =====
+To attach a path to a specific action/controller pair you use the match.to methods
+<code RUBY>
+match("/about").to(:controller => "main", :action => "about").name(:about)
+
+# url(:about)
+
+# you can pass in parameters like so, optional parameters are placed in parentheses.
+match("/articles/:year/:month/:day/:title").to(:controller => "articles", :action => "show").name(:article)
+
+# url(:article, :year => 2008, :month => 07, :day => 22, :title => "Osim")
+
+# In this example, the Articles.show method would receive:
+# params => {"controller"=>"articles", "action"=>"show", "year"=>"2008", "month"=>"07", 
+#            "day"=>"22", "title"=>"Osim"}
+</code>
+
+You can match based on domain
+<code RUBY>
+match(:domain => "somecooldomain.com").to(:controller => "main").name(:main)
+</code>
+
+Merb::Request provides a #subdomains method as well, which you can use to match against.  However since #subdomains is an array, matching against :subdomains will flatten the array with to_s.  It's suggested to define methods returning the relevant subdomain you would like to match against.
+
+The following is a simplified example where we are matching subdomains to accounts.
+
+<code RUBY>
+match('/', :subdomains => /(.+)/).to(:controller => 'accounts', :action =>'dashboard')
+</code>
+
+===== Resources =====
+You can use Rails-like resources:
+<code RUBY>
+# If you run merb-gen resource article from the terminal that will put the following in your router block
+resources :articles
+
+# from there you can use the regular restful routes.
+
+# You can also nest resources for associative relationships
+resources :articles do
+  resources :comments
+end
+
+</code>
+
+==== Using identify ====
+You can use the option '':identify'' to better customize your url:
+<code RUBY>
+# the following matches /articles/* and captures * as a params[:title] in your controller.
+# note that the resource also matches the url: /articles/foo/bar/baz/... 
+# the "infinitely" nested subpath foo/bar/baz/... will be captured as params[:title]
+resources :articles, :identify => :title, :title => /.*/
+</code>
+==== Examples from the specs suite ====
+
+<code RUBY>
+# using regexp matching for resource route keys
+Merb::Router.prepare do
+  resources :blogposts, :id => %r([a-z]+/\d+)
+end
+
+# explicitly specifying controller name
+Merb::Router.prepare do
+  resources :blogposts, :controller => :posts
+end
+
+# using a path alias (/admins instead of /users)
+Merb::Router.prepare do
+  resources :users, :path => "admins"
+end
+
+# adding collection/member actions on resources
+Merb::Router.prepare do
+  collection_routes = { :one  => :get, :two => :post, :three => :put, :four  => :delete }
+  member_routes     = { :five => :get, :six => :post, :seven => :put, :eight => :delete }
+
+  resources :users, :collection => collection_routes, :member => member_routes
+end
+
+# adding collection/member actions using block syntax
+Merb::Router.prepare do
+  resources :files do
+    collection :package,  :method => :get
+    member     :download, :method => :get
+  end
+end
+
+# adding collection/member actions using block syntax and explicit action name
+Merb::Router.prepare do
+  resources :files do
+    collection :package,  :to => "compress_and_send_with_nginx"
+    member     :download, :to => "compress_a_single_file"
+  end
+end
+
+# method-based recognition
+Merb::Router.prepare do
+  resources :files do
+    member :upload, :method => :get, :to => "upload"
+    member :upload, :method => :put, :to => "reupload"
+  end
+end
+
+# using multiple keys
+Merb::Router.prepare do
+  resources :emails, :keys => ["username", "domain"]
+end
+
+Merb::Router.prepare do
+  resources :emails, :keys => ["username", "domain"], :username => /[a-z]+/, :domain => /[a-z]+\.com/
+end
+
+Merb::Router.prepare do
+  resources :emails, :keys => ["username", "domain"], :username => /[a-z]+/
+end
+
+# identifications keys, different syntax
+
+Merb::Router.prepare do
+  identify Email => :address do
+    resources :emails
+  end
+end
+
+Merb::Router.prepare do
+  resources :emails, :identify => :address
+end
+
+# keys to override parent's identify key
+Merb::Router.prepare do
+  identify Email => :address do
+    resources :emails, :key => :email
+  end
+end
+
+# both keys and key work if you need extra readability
+Merb::Router.prepare do
+  resources :emails, :keys => [:username, :domain]
+  resources :tweets, :key  => :timestamp
+end
+
+# but :keys has precedence
+Merb::Router.prepare do
+  resources :emails, :keys => :address, :key => :zomg
+end
+
+# optional segments
+Merb::Router.prepare do
+  match("/:first(/:second/:third)").register
+end
+
+# optional segments that match the regexp
+Merb::Router.prepare do
+  match("/:first(/:second)", :second => /^\d+$/).register
+end
+
+# multiple optional segments
+Merb::Router.prepare do
+  match("/:first(/:second)(/:third)").register
+end
+
+# nested match blocks with optional segments
+Merb::Router.prepare do
+  match("(/:language)") do
+    match("/guides/:action/:id").to(:controller => "tour_guides")
+  end
+end
+</code>
+
+<code RUBY>
+Merb::Router.prepare do      
+  match("/deferred/:zoo").defer_to do |request, params|
+    params.merge(:controller => "w00t") if params[:zoo]
+  end
+end    
+
+Merb::Router.prepare do
+  match("/deferred").defer_to do |request, params|
+    { :hello => "world" }
+  end
+end
+
+Merb::Router.prepare do
+  match("/").defer_to(:controller => "accounts") do |request, params|
+    params.update(:action => "hello")
+  end
+end
+
+Merb::Router.prepare do
+  match("/deferred").defer_to do
+    { :hello => "world" }
+  end
+
+  match("/").to(:foo => "bar")
+end
+
+Merb::Router.prepare do
+  match("/").defer_to do
+    redirect "/hello"
+  end
+
+Merb::Router.prepare do
+  match("/").defer_to do
+    redirect "/hello"
+  end
+end
+
+Merb::Router.prepare do
+  match("/").defer_to { redirect url(:homepage) }
+  match("/home").to(:controller => "home").name(:homepage)
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| p }
+  second = Proc.new { |req, p| p }
+  third  = Proc.new { |req, p| p }
+  
+  defer(first).defer(second).defer(third) do
+    match("/hello").to(:controller => "greetings")
+  end
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| req.first_proc!  ; p }
+  second = Proc.new { |req, p| req.second_proc! ; p }
+  third  = Proc.new { |req, p| req.third_proc!  ; p }
+  
+  defer(first).defer(second).defer(third) do
+    match("/hello").to(:controller => "greetings")
+  end
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| req.first_proc!  ; p }
+  second = Proc.new { |req, p| req.second_proc! ; req.matched! ; p }
+  third  = Proc.new { |req, p| req.third_proc!  ; p }
+  
+  defer(first).defer(second).defer(third) do
+    match("/hello").to(:controller => "greetings")
+  end
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| req.first_proc!  ; p }
+  second = Proc.new { |req, p| req.second_proc! ; redirect("/goodbye") }
+  third  = Proc.new { |req, p| req.third_proc!  ; p }
+  
+  defer(first).defer(second).defer(third) do
+    match("/hello").to(:controller => "greetings")
+  end
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| p }
+  second = Proc.new { |req, p| p }
+  
+  match("/hello").defer(first).defer(second).to(:controller => "deferred")
+  match("/hello").to(:controller => "not_deferred")
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| nil }
+  second = Proc.new { |req, p| p }
+  
+  match("/hello").defer(first).defer(second).to(:controller => "deferred")
+  match("/hello").to(:controller => "not_deferred")
+end
+
+Merb::Router.prepare do
+  first  = Proc.new { |req, p| p }
+  second = Proc.new { |req, p| nil }
+  
+  match("/hello").defer(first).defer(second).to(:controller => "deferred")
+  match("/hello").to(:controller => "not_deferred")
+end
+
+Merb::Router.prepare do
+  block = Proc.new { |req, p| req.in_block! ; p }
+
+  defer(block).with(:controller => "deferred") do
+    match("/first").register
+    match("/second").register
+  end
+end
+</code>
+
+===== Seeing your routes =====
+Type
+<code RUBY>
+rake audit:routes
+</code>
+in the terminal.
+For a more comprehensive look, type
+<code RUBY>
+merb -i
+irb(main):001:0> merb.show_routes
+</code>

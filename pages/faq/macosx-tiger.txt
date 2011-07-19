@@ -1,0 +1,27 @@
+====== Can I run Merb on Mac OSX Tiger? ======
+
+Merb Stack uses SQLite3 by default, make sure you have it installed.
+
+<code>
+G5:~/Sites/my-first-app John$ rake db:automigrate
+(in /Users/john/Sites/my-first-app)
+Loading init file from /Users/john/Sites/my-first-app/config/init.rb
+Loading /Users/john/Sites/my-first-app/config/environments/development.rb
+Loading init file from /Users/john/Sites/my-first-app/config/init.rb
+Loading /Users/john/Sites/my-first-app/config/environments/development.rb
+ ~ Connecting to database...
+dyld: NSLinkModule() error
+dyld: Symbol not found: _sqlite3_prepare_v2
+  Referenced from: /usr/local/lib/ruby/gems/1.8/gems/do_sqlite3-0.9.6/lib/do_sqlite3_ext.bundle
+  Expected in: flat namespace
+</code>
+
+If you have [[http://www.macports.org/|MacPorts]] setup:
+<code>
+sudo port install sqlite3
+</code>
+
+And reinstall do_sqlite3 (Data Objects SQLite3 driver):
+<code>
+sudo gem install do_sqlite3
+</code>

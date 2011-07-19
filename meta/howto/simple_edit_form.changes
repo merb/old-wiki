@@ -1,0 +1,7 @@
+1223948362	72.130.144.12	C	howto:simple_edit_form	mattetti	created	
+1223949828	72.130.144.12	E	howto:simple_edit_form	mattetti		
+1224180145	84.196.0.143	E	howto:simple_edit_form	fabien		
+1225667782	97.97.160.123	E	howto:simple_edit_form			
+1225671704	75.172.95.1	E	howto:simple_edit_form	nanodeath	removing erroneous :action val -- not required here	
+1225872595	202.171.13.52	e	howto:simple_edit_form	abdshomad	form_for(@article) will raise --> Controller 'Article' not found. Add ":action => resource(:articles)"	
+1225874644	202.171.13.52	e	howto:simple_edit_form	abdshomad	form_for should use ":action => resource(@article)"? Otherwise, merb raises "Controller 'Article' not found." error message (Merb::ControllerExceptions::NotFound).	

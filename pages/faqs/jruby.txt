@@ -1,0 +1,5 @@
+====== Merb and JRuby/Glassfish ======
+
+Of course Merb works well with JRuby and Glassfish. However as of Nov 2008 the JDBC driver for DataMapper isn't finished yet meaning that you have to use ActiveRecord.
+
+Checkout [[http://blogs.sun.com/arungupta/entry/getting_started_with_merb_using|this article]] from Arun Gupta(Sun Microsystems).

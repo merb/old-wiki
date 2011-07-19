@@ -1,0 +1,11 @@
+====== Serving Static Content ======
+
+You can pop static HTML pages into the ''public'' directory of your Merb app, and your web server will bypass your app and render them. 
+
+For instance:
+<code>
+$ cd my_merb_app
+$ echo "<h1>Hello World</h1>" > public/hello.html
+</code>
+
+Visit ''http://localhost:4000/hello.html'', and your static HTML will appear!

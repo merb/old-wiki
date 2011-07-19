@@ -1,0 +1,49 @@
+====== Resource url helpers ======
+
+Let say you have a model called Article and you defined a route using:
+
+<code RUBY>resources :articles</code>
+
+Here is a list of url helpers you can use:
+
+<code RUBY>
+# helper, HTTP verb, controller action
+
+resource(:articles)         # GET => index
+resource(@article)          # GET => show
+resource(:articles, :new)   # GET => new
+resource(@article, :edit)   # GET => edit
+resource(@article, :delete) # GET => delete
+resource(:articles)         # POST => create
+resource(@article)          # PUT => update
+resource(@article)          # DELETE => destroy
+</code>
+
+** NOTE: ** 
+Please notice the difference between @article (single form) and :articles (plural form) on the above examples.
+
+  * @article  (single form) : always as instance variable (prefixed with '@')
+  * :articles (plural form) : always as symbol (prefixed with ':')
+
+If you have a nested route such as: 
+
+<code RUBY>
+resources :articles do
+  resources :comments
+end
+</code>
+
+Then the following url helpers are available to you:
+<code RUBY>
+resource(@article, :comments)         # GET => index (shows comments for @article)
+resource(@article, @comment)          # GET => show
+resource(@article, :comments, :new)   # GET => new
+resource(@article, @comment, :edit)   # GET => edit
+resource(@article, @comment, :delete) # GET => delete
+resource(@article, :comments)         # POST => create (creates new comment for @article object)
+resource(@article, @comment)          # PUT => update (updates comment)
+resource(@article, @comment)          # DELETE => destroy (deletes comment)
+
+</code>
+
+These routes can be extended in a similar manner to use deeper nests if you need to, such as resource(@forum, @post, :comments).

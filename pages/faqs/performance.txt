@@ -1,0 +1,23 @@
+19:58:45 <@ezmobius> tell him we have a merb app running in less then 512Mb of ram serving 8 million dynamic pages/day\\
+19:58:56 <@ezmobius> tell him to try and do that in php and get back to me\\
+19:59:02 <+carpeliam> ;)\\
+19:59:12 <+broken_ladder> i don't think his argument makes sense - because we're actually looking at benchmarks.\\
+19:59:13 <+benburkert> zing!\\
+20:03:46 <@ezmobius> also never trust benchmarks unless you run them yourself\\
+20:03:50 <@ezmobius> even if they are form yehuda\\
+20:03:50 <@ezmobius> or me\\
+20:04:23 <@ezmobius> tell him nothing he said is valid unless he has run benchmarks himself and seen the results\\
+20:10:24 <+topfunky> ezmobius: is 512mb ram, 8Mil pages/day public information? or should it stay in the channel?\\
+20:10:39 <@ezmobius> i cannot say what site but its fine to mention publicly\\
+20:10:46 <+topfunky> cool\\
+20:10:51 <@ezmobius> that was on 10 merb processes using 40Mb each stable\\
+20:11:01 <@ezmobius> on 64bit os\\
+20:11:31 <@ezmobius> broken_ladder  tell him merb can serve simple requests in less then 2 milliseconds\\
+
+----
+
+11:21:59 <headius>  neat \\
+11:22:19 <headius>  a simple controller with no session in rails gets around 356 req/s in glassfish gem \\
+11:22:27 <headius>  same in merb gets 1400+ \\
+
+

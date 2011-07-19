@@ -1,0 +1,118 @@
+====== Deploying with Passenger ======
+
+As of version 2.0, Phusion Passenger supports Rack (and thus Merb) through a Rack [[http://www.modrails.com/documentation/Users%20guide%202.0.html#_merb | config.ru]] file placed at the root of an app:
+
+<code RUBY># config.ru
+require 'rubygems'
+
+# Uncomment if your app uses bundled gems
+#gems_dir = File.expand_path(File.join(File.dirname(__FILE__), 'gems'))
+#Gem.clear_paths
+#$BUNDLE = true
+#Gem.path.unshift(gems_dir)
+
+require 'merb-core'
+
+Merb::Config.setup(:merb_root   => File.expand_path(File.dirname(__FILE__)),
+                   :environment => ENV['RACK_ENV'])
+Merb.environment = "production" #Merb::Config[:environment]
+Merb.root = Merb::Config[:merb_root]
+Merb::BootLoader.run
+
+# Uncomment if your app is mounted at a suburi
+#if prefix = ::Merb::Config[:path_prefix]
+#  use Merb::Rack::PathPrefix, prefix
+#end
+
+run Merb::Rack::Application.new
+</code>
+
+Here's a **better config.ru if you're bundling your gems.** It uses your bundled merb-core instead.
+<code RUBY>
+require 'rubygems'
+if File.join(File.dirname(__FILE__), "bin", "common.rb")
+  require File.join(File.dirname(__FILE__), "bin", "common")
+end
+require 'merb-core'
+
+Merb::Config.setup(:merb_root   => ".",
+                   :environment => ENV['RACK_ENV'])
+Merb.environment = Merb::Config[:environment]
+Merb.root = Merb::Config[:merb_root]
+Merb::BootLoader.run
+
+run Merb::Rack::Application.new
+</code>
+
+Check out the [[http://www.modrails.com/documentation/Users%20guide%202.0.html | Passenger User Guide]] to get up and running with Passenger or jump right in:
+
+===== Installation =====
+
+<code>$ gem install passenger
+$ passenger-install-apache2-module
+</code>
+
+===== For Development =====
+
+Passenger works well as a development server and [[http://nubyonrails.com/articles/ask-your-doctor-about-mod_rails | many]] [[http://www.fuzzylizard.com/archives/2008/05/29/947/ | are]] using it as such. Here's how to use it in development for a Merb app:
+
+  * Add an alias to 127.0.0.1 for your app in your hosts file (usually at /etc/hosts). We'll call our app @myfunkysite.local@.
+  * Follow the instructions in the [[http://www.modrails.com/documentation/Users%20guide%202.0.html | user guide]] for [[http://www.modrails.com/documentation/Users%20guide%202.0.html#_installing_phusion_passenger | installing]] Passenger and adding a [[http://www.modrails.com/documentation/Users%20guide%202.0.html#_deploying_to_a_virtual_host_s_root_2 | VirtualHost]] entry for your application.
+  * Add the following to your Apache config file (after your "LoadModule ...mod_passenger.so" directive):
+
+<code>RackEnv development</code>
+
+When you point your browser to http://myfunkysite.local, Passenger will boot the Merb app by loading the config.ru file. Passenger will also kill the app after a default timeout so you're not wasting memory.
+
+==== Example Files ====
+
+
+=== /etc/hosts ===
+
+
+<code>127.0.0.1 localhost myfunkysite.local</code>
+
+=== /etc/apache2/httpd.conf ===
+
+
+<code># ...snip...
+
+# These paths will vary for your installation. Passenger will give them to you at the end of its installation.
+LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.9.0/ext/apache2/mod_passenger.so
+PassengerRoot /Library/Ruby/Gems/1.8/gems/passenger-1.9.0
+PassengerRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
+
+RackEnv development
+
+# Only needed if getting 403 Forbidden errors on static assets:
+<Directory "/Users/JohnDoe/apps">
+  Order allow,deny
+  Allow from all
+</Directory>
+
+<VirtualHost *:80>                  
+  ServerName myfunkysite.local            
+  DocumentRoot /Users/JohnDoe/apps/myfunkysite/public
+  ErrorLog /Users/JohnDoe/apps/myfunkysite/log/error.log
+</VirtualHost>
+</code>
+
+Most users put the Passenger config and vhost directives into separate files and use the @Include@ directive to pull them into Apache, but that is left as an exercise for the reader.
+
+===== Restarting the app =====
+
+
+<code>$ touch tmp/restart.txt</code>
+
+You'll have to create the tmp dir in the root of your app if it doesn't exist.
+
+
+===== Drawback: No Debugging =====
+
+Since Passenger runs your app headlessly calls to @debugger@ in your code no longer do anything—except freeze your app. Does anyone feel up to investigating [[http://debu.gs/live-console | LiveConsole]] integration?
+
+===== Issues =====
+
+For a static content controller, I found I had to delete merb.fcgi file from public/ folder, otherwise the static controller's action would route to the merb.fcgi file instead of their prospective erb view.
+
+/public/.htaccess will route everything to /public/merb.fcgi by default, so delete the .htaccess file
